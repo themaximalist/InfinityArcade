@@ -22,13 +22,8 @@ function shuffle(array) {
     return array;
 }
 
-function genres(num = 20) {
-    return shuffle(readFileSync("./data/genres.txt", "utf8").trim().split("\n")).slice(0, num).join("\n");
-}
-
 module.exports = {
     slugify,
     rand,
     shuffle,
-    genres,
 };
