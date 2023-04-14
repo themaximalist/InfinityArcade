@@ -1,13 +1,31 @@
+const InfinityArcadeAPI = require('./api');
+const { getCookie, setCookie } = require('./utils');
+
 class InfinityArcade {
     constructor() {
         this.api = new InfinityArcadeAPI();
         this.session_id = null;
     }
 
-    static async initialize() {
+    get params() {
+        return new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+    }
+
+    async handleGame() {
+        console.log(GAME);
+    }
+
+    async handleGenerate() {
+        const prompt_text = this.params.prompt_text;
+        const game = await this.api.generateGame(prompt_text);
+        document.location = `/${game.slug}`;
+    }
+
+    static async initialize(api) {
         const ia = new InfinityArcade();
         ia.session_id = await ia.getOrCreateSession();
-
         console.log(`initialized InfinityArcade with session_id ${ia.session_id}`);
         return ia;
     }
@@ -26,3 +44,5 @@ class InfinityArcade {
         return session_id;
     }
 }
+
+module.exports = InfinityArcade;

@@ -130,6 +130,4 @@ class UserInterface {
 
 }
 
-if (document.getElementById("image")) {
-    window.ui = new UserInterface();
-}
+module.exports = UserInterface;

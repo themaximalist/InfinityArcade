@@ -6,6 +6,8 @@
     "scripts": {
         "start": "node src/server.js",
         "build": "npx tailwindcss -i ./src/app.css -o ./public/app.css",
+        "build:js": "rollup -c",
+        "watch:js": "rollup -c --watch",
         "watch": "npx tailwindcss -i ./src/app.css -o ./public/app.css --watch"
     },
     "keywords": [
@@ -30,5 +32,12 @@
         "toml": "^3.0.0",
         "uuid": "^9.0.0"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "@babel/core": "^7.21.4",
+        "@babel/preset-env": "^7.21.4",
+        "rollup": "^3.20.2",
+        "rollup-plugin-babel": "^4.4.0",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-node-resolve": "^5.2.0"
+    }
 }
