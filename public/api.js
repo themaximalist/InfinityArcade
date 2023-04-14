@@ -96,7 +96,7 @@ async function* yieldStreamResponse(response) {
                 const chunks = buffer.split("\n");
                 for (const chunk of chunks) {
                     if (chunk) {
-                        console.log(`'${chunk}'`);
+                        // console.log(`'${chunk}'`);
                         try {
                             yield JSON.parse(chunk);
                         } catch (e) {
