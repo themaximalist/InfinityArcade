@@ -1,3 +1,21 @@
+const toggleRadio = document.getElementById("radio-toggle");
+toggleRadio.onclick = (e) => {
+    console.log("CLICK");
+    e.preventDefault();
+
+    const player = new Tone.Player({
+        url: "https://tonejs.github.io/audio/berklee/gong_1.mp3",
+        autoplay: true,
+    });
+
+    Tone.loaded().then(() => {
+        console.log("LOADED");
+        player.start();
+    });
+
+};
+
+/*
 class Radio {
     constructor() {
         this.autoplay = false;
@@ -162,3 +180,4 @@ class Radio {
 
 
 const radio = new Radio();
+*/
