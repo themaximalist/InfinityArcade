@@ -1,7 +1,6 @@
 const log = require("debug")("ia:controllers:chats");
 
 const Game = require("../models/game");
-const Chat = require("../models/chat");
 const StartGame = require("../services/StartGame");
 const ChatGame = require("../services/ChatGame");
 
@@ -25,8 +24,6 @@ async function start(req, res) {
 }
 
 async function chat(req, res) {
-    const { chat_id } = req.query;
-
     try {
         const { chat_id, content } = req.body;
         for await (const token of ChatGame(chat_id, content)) {

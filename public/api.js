@@ -90,13 +90,26 @@ async function* yieldStreamResponse(response) {
             const read = await reader.read();
             if (read && !read.done) {
                 const raw = decoder.decode(read.value);
+                buffer += raw;
+
+                let leftover = "";
                 const chunks = raw.split("\n");
                 for (const chunk of chunks) {
                     if (chunk) {
                         console.log(`'${chunk}'`);
-                        yield JSON.parse(chunk);
+                        try {
+                            yield JSON.parse(chunk);
+                        } catch (e) {
+                            leftover += chunk;
+                        }
                     }
                 }
+
+                if (leftover) {
+                    console.log("LEFTOVER", leftover);
+                }
+
+                buffer = leftover;
             } else {
                 break;
             }
