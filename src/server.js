@@ -32,7 +32,8 @@ class Server {
         this.app.post("/api/chat", controllers.chats.chat);
 
         this.app.get("/generate", controllers.games.generate_handler);
-        this.app.get("/", controllers.games.index); // TODO: switch to infinity game view 
+        this.app.get("/status", controllers.status);
+        this.app.get("/", controllers.games.index);
 
         this.app.get("/:slug", controllers.games.wildcard_handler);
     }
