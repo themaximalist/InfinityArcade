@@ -24,7 +24,8 @@
         "replicate": "^0.9.0",
         "sequelize": "^6.31.0",
         "slugify": "^1.6.6",
-        "toml": "^3.0.0"
+        "toml": "^3.0.0",
+        "uuid": "^9.0.0"
     },
     "devDependencies": {
         "mocha": "7.2"
