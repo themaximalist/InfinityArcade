@@ -1,7 +1,8 @@
 ```
+// USE GPT4 to improve image prompts
+// SIMPLIFY CODE BASE
 // README
 // GENERATE 100s of games
 // TAILWIND BUILD
-// MOBILE
 // SOUND (AUTO PULL MUSIC STATION FOR GAME)
 ```

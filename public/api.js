@@ -38,6 +38,7 @@ class InfinityArcadeAPI {
 
             return fetch(url, {
                 method: "POST",
+                headers: { accept: 'application/x-ndjson' },
                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
                 body: new URLSearchParams(data)
             });
@@ -83,20 +84,19 @@ async function* yieldStreamResponse(response) {
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
 
+    let buffer = "";
     while (true) {
         try {
             const read = await reader.read();
             if (read && !read.done) {
-                const chunk = decoder.decode(read.value).trim();
-                console.log(chunk);
-                yield JSON.parse(chunk);
-                /*
-                const chunks = chunk.split("\n");
-                for (const c of chunks) {
-                    console.log(c);
-                    yield JSON.parse(c);
+                const raw = decoder.decode(read.value);
+                const chunks = raw.split("\n");
+                for (const chunk of chunks) {
+                    if (chunk) {
+                        console.log(`'${chunk}'`);
+                        yield JSON.parse(chunk);
+                    }
                 }
-                */
             } else {
                 break;
             }

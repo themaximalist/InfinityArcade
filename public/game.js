@@ -81,7 +81,7 @@ class InfinityArcadeGame {
     }
 
     async chat(input) {
-        await this.ui.startLoading();
+        this.ui.startLoading();
         await this.handleStream(this.ia.api.chat(this.chat_id, input));
     }
 
@@ -99,15 +99,19 @@ class InfinityArcadeGame {
         window.onkeydown = (e) => {
             switch (e.key) {
                 case "1":
+                    e.preventDefault();
                     this.ui.button1.click();
                     break;
                 case "2":
+                    e.preventDefault();
                     this.ui.button2.click();
                     break;
                 case "3":
+                    e.preventDefault();
                     this.ui.button3.click();
                     break;
                 case "4":
+                    e.preventDefault();
                     this.ui.button4.click();
                     break;
             }
