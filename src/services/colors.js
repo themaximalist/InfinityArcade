@@ -12,27 +12,6 @@ function hexToRgb(hex) {
 function rgbToHex(r, g, b) {
     return '#' + [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('');
 }
-
-function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
-}
-
-function generateGradientColors(hexColor, numColors = 5) {
-    const [r, g, b] = hexToRgb(hexColor);
-    const colorVariations = [];
-
-    for (let i = 1; i <= numColors; i++) {
-        const factor = i * 0.3;
-        const newR = clamp(Math.round(r + r * factor), 0, 255);
-        const newG = clamp(Math.round(g + g * factor), 0, 255);
-        const newB = clamp(Math.round(b + b * factor), 0, 255);
-        const newHex = rgbToHex(newR, newG, newB);
-        colorVariations.push(newHex);
-    }
-
-    return colorVariations;
-}
-
 function rgbToHsl(r, g, b) {
     r /= 255;
     g /= 255;
@@ -116,23 +95,4 @@ function wcagContrast(hexColor) {
     return hslToHex(...newHsl);
 }
 
-function generateContrastColors(colors) {
-    return colors.map(wcagContrast);
-}
-
-function generateColorScheme(hexColor, num = 5) {
-    const background = generateGradientColors(hexColor, num);
-    const foreground = generateContrastColors(background);
-
-    const colors = [];
-    for (let i = 0; i < num; i++) {
-        colors.push({
-            background: background[i],
-            foreground: foreground[i]
-        });
-    }
-
-    return colors;
-}
-
-module.exports = { generateColorScheme };
+module.exports = { wcagContrast };

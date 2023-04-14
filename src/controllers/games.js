@@ -2,7 +2,7 @@ const log = require("debug")("ia:controllers:games");
 
 const Game = require("../models/game");
 const GenerateGame = require("../services/GenerateGame");
-const { generateColorScheme } = require("../services/colors");
+const { generateColorScheme, wcagContrast } = require("../services/colors");
 
 async function create(req, res) {
     try {
@@ -58,10 +58,10 @@ async function wildcard_handler(req, res) {
 
     const game = await Game.findOne({ where: { slug } });
     if (game) {
-        const colors = generateColorScheme(game.primary_color);
+        const contrast_color = wcagContrast(game.primary_color);
         return res.render("game", {
             game: game.dataValues,
-            colors,
+            contrast_color,
         });
     } else {
         return res.redirect(`/generate?prompt_text=${encodeURIComponent(slug)}`);

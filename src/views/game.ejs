@@ -43,8 +43,8 @@
                 </h1>
                 <h2
                     id="tagline"
-                    style="color: <%= colors[0].background %>"
-                    class="text-xl font-bold flex"
+                    style="color: <%= game.primary_color %>"
+                    class="text-xl font-bold flex opacity-80"
                 >
                     <%= game.tagline %>
                 </h2>
@@ -68,28 +68,28 @@
                     <li id="option1" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button1"
-                            style="background-color: <%= colors[1].background %>; color: <%= colors[1].foreground %>;"
+                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
                             class="w-full rounded py-4 px-4 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Play <%= game.title %>!</button>
                     </li>
                     <li id="option2" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button2"
-                            style="background-color: <%= colors[2].background %>; color: <%= colors[2].foreground %>;"
+                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
                             class="w-full opacity-90 rounded py-4 px-4  shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Option 1</button>
                     </li>
                     <li id="option3" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button3"
-                            style="background-color: <%= colors[3].background %>; color: <%= colors[3].foreground %>;"
+                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
                             class="w-full rounded py-4 px-4  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Option 3</button>
                     </li>
                     <li id="option4" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button4"
-                            style="background-color: <%= colors[4].background %>; color: <%= colors[4].foreground %>;"
+                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
                             class="w-full rounded py-4 px-4  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Option 4</button>
                     </li>
@@ -119,14 +119,9 @@
         </div>
     </div>
 </div>
+<%- include("scripts.ejs") %>
 <script>
     const GAME = <%- JSON.stringify(game) %>;
-<% if (NODE_ENV == "development") { %>
-    const BASE_URL =  "http://localhost:3000/api";
-<% } else { %>
-    const BASE_URL =  "https://infinityarcade.com/api";
-<% } %>
 </script>
-<%- include("scripts.ejs") %>
 <script src="/game.js"></script>
 <%- include("footer.ejs") %>

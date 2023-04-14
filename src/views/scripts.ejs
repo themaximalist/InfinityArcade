@@ -1,3 +1,10 @@
+<script>
+    <% if (NODE_ENV == "development") { %>
+        const BASE_URL =  "http://localhost:3000/api";
+    <% } else { %>
+        const BASE_URL =  "https://infinityarcade.com/api";
+    <% } %>
+</script>
 <script src="/utils.js"></script>
 <script src="/ui.js"></script>
 <script src="/api.js"></script>
