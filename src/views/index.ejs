@@ -1,5 +1,19 @@
-<%- include("header.ejs") %> <% let i = 0 %> <% let num = games.length %>
-<div class="grid grid-cols-5 max-w-full mx-auto gap-4 p-8">
+<%- include("header.ejs") %>
+
+<div class="w-full text-center">
+    <a
+        href="/"
+        class="text-white text-center py-4 text-[9px] opacity-60 tracking-wider inline-block"
+    >
+        Infinity Arcade
+    </a>
+</div>
+
+<% let i = 0 %> <% let num = games.length %>
+
+<div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-4 p-8"
+>
     <% for (const game of games) { %>
     <a
         href="/<%- game.slug %>"
