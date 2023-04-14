@@ -120,9 +120,8 @@
     </div>
 </div>
 <%- include("scripts.ejs") %>
-<!-- <script>
-    const GAME = <%- JSON.stringify(game) %>;
-</script> -->
-<!-- <script src="/game.js"></script> -->
+<script>
+    window.ia.handleGame(<%- JSON.stringify(game) %>);
+</script>
 <!-- <%- include("radio.ejs") %> -->
 <%- include("footer.ejs") %>

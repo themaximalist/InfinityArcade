@@ -1,9 +1,13 @@
 const InfinityArcadeAPI = require('./api');
+const InfinityArcadeGame = require('./game');
+const UserInterface = require('./ui');
 const { getCookie, setCookie } = require('./utils');
 
 class InfinityArcade {
     constructor() {
         this.api = new InfinityArcadeAPI();
+        this.ui = new UserInterface();
+        this.game = null;
         this.session_id = null;
     }
 
@@ -13,8 +17,9 @@ class InfinityArcade {
         });
     }
 
-    async handleGame() {
-        console.log(GAME);
+    async handleGame(game) {
+        this.game = new InfinityArcadeGame(this, game);
+        await this.game.setup();
     }
 
     async handleGenerate() {

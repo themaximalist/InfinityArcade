@@ -1,8 +1,7 @@
-
 class InfinityArcadeGame {
     constructor(ia, game) {
         this.ia = ia;
-        this.ui = ui;
+        this.ui = ia.ui;
         this.game = game;
 
         this.chat_id = null;
@@ -120,15 +119,4 @@ class InfinityArcadeGame {
     }
 }
 
-async function bootstrap() {
-    const ia = await InfinityArcade.initialize();
-    if (typeof GAME == "undefined" || typeof BASE_URL == "undefined") {
-        console.log("GAME or BASE_URL not defined...can't start game");
-        return;
-    }
-
-    const game = new InfinityArcadeGame(ia, GAME, BASE_URL);
-    await game.setup();
-};
-
-bootstrap();
+module.exports = InfinityArcadeGame;
