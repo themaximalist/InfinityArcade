@@ -1,5 +1,5 @@
 class InfinityArcadeAPI {
-    BASE_URL = "http://localhost:3000/api";
+    BASE_URL = "https://infinity-arcade.onrender.com/api";
 
     constructor() {
 
