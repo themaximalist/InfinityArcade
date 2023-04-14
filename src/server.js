@@ -1,6 +1,10 @@
+require("dotenv").config();
+
 const log = require("debug")("ia:server");
 
 const express = require("express");
+
+const Database = require("./database");
 const controllers = require("./controllers");
 
 class Server {
@@ -31,14 +35,6 @@ class Server {
         this.app.get("/", controllers.games.index); // TODO: switch to infinity game view 
 
         this.app.get("/:slug", controllers.games.wildcard_handler);
-
-        // this.app.get("/", handlers.createSession);           // home page
-        // this.app.get("/create", handlers.createSession);     // game creator
-        // this.app.get("/:game_slug", handlers.createSession); // search engine
-
-        // INDEX
-        // GAME INDEX
-        // GAME CREATOR
     }
 
     start() {
@@ -49,4 +45,8 @@ class Server {
     }
 }
 
-module.exports = Server;
+(async function main() {
+    await Database.initialize();
+    const server = new Server();
+    server.start();
+})();

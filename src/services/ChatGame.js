@@ -3,7 +3,6 @@ const log = require("debug")("ia:services:ChatGame");
 const Chat = require("../models/chat");
 const GetChat = require("./GetChat");
 const prompts = require("./prompts");
-const parseContent = require("./ParseContent");
 const { StreamChat } = require("./ai");
 
 async function* ChatGame(chat_id, content, prompt_name = "ChatGame-v1") {
