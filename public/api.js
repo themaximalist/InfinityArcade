@@ -105,12 +105,15 @@ async function* yieldStreamResponse(response) {
                     }
                 }
 
-                if (leftover) {
-                    console.log("LEFTOVER", leftover);
-                }
-
                 buffer = leftover;
             } else {
+                if (buffer) {
+                    try {
+                        yield JSON.parse(buffer);
+                    } catch (e) {
+                        console.log("LEFTOVER", buffer);
+                    }
+                }
                 break;
             }
         } catch (e) {
