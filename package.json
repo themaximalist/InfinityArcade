@@ -30,7 +30,5 @@
         "toml": "^3.0.0",
         "uuid": "^9.0.0"
     },
-    "devDependencies": {
-        "mocha": "7.2"
-    }
+    "devDependencies": {}
 }

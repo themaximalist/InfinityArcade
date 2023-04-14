@@ -1,0 +1,39 @@
+<script type="text/javascript" src="https://unpkg.com/@tonejs/midi"></script>
+<script type="text/javascript" src="https://unpkg.com/tone@13.4.9"></script>
+
+<div
+    id="radio"
+    class="absolute top-0 right-0 flex gap-4 items-center p-2 opacity-50 transition-opacity hover:opacity-100"
+>
+    <a href="" class="text-white w-6 h-6 inline-block" id="radio-toggle">
+        <img
+            class="w-full h-full"
+            style="display: none"
+            src="/images/radio-play.png"
+            alt="Radio Play"
+            id="icon-play"
+        />
+        <img
+            class="w-full h-full"
+            src="/images/radio-stop.png"
+            alt="Radio Stop"
+            id="icon-stop"
+        />
+    </a>
+    <a href="" class="text-white w-4 h-4" id="radio-prev">
+        <img
+            class="w-full h-full"
+            src="/images/radio-prev.png"
+            alt="Radio Previous"
+        />
+    </a>
+    <a href="" class="text-white w-4 h-4 inline-block" id="radio-next">
+        <img
+            class="w-full h-full"
+            src="/images/radio-next.png"
+            alt="Radio Next"
+        />
+    </a>
+</div>
+
+<script src="/radio.js" type="text/javascript"></script>
