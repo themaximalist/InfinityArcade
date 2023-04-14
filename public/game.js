@@ -4,7 +4,6 @@ class InfinityArcadeGame {
         this.ui = ui;
         this.game = game;
 
-        // empty state
         this.chat_id = null;
         this.parent_id = null;
         this.streaming = false;
