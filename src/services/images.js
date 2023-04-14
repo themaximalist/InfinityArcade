@@ -19,7 +19,6 @@ async function stablediffusion(prompt) {
                     num_outputs: 1,
                     prompt,
                 }
-
             }
         );
 

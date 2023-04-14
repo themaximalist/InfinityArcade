@@ -15,13 +15,11 @@ async function GenerateGameArt(game, image_prompt_name = "GenerateGameArt-v1") {
         const response = await fetch(remote_image_url);
         const image_data = await response.buffer();
 
-        const art = {
+        return {
             image_prompt_name,
             image_prompt_text,
             image_data,
         };
-
-        return art;
     } catch (e) {
         log(`error generating game art ${e.message}`);
         return null;

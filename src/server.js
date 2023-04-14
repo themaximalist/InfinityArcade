@@ -16,25 +16,20 @@ class Server {
         this.app.set("view engine", "ejs");
         this.app.set("views", "src/views");
 
-
         this.setupHandlers();
     }
 
     setupHandlers() {
         this.app.get("/api/session/new", controllers.sessions.create);
-
         this.app.post("/api/game/new", controllers.games.create);
         this.app.post("/api/game/generate", controllers.games.generate);
-        this.app.get("/api/art/generate", controllers.art.generate);
-
         this.app.get("/api/game/:slug/art", controllers.art.get);
+        this.app.get("/api/art/generate", controllers.art.generate);
         this.app.post("/api/chat/:slug/start", controllers.chats.start);
         this.app.post("/api/chat", controllers.chats.chat);
-
         this.app.get("/generate", controllers.games.generate_handler);
         this.app.get("/status", controllers.status);
         this.app.get("/", controllers.games.index);
-
         this.app.get("/:slug", controllers.games.wildcard_handler);
     }
 

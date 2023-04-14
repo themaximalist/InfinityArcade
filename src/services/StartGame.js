@@ -31,7 +31,7 @@ async function* StartGame(game, session_id, prompt_name = "StartGame-v1") {
             log(`created chat (id=${chat_id})`);
         }
 
-        for await (const response of await ChatGame(chat_id, "Start Game")) {
+        for await (const response of ChatGame(chat_id, "Start Game")) {
             yield response;
         }
     } catch (e) {

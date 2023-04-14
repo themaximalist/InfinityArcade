@@ -93,7 +93,7 @@ async function* yieldStreamResponse(response) {
                 buffer += raw;
 
                 let leftover = "";
-                const chunks = raw.split("\n");
+                const chunks = buffer.split("\n");
                 for (const chunk of chunks) {
                     if (chunk) {
                         console.log(`'${chunk}'`);
@@ -111,7 +111,7 @@ async function* yieldStreamResponse(response) {
                     try {
                         yield JSON.parse(buffer);
                     } catch (e) {
-                        console.log("LEFTOVER", buffer);
+                        console.log("ERROR PARSING LEFTOVER", buffer);
                     }
                 }
                 break;
