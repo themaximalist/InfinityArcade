@@ -3,14 +3,12 @@
 > Play any game
 
 ```
-Try game with gpt 4…see how far you get
 Upgrade image API
 // README
 // GENERATE 100s of games
 // SOUND (AUTO PULL MUSIC STATION FOR GAME)
-The Maximalist discord, newsletter, website, branding
-// FIX BUTTON COLOR
 // GAME JUMPS AROUND TOO MUCH on SMALLER SCREENS
+// THE MAXIMALIST BRANDING
 
 ## Pro
 Private games

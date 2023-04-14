@@ -12,7 +12,7 @@ async function AI(prompt) {
     return await Chat([{ "role": "user", "content": prompt }])
 }
 
-async function Chat(messages, model = "gpt-3.5-turbo") {
+async function Chat(messages, model = process.env.MODEL) {
     log(`Generating Chat response for ${JSON.stringify(messages)} message (model: ${model})`);
 
     try {
@@ -28,7 +28,7 @@ async function Chat(messages, model = "gpt-3.5-turbo") {
     }
 }
 
-async function* StreamChat(messages, model = "gpt-3.5-turbo") {
+async function* StreamChat(messages, model = process.env.MODEL) {
     try {
         const response = await openai.createChatCompletion(
             {
