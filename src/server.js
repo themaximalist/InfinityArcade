@@ -13,6 +13,9 @@ class Server {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.static("public"));
+        this.app.locals = {
+            NODE_ENV: process.env.NODE_ENV,
+        };
         this.app.set("view engine", "ejs");
         this.app.set("views", "src/views");
 

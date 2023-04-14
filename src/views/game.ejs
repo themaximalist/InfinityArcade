@@ -121,6 +121,11 @@
 </div>
 <script>
     const GAME = <%- JSON.stringify(game) %>;
+<% if (NODE_ENV == "development") { %>
+    const BASE_URL =  "http://localhost:3000/api";
+<% } else { %>
+    const BASE_URL =  "https://infinityarcade.com/api";
+<% } %>
 </script>
 <%- include("scripts.ejs") %>
 <script src="/game.js"></script>

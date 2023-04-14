@@ -1,7 +1,4 @@
 class InfinityArcadeAPI {
-    // BASE_URL = "http://localhost:3000/api";
-    BASE_URL = "https://infinityarcade.com/api";
-
     async fetch(url, data = null) {
         console.log(`fetching ${url}...`);
         try {
@@ -50,30 +47,30 @@ class InfinityArcadeAPI {
 
 
     async createSession() {
-        return await this.fetch(`${this.BASE_URL}/session/new`);
+        return await this.fetch(`${BASE_URL}/session/new`);
     }
 
     async saveGame(game) {
-        return await this.fetch(`${this.BASE_URL}/game/new`, game);
+        return await this.fetch(`${BASE_URL}/game/new`, game);
     }
 
     async generateGame(prompt_text = null) {
-        return await this.fetch(`${this.BASE_URL}/game/generate`, { prompt_text });
+        return await this.fetch(`${BASE_URL}/game/generate`, { prompt_text });
     }
 
     async getArt(slug) {
-        return await this.fetch(`${this.BASE_URL}/game/${slug}/art`);
+        return await this.fetch(`${BASE_URL}/game/${slug}/art`);
     }
 
     async *startGame(game, session_id) {
-        const response = await this.stream(`${this.BASE_URL}/chat/${game.slug}/start`, { session_id });
+        const response = await this.stream(`${BASE_URL}/chat/${game.slug}/start`, { session_id });
         for await (const token of yieldStreamResponse(response)) {
             yield token;
         }
     }
 
     async *chat(chat_id, content) {
-        const response = await this.stream(`${this.BASE_URL}/chat/`, { chat_id, content });
+        const response = await this.stream(`${BASE_URL}/chat/`, { chat_id, content });
         for await (const token of yieldStreamResponse(response)) {
             yield token;
         }

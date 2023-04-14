@@ -1,3 +1,4 @@
+
 class InfinityArcadeGame {
     constructor(ia, game) {
         this.ia = ia;
@@ -121,7 +122,12 @@ class InfinityArcadeGame {
 
 async function bootstrap() {
     const ia = await InfinityArcade.initialize();
-    const game = new InfinityArcadeGame(ia, GAME);
+    if (typeof GAME == "undefined" || typeof BASE_URL == "undefined") {
+        console.log("GAME or BASE_URL not defined...can't start game");
+        return;
+    }
+
+    const game = new InfinityArcadeGame(ia, GAME, BASE_URL);
     await game.setup();
 };
 
