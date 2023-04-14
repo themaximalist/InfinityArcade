@@ -1,0 +1,44 @@
+<%- include("header.ejs") %> <% let i = 0 %> <% let num = games.length %>
+<div class="grid grid-cols-5 max-w-full mx-auto gap-4 p-8">
+    <% for (const game of games) { %>
+    <a
+        href="/<%- game.slug %>"
+        class="text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+    >
+        <div class="relative pb-10/16 rounded-xl">
+            <img
+                src="<%- game.image_url %>"
+                alt="<%- game.title %>"
+                class="h-full w-full"
+            />
+        </div>
+        <div class="flex flex-col h-full gap-1">
+            <div
+                style="color: <%- game.primary_color %>"
+                class="text-xl font-semibold truncate"
+            >
+                <%- game.title %>
+            </div>
+            <div class="text-gray-500 font-medium text-sm italic truncate">
+                <%- game.genre %> <%- game.subgenre %>
+            </div>
+            <div class="text-sm font-bold mt-2"><%- game.tagline %></div>
+        </div>
+    </a>
+    <% if (++i % 32 == 0 || i == num) { %>
+    <a
+        href="/generate"
+        class="text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200 cursor-pointer"
+    >
+        <div
+            class="relative pb-10/16 rounded-xl flex items-center justify-center bg-gray-800"
+        ></div>
+        <div
+            class="flex flex-col h-full gap-1 justify-center items-center py-44"
+        >
+            <div class="text-xl font-semibold">Generate Game</div>
+        </div>
+    </a>
+    <% } %> <% } %>
+</div>
+<%- include("footer.ejs") %>

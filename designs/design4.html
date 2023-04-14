@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Press Start 2P', sans-serif;
+    }
+  </style>
+  <title>8-bit Mario Text Adventure</title>
+</head>
+<body class="bg-blue-900">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-center text-white mb-12">8-bit Mario Text Adventure</h1>
+    <div class="bg-black rounded-lg shadow-lg p-8 text-white">
+      <div class="bg-green-600 rounded-lg mb-12">
+        <div class="bg-green-700 h-16 rounded-lg relative">
+          <div class="bg-yellow-300 w-16 h-16 absolute top-[-4px] left-[-4px]"></div>
+          <div class="bg-yellow-300 w-16 h-16 absolute top-[-4px] right-[-4px]"></div>
+        </div>
+        <p class="text-xl px-6 py-4">You find yourself in an 8-bit world inspired by old school Mario games. You're standing in a grassy area with blocks floating above you. A pipe is nearby, and you can see a small castle in the distance. What do you do?</p>
+      </div>
+      <ul class="list-none space-y-4">
+        <li>
+          <button class="w-full bg-red-600 text-white rounded py-1 px-3 text-sm hover:bg-red-700 shadow-md">1. Jump and hit the floating blocks</button>
+        </li>
+        <li>
+          <button class="w-full bg-green-600 text-white rounded py-1 px-3 text-sm hover:bg-green-700 shadow-md">2. Enter the pipe</button>
+        </li>
+        <li>
+          <button class="w-full bg-blue-600 text-white rounded py-1 px-3 text-sm hover:bg-blue-700 shadow-md">3. Head towards the castle</button>
+        </li>
+        <li>
+          <button class="w-full bg-yellow-600 text-white rounded py-1 px-3 text-sm hover:bg-yellow-700 shadow-md">4. Stay and look for hidden secrets</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

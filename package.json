@@ -1,0 +1,35 @@
+{
+    "name": "infinityarcade",
+    "version": "0.0.1",
+    "description": "Create, Play, Repeat",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "keywords": [
+        "ai",
+        "arcade"
+    ],
+    "author": "The Maximalist",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "debug": "^4.3.4",
+        "dotenv": "^16.0.3",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "node-fetch": "^2.6.9",
+        "openai": "^3.2.1",
+        "pg": "^8.10.0",
+        "pg-hstore": "^2.3.4",
+        "prompt-sync": "^4.2.0",
+        "prompt-sync-history": "^1.0.1",
+        "replicate": "^0.9.0",
+        "request": "^2.88.2",
+        "sequelize": "^6.31.0",
+        "slugify": "^1.6.6",
+        "toml": "^3.0.0"
+    },
+    "devDependencies": {
+        "mocha": "7.2"
+    }
+}

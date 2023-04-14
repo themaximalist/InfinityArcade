@@ -1,0 +1,7 @@
+<% for (const chat of chats) { %>
+[[messages]]
+role = "<%= chat.role %>"
+content = """
+<%- chat.content %>
+"""
+<% } %>

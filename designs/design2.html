@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'PixelFont';
+      src: url('path/to/pixel-font.woff2') format('woff2');
+    }
+    body {
+      font-family: 'PixelFont', sans-serif;
+    }
+  </style>
+  <title>8-bit Mario Text Adventure</title>
+</head>
+<body class="bg-blue-900">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-center text-white mb-8">8-bit Mario Text Adventure</h1>
+    <div class="bg-black rounded-lg shadow-lg p-8 text-white">
+      <p class="text-xl mb-4">You find yourself in an 8-bit world inspired by old school Mario games. You're standing in a grassy area with blocks floating above you. A pipe is nearby, and you can see a small castle in the distance. What do you do?</p>
+      <ul class="list-none space-y-2">
+        <li>
+          <button class="w-full bg-red-600 text-white rounded py-2 px-4 hover:bg-red-700">1. Jump and hit the floating blocks</button>
+        </li>
+        <li>
+          <button class="w-full bg-green-600 text-white rounded py-2 px-4 hover:bg-green-700">2. Enter the pipe</button>
+        </li>
+        <li>
+          <button class="w-full bg-blue-600 text-white rounded py-2 px-4 hover:bg-blue-700">3. Head towards the castle</button>
+        </li>
+        <li>
+          <button class="w-full bg-yellow-600 text-white rounded py-2 px-4 hover:bg-yellow-700">4. Stay and look for hidden secrets</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

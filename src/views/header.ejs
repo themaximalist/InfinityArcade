@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/app.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+        <% if (typeof game !== "undefined") { %>
+        <title><%- game.title %> — Infinity Arcade</title>
+        <meta name="description" content="<%- game.description %>" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta property="og:url" content="<%- game.slug %>" />
+        <meta
+            property="og:title"
+            content="<%- game.title %> — Infinity Arcade"
+        />
+        <meta property="og:description" content="<%- game.description %>" />
+
+        <% if (game.image_url) { %>
+        <meta
+            property="og:image"
+            content="https://25d9-50-53-4-148.ngrok-free.app<%- game.image_url %>"
+        />
+        <% } %> <% } else { %>
+        <title>Infinity Arcade</title>
+        <meta
+            name="description"
+            content="Infinity Arcade is an arcade that never ends."
+        />
+        <% } %>
+    </head>
+    <body class="bg-black w-full"></body>
+</html>
