@@ -21,8 +21,6 @@
         "openai": "^3.2.1",
         "pg": "^8.10.0",
         "pg-hstore": "^2.3.4",
-        "prompt-sync": "^4.2.0",
-        "prompt-sync-history": "^1.0.1",
         "replicate": "^0.9.0",
         "request": "^2.88.2",
         "sequelize": "^6.31.0",
