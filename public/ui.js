@@ -56,7 +56,6 @@ class UserInterface {
     }
 
     showChatInput() {
-        console.log("SHOW CHAT INPUT");
         this.chat.style.display = "flex";
         this.chat_input.focus();
     }

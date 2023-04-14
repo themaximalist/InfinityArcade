@@ -2,7 +2,6 @@ const log = require("debug")("ia:controllers:games");
 
 const Game = require("../models/game");
 const GenerateGame = require("../services/GenerateGame");
-const GenerateGameArt = require("../services/GenerateGameArt");
 const { generateColorScheme } = require("../services/colors");
 
 async function create(req, res) {

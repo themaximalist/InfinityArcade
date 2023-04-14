@@ -1,9 +1,7 @@
 const log = require("debug")("ia:controllers:art");
 
 const Game = require("../models/game");
-const GenerateGameScene = require("../services/GenerateGameScene");
 const GenerateGameArt = require("../services/GenerateGameArt");
-const request = require("request");
 
 async function generate(req, res) {
     try {
@@ -12,8 +10,8 @@ async function generate(req, res) {
             const game = await Game.findOne({ where: { id: game_id } });
             if (!game) throw new Error(`game with id ${game_id} not found`);
 
-            if (game.image_url) {
-                return res.redirect(game.image_url);
+            if (game.image_data) {
+                return res.redirect(`/api/game/${game.slug}/art`);
             }
 
             const art = await GenerateGameArt(game.llm_fields);
@@ -21,7 +19,7 @@ async function generate(req, res) {
 
             await Game.update(art, { where: { id: game.id } });
 
-            return res.redirect(art.image_url)
+            return res.redirect(`/api/game/${game.slug}/art`);
         } else if (chat_id && !game_id) {
             console.log("GENERATE SCENEART");
         } else {
@@ -41,11 +39,10 @@ async function get(req, res) {
         const game = await Game.findOne({ where: { slug } });
         if (!game) throw new Error(`game with slug ${slug} not found`);
 
-        if (game.image_url) {
-            return res.json({
-                status: "success",
-                data: game.image_url
-            });
+        if (game.image_data) {
+            res.set('Content-Type', "image/jpeg");
+            res.send(game.image_data);
+            res.end();
         } else {
             throw new Error(`game with slug ${slug} has no art`)
         }

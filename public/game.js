@@ -15,7 +15,6 @@ class InfinityArcadeGame {
     }
 
     async streamFinished() {
-        console.log("FINISHED");
         this.streaming = false;
         this.ui.showChatInput();
 

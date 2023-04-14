@@ -22,7 +22,6 @@
         "pg": "^8.10.0",
         "pg-hstore": "^2.3.4",
         "replicate": "^0.9.0",
-        "request": "^2.88.2",
         "sequelize": "^6.31.0",
         "slugify": "^1.6.6",
         "toml": "^3.0.0"

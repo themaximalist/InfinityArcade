@@ -27,7 +27,7 @@ class Server {
         this.app.post("/api/game/generate", controllers.games.generate);
         this.app.get("/api/art/generate", controllers.art.generate);
 
-        // this.app.get("/api/game/:slug/art", controllers.art.get);
+        this.app.get("/api/game/:slug/art", controllers.art.get);
         this.app.post("/api/chat/:slug/start", controllers.chats.start);
         this.app.post("/api/chat", controllers.chats.chat);
 

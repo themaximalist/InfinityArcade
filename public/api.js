@@ -1,5 +1,6 @@
 class InfinityArcadeAPI {
     BASE_URL = "https://infinityarcade.com/api";
+    // BASE_URL = "http://localhost:3000/api";
 
     constructor() {
 
@@ -93,6 +94,7 @@ async function* yieldStreamResponse(response) {
                 const chunk = decoder.decode(read.value).trim();
                 const chunks = chunk.split("\n");
                 for (const c of chunks) {
+                    console.log(c);
                     yield JSON.parse(c);
                 }
             } else {

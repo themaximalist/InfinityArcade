@@ -16,6 +16,10 @@ Art.init({
         allowNull: false,
         unique: true
     },
+    data: {
+        type: DataTypes.BLOB,
+        allowNull: false,
+    },
 }, {
     sequelize,
 });

@@ -4,6 +4,7 @@ const prompts = require("./prompts");
 const { slugify, streamToDisk } = require("../utils");
 const path = require("path");
 const { stablediffusion } = require("./images");
+const fetch = require("node-fetch");
 
 async function GenerateGameArt(game, image_prompt_name = "GenerateGameArt-v1") {
     log(`generating game art (game=${JSON.stringify(game)}, prompt_name=${image_prompt_name})...`);
@@ -14,16 +15,19 @@ async function GenerateGameArt(game, image_prompt_name = "GenerateGameArt-v1") {
         const remote_image_url = await stablediffusion(image_prompt_text);
 
 
-        const image_name = `${slugify(game.title)}-${Date.now()}.jpg`;
-        const image_path = path.join(__dirname, "..", "..", "public", "images", "generated", image_name);
-        const image_url = `/images/generated/${image_name}`;
+        // const image_name = `${slugify(game.title)}-${Date.now()}.jpg`;
+        // const image_path = path.join(__dirname, "..", "..", "public", "images", "generated", image_name);
+        // const image_url = `/images/generated/${image_name}`;
 
-        await streamToDisk(remote_image_url, image_path);
+        // await streamToDisk(remote_image_url, image_path);
+
+        const response = await fetch(remote_image_url);
+        const image_data = await response.buffer();
 
         const art = {
             image_prompt_name,
             image_prompt_text,
-            image_url,
+            image_data,
         };
 
         log(`generated art ${JSON.stringify(art)}`);

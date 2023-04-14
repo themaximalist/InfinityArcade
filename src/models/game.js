@@ -53,9 +53,9 @@ Game.init({
         type: DataTypes.TEXT,
         allowNull: true
     },
-    image_url: {
-        type: DataTypes.TEXT,
-        allowNull: true
+    image_data: {
+        type: DataTypes.BLOB,
+        allowNull: true,
     },
     llm_fields: {
         type: DataTypes.VIRTUAL,
