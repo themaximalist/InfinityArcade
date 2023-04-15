@@ -2,7 +2,8 @@ const log = require("debug")("ia:controllers:games");
 
 const Game = require("../models/game");
 const GenerateGame = require("../services/GenerateGame");
-const { generateColorScheme, wcagContrast } = require("../services/colors");
+const sequelize = require("../sequelize");
+const { wcagContrast } = require("../services/colors");
 
 async function create(req, res) {
     try {
@@ -49,7 +50,7 @@ async function generate_handler(req, res) {
 }
 
 async function index(req, res) {
-    const games = (await Game.findAll({ order: [["id", "DESC"]] })).map(g => g.dataValues);
+    const games = (await Game.findAll({ order: sequelize.random(), limit: 32 })).map(g => g.dataValues);
     return res.render("index", { games });
 }
 
