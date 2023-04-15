@@ -223,7 +223,7 @@ body {
 }
 
 .ia-game-started #title {
-    @apply text-base lg:text-2xl;
+    @apply text-base lg:text-2xl mt-0;
 }
 
 #radio {

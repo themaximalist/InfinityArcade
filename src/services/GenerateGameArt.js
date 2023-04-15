@@ -1,21 +1,29 @@
 const log = require("debug")("ia:services:GenerateGameArt");
 const { Chat } = require("./ai");
 const prompts = require("./prompts");
-const { stablediffusion } = require("./images");
-const fetch = require("node-fetch");
+const { replicate2image, stability2image } = require("./images");
 
-async function GenerateGameArt(game, image_prompt_name = "GenerateGameArt-v1") {
-    log(`generating game art (game=${JSON.stringify(game)}, prompt_name=${image_prompt_name})...`);
+async function GenerateGameArt(game, image_prompt_name = "GenerateGameArt-v1", image_prompt_model = process.env.IMAGE_MODEL) {
+    log(`generating game art (game=${JSON.stringify(game)}, prompt_name=${image_prompt_name}, image_dimensions=${image_prompt_model})...`);
 
     try {
         const messages = prompts.load(image_prompt_name, { game });
         const image_prompt_text = await Chat(messages);
-        const remote_image_url = await stablediffusion(image_prompt_text);
 
-        const response = await fetch(remote_image_url);
-        const image_data = await response.buffer();
+        let image_data;
+        switch (image_prompt_model) {
+            case "replicate":
+                image_data = await replicate2image(image_prompt_text);
+                break;
+            case "stability":
+                image_data = await stability2image(image_prompt_text);
+                break;
+            default:
+                throw new Error(`unknown image_prompt_model ${image_prompt_model}`);
+        }
 
         return {
+            image_prompt_model,
             image_prompt_name,
             image_prompt_text,
             image_data,

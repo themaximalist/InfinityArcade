@@ -1299,6 +1299,7 @@ body {
 }
 
 .ia-game-started #title {
+  margin-top: 0px;
   font-size: 1rem;
   line-height: 1.5rem;
 }
@@ -1360,6 +1361,10 @@ body {
 }
 
 @media (min-width: 768px) {
+  .md\:mt-8 {
+    margin-top: 2rem;
+  }
+
   .md\:gap-4 {
     gap: 1rem;
   }

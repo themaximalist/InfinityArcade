@@ -37,7 +37,7 @@ To run InfinityArcade locally, you'll need:
 -   Node.js
 -   PostgreSQL
 -   OpenAI API key
--   Replicate API key
+-   Replicate or Stability API key
 
 ### Installing
 
@@ -53,11 +53,13 @@ cd InfinityArcade
 ```
 OPENAI_API_KEY=your_openai_api_key
 REPLICATE_API_KEY=your_replicate_api_key
+STABILITY_API_KEY=your_stability_api_key
 DATABASE_URI=postgres://username:password@localhost:5432/infinityarcade
 DEBUG=ia:*
 PORT=3000
 NODE_ENV=development
 MODEL=gpt-4
+IMAGE_MODEL=stability
 ```
 
 3. Install dependencies:

@@ -10,9 +10,7 @@ async function generate(req, res) {
             const game = await Game.findOne({ where: { id: game_id } });
             if (!game) throw new Error(`game with id ${game_id} not found`);
 
-            if (game.image_data) {
-                return res.redirect(`/api/game/${game.slug}/art`);
-            }
+            if (game.image_data) return res.redirect(`/api/game/${game.slug}/art`);
 
             const art = await GenerateGameArt(game.llm_fields);
             if (!art) throw new Error(`art not generated`);
@@ -20,8 +18,6 @@ async function generate(req, res) {
             await Game.update(art, { where: { id: game.id } });
 
             return res.redirect(`/api/game/${game.slug}/art`);
-        } else if (chat_id && !game_id) {
-            console.log("GENERATE SCENEART");
         } else {
             throw new Error(`invalid request parameters`);
         }
@@ -39,10 +35,15 @@ async function get(req, res) {
         const game = await Game.findOne({ where: { slug } });
         if (!game) throw new Error(`game with slug ${slug} not found`);
 
+
         if (game.image_data) {
-            res.set('Content-Type', "image/jpeg");
-            res.send(game.image_data);
-            res.end();
+            const contentType = (game.image_model_name === "replicate" ? "image/jpeg" : "image/png");
+
+            res.writeHead(200, {
+                'Content-Type': contentType
+            });
+
+            res.end(game.image_data, "binary");
         } else {
             throw new Error(`game with slug ${slug} has no art`)
         }

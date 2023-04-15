@@ -45,6 +45,10 @@ Game.init({
         type: DataTypes.TEXT,
         allowNull: true
     },
+    image_prompt_model: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     image_prompt_name: {
         type: DataTypes.STRING,
         allowNull: true
