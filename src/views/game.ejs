@@ -119,9 +119,11 @@
         </div>
     </div>
 </div>
-<%- include("scripts.ejs") %>
 <script>
-    window.ia.handleGame(<%- JSON.stringify(game) %>);
+    document.addEventListener("ia-loaded", (e) => {
+        window.ia.handleGame(<%- JSON.stringify(game) %>);
+    });
 </script>
-<!-- <%- include("radio.ejs") %> -->
+<%- include("radio.ejs") %>
+<%- include("scripts.ejs") %>
 <%- include("footer.ejs") %>

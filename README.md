@@ -3,11 +3,9 @@
 > Play any game
 
 ```
-// PROC FILE
-Upgrade image API
+// Upgrade image API
 // README
 // GENERATE 100s of games
-// SOUND (AUTO PULL MUSIC STATION FOR GAME)
 // GAME JUMPS AROUND TOO MUCH on SMALLER SCREENS
 // THE MAXIMALIST BRANDING
 
@@ -25,9 +23,6 @@ GPT-4 (coming soon)
 Use your own OpenAI key with gpt-4 now
 Other models (Claude)
 Full screen
+Multi-character agents (coming soon)
 Multi player (coming soon)
-
-
-
-
 ```

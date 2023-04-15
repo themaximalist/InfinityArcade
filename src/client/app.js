@@ -1,14 +1,21 @@
 const InfinityArcadeAPI = require('./api');
 const InfinityArcadeGame = require('./game');
 const UserInterface = require('./ui');
+const Radio = require("./radio");
 const { getCookie, setCookie } = require('./utils');
 
 class InfinityArcade {
     constructor() {
         this.api = new InfinityArcadeAPI();
         this.ui = new UserInterface();
+        this.radio = new Radio();
         this.game = null;
         this.session_id = null;
+    }
+
+    sendEvent(name) {
+        const event = new CustomEvent(name);
+        document.dispatchEvent(event);
     }
 
     get params() {
@@ -26,6 +33,10 @@ class InfinityArcade {
         const prompt_text = this.params.prompt_text;
         const game = await this.api.generateGame(prompt_text);
         document.location = `/${game.slug}`;
+    }
+
+    async handleRadio() {
+        this.radio.initialize();
     }
 
     static async initialize(api) {

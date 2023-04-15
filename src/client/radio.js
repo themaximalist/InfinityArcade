@@ -1,32 +1,28 @@
-const toggleRadio = document.getElementById("radio-toggle");
-toggleRadio.onclick = (e) => {
-    console.log("CLICK");
-    e.preventDefault();
-
-    const player = new Tone.Player({
-        url: "https://tonejs.github.io/audio/berklee/gong_1.mp3",
-        autoplay: true,
-    });
-
-    Tone.loaded().then(() => {
-        console.log("LOADED");
-        player.start();
-    });
-
-};
-
-/*
 class Radio {
     constructor() {
-        this.autoplay = false;
-        this.stopped = false;
-        this.playing = false;
+        this.audio = null;
+        this.autoplay = true;
         this.index = 0;
-        this.synths = [];
-        this.songs = [
-            "donkey_kong.mid",
-            "examples_bach_846.mid",
-        ];
+        this.catalog = [
+            "CHIPTUNE_Minstrel_Dance.mp3",
+            "CHIPTUNE_The_Bards_Tale.mp3",
+            "CHIPTUNE_The_Old_Tower_Inn.mp3",
+            "HinaCC0_011_Fallen_leaves.mp3",
+            "Komiku_-_02_-_Boss_4__Cobblestone_in_their_face.mp3",
+            "Komiku_-_02_-_Poupis_Theme.mp3",
+            "Komiku_-_04_-_Shopping_List.mp3",
+            "Komiku_-_07_-_Last_Boss__Lets_see_what_we_got.mp3",
+            "Loyalty_Freak_Music_-_02_-_High_Technologic_Beat_Explosion.mp3",
+            "Loyalty_Freak_Music_-_04_-_Cant_Stop_My_Feet_.mp3",
+            "Loyalty_Freak_Music_-_04_-_It_feels_good_to_be_alive_too.mp3",
+            "draft-monk-ambience.mp3",
+            "ocean-of-ice.mp3",
+            "雪のテーマ-Snow-field-.mp3",
+        ]
+    }
+
+    initialize() {
+        console.log("INITIALIZE RADIO");
 
         this.toggleRadio = document.getElementById("radio-toggle");
         this.nextRadio = document.getElementById("radio-next");
@@ -37,21 +33,87 @@ class Radio {
         this.toggleRadio.onclick = this.handleToggleRadioClick.bind(this);
         this.nextRadio.onclick = this.handleClickNext.bind(this);
         this.prevRadio.onclick = this.handleClickPrev.bind(this);
+    }
 
-        // Listen for the 'stop' event on the Transport
-        Tone.Transport.on('stop', async () => {
-            if (this.autoplay && this.stopped) {
-                console.log("RADIO SONG STOPPED...onto next");
-                this.playing = false;
-                this.index++;
-                await this.play();
-                this.render();
-            }
-        });
+    handleToggleRadioClick(e) {
+        e.preventDefault();
+
+        if (this.audio) {
+            this.stop();
+        } else {
+            this.play();
+        }
+    }
+
+    handleClickNext(e) {
+        e.preventDefault();
+        this.next();
+    }
+
+    handleClickPrev(e) {
+        e.preventDefault();
+        this.prev();
+    }
+
+    songEnded() {
+        console.log("SONG ENDED");
+        this.audio = null;
+        if (this.autoplay) {
+            this.next();
+        }
+    }
+
+    get song() {
+        if (this.index >= this.catalog.length) {
+            this.index = 0;
+        }
+
+        if (this.index < 0) {
+            this.index = this.catalog.length - 1;
+        }
+
+        return this.catalog[this.index];
+    }
+
+    play() {
+        if (this.audio) {
+            this.audio.pause();
+            this.audio = null;
+        }
+
+        console.log(`PLAYING ${this.song}`);
+
+        this.audio = new Audio(`/mp3/${this.song}`);
+        this.audio.volume = 0.2;
+
+        this.audio.addEventListener('ended', this.songEnded.bind(this));
+
+        this.audio.play();
+
+        this.render();
+    }
+
+    stop() {
+        if (this.audio) {
+            console.log("STOPPING");
+            this.audio.pause();
+            this.audio = null;
+            this.render();
+        }
+    }
+
+    next() {
+        this.index++;
+        this.play();
+    }
+
+    prev() {
+        this.index--;
+        this.play();
     }
 
     render() {
-        if (this.playing) {
+        if (this.audio) {
             this.iconPlay.style.display = "block";
             this.iconStop.style.display = "none";
         } else {
@@ -59,125 +121,7 @@ class Radio {
             this.iconStop.style.display = "block";
         }
     }
-
-    getSong() {
-        if (this.index >= this.songs.length) {
-            this.index = 0;
-        }
-
-        if (this.index < 0) {
-            this.index = this.songs.length - 1;
-        }
-
-        return this.songs[this.index];
-    }
-
-    async handleToggleRadioClick(e) {
-        e.preventDefault();
-        if (this.playing) {
-            this.autoplay = false;
-            this.stop();
-            this.render();
-        } else {
-            this.autoplay = true;
-            await this.play();
-            this.render();
-        }
-    };
-
-    async play() {
-        if (this.playing) {
-            console.log("ALREADY PLAYING...why are we here???")
-            return;
-        }
-
-        if (!this.autoplay) {
-            console.log("NOT AUTOPLAYING...why are we here???")
-            return;
-        }
-
-        this.stopped = false;
-        this.playing = true;
-        const song = this.getSong();
-        return new Promise((resolve, reject) => {
-            Midi.fromUrl(`/midi/${song}`).then((midi) => {
-                console.log("LOADED");
-                const now = Tone.now() + 0.5;
-                let maxTime = 0; // Variable to store the maximum time value
-
-                midi.tracks.forEach((track) => {
-                    // Create a synth for each track
-                    const synth = new Tone.PolySynth(10, Tone.Synth, {
-                        envelope: {
-                            attack: 0.02,
-                            decay: 0.1,
-                            sustain: 0.3,
-                            release: 1,
-                        },
-                    }).toMaster();
-
-                    this.synths.push(synth);
-
-                    track.notes.forEach((note) => {
-                        const startTime = note.time + now;
-                        synth.triggerAttackRelease(
-                            note.name,
-                            note.duration,
-                            startTime,
-                            note.velocity
-                        );
-                        // Update maxTime with the end time of each note
-                        maxTime = Math.max(maxTime, startTime + note.duration);
-                    });
-                });
-
-                // Schedule the Transport to stop after the total duration
-                Tone.Transport.scheduleOnce((time) => {
-                    console.log("SONG ENDED");
-                    this.stop();
-                }, maxTime);
-
-                Tone.Transport.start();
-                resolve();
-            });
-        });
-    }
-
-
-    stop() {
-        this.playing = false;
-        while (this.synths.length) {
-            const synth = this.synths.shift();
-            synth.dispose();
-        }
-        this.synths = [];
-        this.stopped = true;
-        Tone.Transport.stop();
-    }
-
-    async handleClickNext(e) {
-        e.preventDefault();
-        this.autoplay = true;
-        if (this.playing) {
-            this.stop();
-        }
-        this.index++;
-        await this.play();
-        this.render();
-    }
-
-    async handleClickPrev(e) {
-        e.preventDefault();
-        this.autoplay = true;
-        this.index--;
-        if (this.playing) {
-            this.stop();
-        }
-        await this.play();
-        this.render();
-    }
 }
 
 
-const radio = new Radio();
-*/
+module.exports = Radio;
