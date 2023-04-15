@@ -655,6 +655,10 @@ video {
   max-width: 100%;
 }
 
+.max-w-lg {
+  max-width: 32rem;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -704,10 +708,6 @@ video {
 
 .flex-col {
   flex-direction: column;
-}
-
-.items-start {
-  align-items: flex-start;
 }
 
 .items-center {
@@ -1269,9 +1269,18 @@ body {
 }
 
 .ia-game-started #tagline,
-.ia-game-started #image-wrapper,
 .ia-game-started #genre-wrapper {
   display: none;
+}
+
+.ia-game-started #image-wrapper {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .ia-game-started #image-wrapper {
+    display: flex;
+  }
 }
 
 #button1 {
@@ -1292,6 +1301,13 @@ body {
 .ia-game-started #title {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ia-game-started #title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 #radio {
@@ -1359,12 +1375,20 @@ body {
     margin-top: 0.75rem;
   }
 
+  .lg\:max-w-xl {
+    max-width: 36rem;
+  }
+
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:flex-row-reverse {
     flex-direction: row-reverse;
+  }
+
+  .lg\:items-center {
+    align-items: center;
   }
 }
 

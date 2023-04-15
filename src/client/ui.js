@@ -114,12 +114,6 @@ class UserInterface {
     }
 
     enableGameUI() {
-        // this.tagline.style.display = "none";
-        // this.genre_wrapper.style.display = "none";
-        // this.text.classList.remove("h-full");
-        // this.text.classList.remove("grow");
-        // this.text.style.removeProperty("max-height");
-        // this.text.style.height = "400px";
         this.videogame.classList.add("ia-game-started");
         this.startLoading();
     }

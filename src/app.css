@@ -206,9 +206,12 @@ body {
 }
 
 .ia-game-started #tagline,
-.ia-game-started #image-wrapper,
 .ia-game-started #genre-wrapper {
     display: none;
+}
+
+.ia-game-started #image-wrapper {
+    @apply hidden md:flex;
 }
 
 #button1 {
@@ -220,7 +223,7 @@ body {
 }
 
 .ia-game-started #title {
-    @apply text-base;
+    @apply text-base lg:text-2xl;
 }
 
 #radio {
