@@ -1,20 +1,23 @@
 <%- include("header.ejs") %>
 <div
-    class="container mx-auto px-1 py-4 flex w-full justify-center h-screen"
+    class="container mx-auto px-3 py-4 flex flex-col w-full justify-center h-full gap-4 lg:mt-3"
     id="videogame"
 >
-    <a
-        href="/"
-        class="absolute top-0 text-white text-center py-4 text-sm opacity-60 tracking-wider"
-    >
-        Infinity Arcade
-    </a>
+    <div class="w-full flex justify-between items-center h-6">
+        <a
+            href="/"
+            class="text-white text-center text-sm opacity-60 tracking-wider"
+        >
+            Infinity Arcade
+        </a>
+        <%- include("radio.ejs") %>
+    </div>
 
     <div
-        class="bg-black rounded-lg shadow-lg px-2 pb-4 pt-12 text-white flex gap-8 w-full flex-col lg:flex-row-reverse h-full"
+        class="bg-black rounded-lg shadow-lg pb-4 text-white flex gap-8 w-full flex-col lg:flex-row-reverse h-full"
     >
 
-        <div class="flex flex-col w-full lg:w-4/12 justify-start items-center h-full gap-4" style="max-height: 800px" id="image-wrapper">
+        <div class="flex flex-col w-full justify-start items-start gap-4" id="image-wrapper">
             <div class="mt-44" id="image-loader" <%- (game.image_data ? `style="display: none"` : "") %>>
                 <div class="lds-roller text-green-500">
                     <div></div>
@@ -29,13 +32,13 @@
             </div>
             <img
                 id="image"
-                class="w-full object-cover rounded-md image-hover"
+                class="object-cover rounded-md image-hover w-full"
                 src="/api/art/generate?game_id=<%= game.id %>"
                 alt="Scene Image"
             />
         </div>
-        <div class="flex flex-col w-full lg:w-8/12 h-full">
-            <div class="flex flex-col gap-4 grow h-1/2">
+        <div class="flex flex-col w-full gap-4">
+            <div class="flex flex-col gap-2">
                 <h1 class="text-4xl font-bold"
                     style="color: <%= game.primary_color %>"
                     id="title">
@@ -60,37 +63,37 @@
                         </span>
                 </div>
                 <div id="dot-loader" style="display: none" class="dot-animation"><span class="dots"></span></div>
-                <div class="text-xl grow overflow-y-scroll flex flex-col gap-4 leading-relaxed whitespace-pre-line" id="text" style="max-height: 400px;"><%= game.description %></div>
+                <div class="text-base grow overflow-y-scroll flex flex-col gap-4 leading-relaxed whitespace-pre-line" id="text"><%= game.description %></div>
             </div>
 
-            <div class="bottom-0 md:h-1/2">
+            <div class="">
                 <ul class="list-none space-y-2">
-                    <li id="option1" class="hover:opacity-80 transition-opacity">
+                    <li id="option1" class="opacity-100 hover:opacity-80 transition-opacity">
                         <button
                             id="button1"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="w-full rounded py-3 px-4 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
+                            class="text-sm w-full rounded py-3 px-4 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Play <%= game.title %>!</button>
                     </li>
                     <li id="option2" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button2"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="w-full opacity-90 rounded py-3 px-4  shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
+                            class="text-sm w-full opacity-90 rounded py-3 px-4  shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Option 1</button>
                     </li>
                     <li id="option3" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button3"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="w-full rounded py-3 px-4  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
+                            class="text-sm w-full rounded py-3 px-4  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Option 3</button>
                     </li>
                     <li id="option4" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button4"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="w-full rounded py-3 px-4  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
+                            class="text-sm w-full rounded py-3 px-4  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left"
                         >Option 4</button>
                     </li>
                 <li id="chat"
@@ -114,12 +117,12 @@
             </div>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener("ia-loaded", (e) => {
-        window.ia.handleGame(<%- JSON.stringify(game) %>);
+    <script>
+        document.addEventListener("ia-loaded", (e) => {
+            window.ia.handleGame(<%- JSON.stringify(game) %>);
+            window.ia.handleRadio();
     });
-</script>
-<%- include("radio.ejs") %>
+    </script>
+</div>
 <%- include("scripts.ejs") %>
 <%- include("footer.ejs") %>

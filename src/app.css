@@ -204,3 +204,30 @@ body {
     content: "";
     animation: dots-animation 1s infinite steps(3, end);
 }
+
+.ia-game-started #tagline,
+.ia-game-started #image-wrapper,
+.ia-game-started #genre-wrapper {
+    display: none;
+}
+
+#button1 {
+    @apply text-lg p-5;
+}
+
+.ia-game-started #button1 {
+    @apply text-sm px-4 py-3;
+}
+
+.ia-game-started #title {
+    @apply text-base;
+}
+
+#radio {
+    /* visibility: hidden; */
+    /* @apply pointer-events-none; */
+}
+
+.ia-game-started #radio {
+    /* visibility: visible; */
+}

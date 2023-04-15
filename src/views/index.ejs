@@ -12,21 +12,21 @@
 <% let i = 0 %> <% let num = games.length %>
 
 <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-4 py-8 px-2"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-8 sm:px-4"
 >
     <% for (const game of games) { %>
     <a
         href="/<%- game.slug %>"
-        class="text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+        class="text-white flex flex-col bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
     >
         <div class="relative pb-10/16 rounded-xl">
             <img
                 src="/api/game/<%- game.slug %>/art"
                 alt="<%- game.title %>"
-                class="h-full w-full rounded-xl"
+                class="h-full w-full rounded-t-xl"
             />
         </div>
-        <div class="flex flex-col h-full gap-1">
+        <div class="flex flex-col h-full gap-1 p-3">
             <div
                 style="color: <%- game.primary_color %>"
                 class="text-xl font-semibold truncate"

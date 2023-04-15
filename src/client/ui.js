@@ -1,5 +1,6 @@
 class UserInterface {
     constructor() {
+        this.videogame = document.getElementById("videogame");
         this.image = document.getElementById("image");
         this.tagline = document.getElementById("tagline");
         this.genre_wrapper = document.getElementById("genre-wrapper");
@@ -102,6 +103,10 @@ class UserInterface {
         this.button2.innerHTML = "";
         this.button3.innerHTML = "";
         this.button4.innerHTML = "";
+        this.option1.style.opacity = 1; // mobile hover bug
+        this.option2.style.opacity = 1;
+        this.option3.style.opacity = 1;
+        this.option4.style.opacity = 1;
         this.option1.style.display = "none";
         this.option2.style.display = "none";
         this.option3.style.display = "none";
@@ -109,12 +114,13 @@ class UserInterface {
     }
 
     enableGameUI() {
-        this.tagline.style.display = "none";
-        this.genre_wrapper.style.display = "none";
-        this.text.classList.remove("h-full");
-        this.text.classList.remove("grow");
-        this.text.style.removeProperty("max-height");
-        this.text.style.height = "400px";
+        // this.tagline.style.display = "none";
+        // this.genre_wrapper.style.display = "none";
+        // this.text.classList.remove("h-full");
+        // this.text.classList.remove("grow");
+        // this.text.style.removeProperty("max-height");
+        // this.text.style.height = "400px";
+        this.videogame.classList.add("ia-game-started");
         this.startLoading();
     }
 
