@@ -25,4 +25,5 @@ Other models (Claude)
 Full screen
 Multi-character agents (coming soon)
 Multi player (coming soon)
+Generative Music (coming soon)
 ```
