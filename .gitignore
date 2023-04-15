@@ -4,4 +4,3 @@ node_modules/
 package-lock.json
 public/images/generated/*.jpg
 public/midi/*
-public/mp3/*
