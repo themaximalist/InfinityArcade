@@ -22,9 +22,11 @@
     >
         <div class="relative pb-10/16 rounded-xl">
             <img
-                src="/api/game/<%- game.slug %>/art"
-                alt="<%- game.title %>"
-                class="h-full w-full rounded-t-xl"
+                data-src="/api/game/<%- game.slug %>/art"
+                alt="<%- game.title
+            %>"
+                style="visibility: hidden"
+                class="h-full w-full rounded-t-xl lazy-load min-w-full"
             />
         </div>
         <div class="flex flex-col h-full gap-1 p-3">
@@ -56,12 +58,53 @@
     </a>
     <% } %> <% } %>
 </div>
-<a href="https://themaximalist.com">
+<a
+    href="https://themaximalist.com"
+    class="opacity-50 hover:opacity-100 transition-opacity"
+>
     <img
         src="/images/themaximalist.png"
         id="themaximalist"
-        class="mx-auto w-32 my-16"
+        class="mx-auto w-12 h-12 my-12"
         alt="The Maximalist"
     />
 </a>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get all images with the 'lazy-load' class
+        const lazyImages = [].slice.call(
+            document.querySelectorAll("img.lazy-load")
+        );
+
+        // Create an Intersection Observer instance
+        const lazyImageObserver = new IntersectionObserver(function (
+            entries,
+            observer
+        ) {
+            entries.forEach(function (entry) {
+                // If the image is in the viewport
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+
+                    // Set the 'src' attribute to the value of the 'data-src' attribute
+                    lazyImage.src = lazyImage.dataset.src;
+
+                    // Remove the 'lazy-load' class after the image has loaded
+                    lazyImage.onload = function () {
+                        lazyImage.style.visibility = "visible";
+                        lazyImage.classList.remove("lazy-load");
+                    };
+
+                    // Unobserve the image to avoid further checks
+                    observer.unobserve(lazyImage);
+                }
+            });
+        });
+
+        // Observe each image
+        lazyImages.forEach(function (lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+        });
+    });
+</script>
 <%- include("footer.ejs") %>
