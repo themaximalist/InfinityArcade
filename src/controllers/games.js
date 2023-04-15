@@ -50,7 +50,7 @@ async function generate_handler(req, res) {
 }
 
 async function index(req, res) {
-    const games = (await Game.findAll({ order: sequelize.random(), limit: 32 })).map(g => g.dataValues);
+    const games = (await Game.findAll({ order: sequelize.random(), limit: 500 })).map(g => g.dataValues);
     return res.render("index", { games });
 }
 
