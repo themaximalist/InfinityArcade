@@ -14,7 +14,7 @@
         class="bg-black rounded-lg shadow-lg px-2 pb-4 pt-12 text-white flex gap-8 w-full flex-col lg:flex-row-reverse h-full"
     >
 
-        <div class="flex flex-col w-full lg:w-4/12 justify-start items-center overflow-y-scroll h-full gap-4" style="max-height: 800px" id="image-wrapper">
+        <div class="flex flex-col w-full lg:w-4/12 justify-start items-center h-full gap-4" style="max-height: 800px" id="image-wrapper">
             <div class="mt-44" id="image-loader" <%- (game.image_data ? `style="display: none"` : "") %>>
                 <div class="lds-roller text-green-500">
                     <div></div>
@@ -29,7 +29,7 @@
             </div>
             <img
                 id="image"
-                class="w-full h-full object-cover rounded-md image-hover max-h-96"
+                class="w-full object-cover rounded-md image-hover"
                 src="/api/art/generate?game_id=<%= game.id %>"
                 alt="Scene Image"
             />
