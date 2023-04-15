@@ -55,8 +55,11 @@ async function get(req, res) {
                     throw new Error(`unknown image model name ${game.image_prompt_model}`);
             }
 
+
+
             res.writeHead(200, {
-                'Content-Type': contentType
+                'Content-Type': contentType,
+                'Cache-control': 'public, max-age=3000'
             });
 
             res.end(resizedImage, "binary");
