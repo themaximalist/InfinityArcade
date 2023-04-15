@@ -1,7 +1,10 @@
 class InfinityArcadeAPI {
     constructor() {
-        // TODO: detect
-        this.base_url = "http://localhost:3000/api";
+        if (document.location.href.indexOf("http://localhost:3000") == 0) {
+            this.base_url = "http://localhost:3000/api";
+        } else {
+            this.base_url = "https://infinityarcade.com/api";
+        }
     }
 
     async fetch(url, data = null) {
