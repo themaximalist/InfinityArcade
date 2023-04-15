@@ -4,7 +4,7 @@
     "description": "Play any game",
     "main": "src/index.js",
     "scripts": {
-        "start": "npm run dev",
+        "start": "npm run server",
         "dev": "npm run watch",
         "server": "node src/server.js",
         "watch": "nf -j Procfile.dev start",
