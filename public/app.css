@@ -621,6 +621,10 @@ video {
   margin-top: 11rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .block {
   display: block;
 }
@@ -1538,6 +1542,10 @@ body {
 
   .md\:mt-8 {
     margin-top: 2rem;
+  }
+
+  .md\:ml-8 {
+    margin-left: 2rem;
   }
 
   .md\:inline-block {
