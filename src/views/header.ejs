@@ -18,7 +18,8 @@
         <title><%- game.title %> — Infinity Arcade</title>
         <meta name="description" content="<%- game.description %>" />
 
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
+
         <meta property="og:url" content="<%- game.slug %>" />
         <meta
             property="og:title"
@@ -26,13 +27,17 @@
         />
         <meta property="og:description" content="<%- game.description %>" />
 
-        <% if (game.image_url) { %>
+        <% if (game.image_data) { %>
         <meta
             property="og:image"
-            content="https://25d9-50-53-4-148.ngrok-free.app<%- game.image_url %>"
+            content="/api/art/generate?game_id=<%= game.id %>"
         />
         <% } %> <% } else { %>
         <title>Infinity Arcade</title>
+        <meta
+            property="og:image"
+            content="/images/banner.png"
+        />
         <meta
             name="description"
             content="Infinity Arcade is an arcade that never ends."
