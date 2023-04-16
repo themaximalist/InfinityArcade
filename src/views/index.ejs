@@ -14,14 +14,24 @@
             Infinity Arcade
         </div>
     </a>
+    <% if (user) { %>
+    <a
+        href="/account"
+        class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block"
+        >Account</a
+    >
+    <% } else { %>
     <a
         href="/pro"
         class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block"
         >GO PRO!</a
     >
+    <% } %>
 </div>
-
-<% let i = 0 %> <% let num = games.length %>
+<!-- -->
+<% let i = 0 %>
+<!-- -->
+<% let num = games.length %>
 
 <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-8 sm:px-4"

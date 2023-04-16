@@ -15,7 +15,19 @@
                     Infinity Arcade
                 </div>
             </a>
-            <a href="/pro" class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block">GO PRO!</a>
+            <% if (user) { %>
+            <a
+                href="/account"
+                class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block"
+                >Account</a
+            >
+            <% } else { %>
+            <a
+                href="/pro"
+                class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block"
+                >GO PRO!</a
+            >
+            <% } %>
         </div>
         <%- include("radio.ejs") %>
     </div>

@@ -1,20 +1,33 @@
 <%- include("header.ejs") %>
 
-<a href="/" class="w-full text-center flex items-center justify-center gap-4">
-    <img src="/images/logo.png" alt="Infinity Arcade" class="h-6 opacity-60" />
-    <div
-        href="/"
-        class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-sm opacity-60 tracking-wider inline-block"
-    >
-        Infinity Arcade
-    </div>
-</a>
+<div class="w-full flex justify-center items-center">
+    <a href="/" class="text-center items-center justify-center gap-4 flex">
+        <img
+            src="/images/logo.png"
+            alt="Infinity Arcade"
+            class="h-6 opacity-60"
+        />
+        <div
+            href="/"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-sm opacity-60 tracking-wider inline-block"
+        >
+            Infinity Arcade
+        </div>
+    </a>
+</div>
+
+<div
+    class="text-gray-300 text-xs opacity-80 hover:opacity-100 transition-opacity absolute top-4 right-4"
+>
+    <a href="/login" class="text-purple-500 hover:text-purple-400"> Login </a>
+</div>
+
 <div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
     <h1 class="text-4xl font-bold my-4 text-purple-500">
         Infinity Arcade Pro
     </h1>
     <p class="prose">
-        <span class="text-purple-200">Unlock special features:</span>
+        <span class="text-purple-200">Unlock special features</span>
         <ul class="my-4 ml-4 md:ml-8 text-white">
             <li class="flex gap-4 items-center hover:text-purple-400 py-1 cursor-move">
                 <div class="w-2 h-2 bg-white"></div>
@@ -55,5 +68,6 @@
             One-time purchase
         </div>
     </p>
+
 </div>
 <%- include("footer.ejs") %>

@@ -51,7 +51,7 @@ async function generate_handler(req, res) {
 
 async function index(req, res) {
     const games = (await Game.findAll({ order: [["id", "DESC"]], limit: 500 })).map(g => g.dataValues);
-    return res.render("index", { games });
+    return res.render("index", { games, user: req.user });
 }
 
 async function wildcard_handler(req, res) {
@@ -62,6 +62,7 @@ async function wildcard_handler(req, res) {
         const contrast_color = wcagContrast(game.primary_color);
         return res.render("game", {
             game: game.dataValues,
+            user: req.user,
             contrast_color,
         });
     } else {

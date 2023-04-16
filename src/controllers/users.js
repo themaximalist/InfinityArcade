@@ -18,13 +18,13 @@ function isPasswordValid(password) {
 async function handle_login(req, res) {
     try {
         if (!isPasswordValid(req.body.password)) {
-            return res.status(400).send("Password must be at least 8 characters");
+            throw new Error("Password must be at least 8 characters");
         }
 
         const user = await User.findOne({ where: { email: req.body.email } });
 
         if (!user) {
-            return res.status(400).send("Email not found");
+            throw new Error("Email not found");
         }
 
         const isValid = await bcrypt.compare(
@@ -33,7 +33,7 @@ async function handle_login(req, res) {
         );
 
         if (!isValid) {
-            return res.status(400).send("Incorrect password");
+            throw new Error("Incorrect password");
         }
 
         // Set the user ID as a signed cookie
@@ -41,13 +41,12 @@ async function handle_login(req, res) {
 
         res.redirect("/account");
     } catch (error) {
-        res.status(500).send("Error: " + error.message);
+        res.render("login", { error: error.message });
     }
 }
 
 async function account(req, res) {
-    console.log(req.user);
-    res.send("ACCOUNT");
+    res.render("account", { user: req.user });
 }
 
 async function signup(req, res) {

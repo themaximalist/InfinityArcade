@@ -1,0 +1,91 @@
+<%- include("header.ejs") %>
+
+<div class="w-full flex justify-center items-center">
+    <a href="/" class="text-center items-center justify-center gap-4 flex">
+        <img
+            src="/images/logo.png"
+            alt="Infinity Arcade"
+            class="h-6 opacity-60"
+        />
+        <div
+            href="/"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-sm opacity-60 tracking-wider inline-block"
+        >
+            Infinity Arcade
+        </div>
+    </a>
+</div>
+
+<div
+    class="text-gray-300 text-xs opacity-80 hover:opacity-100 transition-opacity absolute top-4 right-4"
+>
+    <a href="/logout" class="text-purple-500 hover:text-purple-400"> Logout </a>
+</div>
+
+<div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
+    <h1 class="text-4xl font-bold my-4 text-purple-500">Account</h1>
+    <div class="prose flex flex-col gap-4">
+        <p>
+            <span class="text-purple-200"
+                >Thanks for purchasing <%= user.email %>!</span
+            >
+        </p>
+
+        <br />
+
+        <p class="flex gap-4 items-center text-purple-400 py-1">
+            Improved games
+        </p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Games will now automatically use GPT-4, a much smarter game engine!
+        </p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Generation and game art will use GPT-4, leading to better games.
+        </p>
+
+        <br />
+        <p class="flex gap-4 items-center text-purple-400 py-1">Faster games</p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Your account now receives priority in the game queue, meaning your
+            games will be generated faster!
+        </p>
+
+        <br />
+        <p class="flex gap-4 items-center text-purple-400 py-1">Longer games</p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Games can be saved and continued, allowing you to play for longer!
+        </p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Modify game prompt to make games even longer!
+        </p>
+
+        <br />
+        <p class="flex gap-4 items-center text-purple-400 py-1">
+            Full control!
+        </p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Games you create are now created just for you
+        </p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Save and load games to play again from interesting checkpoints
+        </p>
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            Modify the game prompts to create any kind of game you want!
+        </p>
+
+        <br />
+
+        <p>Email hello@themaximalist.com for question.</p>
+
+        <p>Have fun!</p>
+    </div>
+</div>
+<%- include("footer.ejs") %>
