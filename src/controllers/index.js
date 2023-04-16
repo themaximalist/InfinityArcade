@@ -8,5 +8,6 @@ module.exports = {
     art: require("./art"),
     chats: require("./chats"),
     pro: require("./pro"),
+    users: require("./users"),
     status,
 };
