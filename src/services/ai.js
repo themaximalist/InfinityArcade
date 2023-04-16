@@ -8,8 +8,8 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-async function AI(prompt) {
-    return await Chat([{ "role": "user", "content": prompt }])
+async function AI(prompt, model = process.env.MODEL) {
+    return await Chat([{ "role": "user", "content": prompt }], model);
 }
 
 async function Chat(messages, model = process.env.MODEL) {

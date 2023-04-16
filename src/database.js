@@ -4,7 +4,7 @@ const sequelize = require("./sequelize");
 require("./models");
 
 async function initialize() {
-    await sequelize.sync({ force: false });
+    await sequelize.sync({ alter: true });
 }
 
 async function close() {

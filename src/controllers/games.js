@@ -26,10 +26,11 @@ async function create(req, res) {
 }
 
 async function generate(req, res) {
-    const { prompt_text } = req.body;
-
-    const game = await GenerateGame(prompt_text);
     try {
+        const { prompt_text } = req.body;
+        let model = (req.user ? "gpt-4" : process.env.MODEL);
+
+        const game = await GenerateGame(prompt_text, model);
 
         const saved = await Game.create(game);
 

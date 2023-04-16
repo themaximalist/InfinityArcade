@@ -31,7 +31,7 @@ class Server {
 
         this.app.get("/api/session/new", controllers.sessions.create);
         this.app.post("/api/game/new", controllers.games.create);
-        this.app.post("/api/game/generate", controllers.games.generate);
+        this.app.post("/api/game/generate", optional_user, controllers.games.generate);
         this.app.get("/api/game/:slug/art", controllers.art.get);
         this.app.get("/api/art/generate", controllers.art.generate);
         this.app.post("/api/chat/:slug/start", controllers.chats.start);
@@ -44,7 +44,7 @@ class Server {
         this.app.get("/account", verify_user, controllers.users.account);
         this.app.get("/pro", controllers.pro.index);
 
-        this.app.get("/generate", controllers.games.generate_handler);
+        this.app.get("/generate", optional_user, controllers.games.generate_handler);
         this.app.get("/", optional_user, controllers.games.index);
         this.app.get("/:slug", optional_user, controllers.games.wildcard_handler);
     }

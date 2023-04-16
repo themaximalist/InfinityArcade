@@ -45,6 +45,11 @@ Game.init({
         type: DataTypes.TEXT,
         allowNull: true
     },
+    prompt_model: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "gpt-3.5-turbo"
+    },
     image_prompt_model: {
         type: DataTypes.STRING,
         allowNull: true,
