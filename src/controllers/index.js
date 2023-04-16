@@ -7,5 +7,6 @@ module.exports = {
     games: require("./games"),
     art: require("./art"),
     chats: require("./chats"),
+    pro: require("./pro"),
     status,
 };

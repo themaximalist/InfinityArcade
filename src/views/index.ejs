@@ -1,14 +1,25 @@
 <%- include("header.ejs") %>
 
-<a href="/" class="w-full text-center flex items-center justify-center gap-4">
-    <img src="/images/logo.png" alt="Infinity Arcade" class="h-6 opacity-60" />
-    <div
-        href="/"
-        class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-sm opacity-60 tracking-wider inline-block"
+<div class="w-full text-center flex items-center justify-center gap-4">
+    <a href="/" class="flex items-center gap-2">
+        <img
+            src="/images/logo.png"
+            alt="Infinity Arcade"
+            class="w-8 opacity-60"
+        />
+        <div
+            href="/"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-sm opacity-60 tracking-wider inline-block"
+        >
+            Infinity Arcade
+        </div>
+    </a>
+    <a
+        href="/pro"
+        class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block"
+        >GO PRO!</a
     >
-        Infinity Arcade
-    </div>
-</a>
+</div>
 
 <% let i = 0 %> <% let num = games.length %>
 
