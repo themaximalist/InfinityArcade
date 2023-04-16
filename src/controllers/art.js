@@ -13,7 +13,8 @@ async function generate(req, res) {
 
             if (game.image_data) return res.redirect(`/api/game/${game.slug}/art`);
 
-            const art = await GenerateGameArt(game.llm_fields);
+            let model = (req.user ? "gpt-4" : process.env.MODEL);
+            const art = await GenerateGameArt(game.llm_fields, model);
             if (!art) throw new Error(`art not generated`);
 
             await Game.update(art, { where: { id: game.id } });

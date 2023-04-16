@@ -3,12 +3,15 @@ const { Chat } = require("./ai");
 const prompts = require("./prompts");
 const { replicate2image, stability2image } = require("./images");
 
-async function GenerateGameArt(game, image_prompt_name = "GenerateGameArt-v1", image_prompt_model = process.env.IMAGE_MODEL) {
-    log(`generating game art (game=${JSON.stringify(game)}, prompt_name=${image_prompt_name}, image_dimensions=${image_prompt_model})...`);
+async function GenerateGameArt(game,
+    concept_model = process.env.MODEL,
+    image_prompt_name = "GenerateGameArt-v1",
+    image_prompt_model = process.env.IMAGE_MODEL) {
+    log(`generating game art (game=${JSON.stringify(game)}, concept_model=${concept_model}, prompt_name=${image_prompt_name}, image_dimensions=${image_prompt_model})...`);
 
     try {
         const messages = prompts.load(image_prompt_name, { game });
-        const image_prompt_text = await Chat(messages);
+        const image_prompt_text = await Chat(messages, concept_model);
 
         let image_data;
         switch (image_prompt_model) {
