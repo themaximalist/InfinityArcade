@@ -73,8 +73,7 @@
 <script>
     document.addEventListener("ia-loaded", (e) => {
         console.log("IA Loaded");
-        const PAYMENT_LINK = "https://buy.stripe.com/test_7sI9EGb0Zgcl18I7ss";
-        const CHECKOUT_LINK = `${PAYMENT_LINK}?client_reference_id=${window.ia.session_id}`;
+        const CHECKOUT_LINK = `<%- STRIPE_PURCHASE_LINK %>?client_reference_id=${window.ia.session_id}`;
         const orderButton = document.getElementById("order-button");
         orderButton.href = CHECKOUT_LINK;
         orderButton.classList.remove("pointer-events-none");
