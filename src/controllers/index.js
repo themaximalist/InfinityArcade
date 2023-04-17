@@ -9,5 +9,6 @@ module.exports = {
     chats: require("./chats"),
     pro: require("./pro"),
     users: require("./users"),
+    admin: require("./admin"),
     status,
 };

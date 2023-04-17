@@ -1,0 +1,71 @@
+<%- include("../header.ejs") %>
+
+<div class="w-full flex justify-center items-center">
+    <a href="/" class="text-center items-center justify-center gap-4 flex">
+        <img
+            src="/images/logo.png"
+            alt="Infinity Arcade"
+            class="h-6 opacity-60"
+        />
+        <div
+            href="/"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-sm opacity-60 tracking-wider inline-block"
+        >
+            Infinity Arcade
+        </div>
+    </a>
+</div>
+
+<div class="container max-w-4xl mx-auto">
+    <div class="text-white max-w-4xl flex flex-col gap-16 py-10">
+        <div class="prose flex flex-col gap-4">
+            <h1 class="text-4xl font-bold text-purple-500">Admin Dashboard</h1>
+            <div class="container mx-auto px-4 py-8">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                    <% [totalUsers, totalGames, totalChats,
+                    newUsersLast7Days].forEach((stat, index) => { %>
+                    <div
+                        class="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-200"
+                    >
+                        <h2 class="text-xl font-semibold mb-2">
+                            <%= ['Total Users', 'Total Games', 'Total Chats',
+                            'New Users'][index] %>
+                        </h2>
+                        <p class="text-xl font-bold"><%= stat %></p>
+                    </div>
+                    <% }); %>
+                </div>
+                <br />
+                <br />
+                <h2 class="text-2xl font-semibold mt-8 mb-4">
+                    Top 5 Most Popular Games
+                </h2>
+                <ul>
+                    <% top5Games.forEach((game) => { %>
+                    <li class="mb-2">
+                        <%= game.title %> (<%= game.dataValues.chatCount %>
+                        chats)
+                    </li>
+                    <% }); %>
+                </ul>
+                <br />
+                <br />
+                <h2 class="text-2xl font-semibold mt-8 mb-4">
+                    Top 5 Users with Most Chats
+                </h2>
+                <ul>
+                    <% top5Users.forEach((user) => { %>
+                    <li class="mb-2">
+                        <%= user.email %> (<%= user.dataValues.chatCount %>
+                        chats)
+                    </li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<%- include("../footer.ejs") %>

@@ -28,6 +28,11 @@ User.init({
         allowNull: false,
         defaultValue: "gpt-4"
     },
+    admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
 }, {
     sequelize,
 });

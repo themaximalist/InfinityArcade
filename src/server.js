@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 
 const Database = require("./database");
 const controllers = require("./controllers");
-const { verify_user, optional_user } = require("./middleware");
+const { verify_user, optional_user, verify_admin } = require("./middleware");
 
 class Server {
     constructor() {
@@ -45,6 +45,8 @@ class Server {
         this.app.post("/signup", controllers.users.handle_signup);
         this.app.get("/account", verify_user, controllers.users.account);
         this.app.get("/pro", controllers.pro.index);
+
+        this.app.get("/admin", verify_user, verify_admin, controllers.admin.index);
 
         this.app.get("/generate", optional_user, controllers.games.generate_handler);
         this.app.get("/", optional_user, controllers.games.index);
