@@ -31,6 +31,10 @@ async function generate(req, res) {
         let model = (req.user ? req.user.model : process.env.MODEL);
 
         const game = await GenerateGame(prompt_text, model);
+        if (req.user) {
+            game.UserId = req.user.id;
+            game.private = req.user.private;
+        }
 
         const saved = await Game.create(game);
 
@@ -51,7 +55,13 @@ async function generate_handler(req, res) {
 }
 
 async function index(req, res) {
-    const games = (await Game.findAll({ order: [["id", "DESC"]], limit: 500 })).map(g => g.dataValues);
+    const games = (await Game.findAll({
+        where: {
+            private: false
+        },
+        order: [["id", "DESC"]],
+        limit: 500
+    })).map(g => g.dataValues);
     return res.render("index", { games, user: req.user });
 }
 
@@ -60,6 +70,11 @@ async function wildcard_handler(req, res) {
 
     const game = await Game.findOne({ where: { slug } });
     if (game) {
+        if (game.private) {
+            if (!req.user) return res.redirect("/login");
+            if (game.UserId !== req.user.id) return res.redirect("/login");
+        }
+
         const contrast_color = wcagContrast(game.primary_color);
         return res.render("game", {
             game: game.dataValues,

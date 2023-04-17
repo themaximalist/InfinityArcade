@@ -2,6 +2,7 @@ const { DataTypes, Model } = require("sequelize");
 
 const sequelize = require("../sequelize");
 const utils = require("../utils");
+const User = require("./user");
 
 class Game extends Model {
 }
@@ -66,6 +67,11 @@ Game.init({
         type: DataTypes.BLOB,
         allowNull: true,
     },
+    private: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     llm_fields: {
         type: DataTypes.VIRTUAL,
         get() {
@@ -105,5 +111,8 @@ Game.create = async function (game) {
         return await create(game);
     }
 }
+
+Game.belongsTo(User, { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
+User.hasMany(Game, { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
 
 module.exports = Game;

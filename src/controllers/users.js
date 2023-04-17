@@ -46,7 +46,12 @@ async function handle_login(req, res) {
 }
 
 async function account(req, res) {
-    res.render("account", { user: req.user });
+    const games = await req.user.getGames();
+    res.render("account", {
+        user: req.user,
+        games,
+        chats: [],
+    });
 }
 
 async function signup(req, res) {

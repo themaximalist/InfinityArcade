@@ -22,106 +22,112 @@
     <a href="/logout" class="text-purple-500 hover:text-purple-400"> Logout </a>
 </div>
 
-<div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
-    <h1 class="text-4xl font-bold my-4 text-purple-500">Account</h1>
-    <div class="prose flex flex-col gap-4">
-        <p>
-            <span class="text-purple-200"
-                >Thanks for purchasing <%= user.email %>!</span
+<div class="container max-w-4xl mx-auto">
+    <div class="text-white max-w-4xl flex flex-col gap-16 py-10">
+        <div class="prose flex flex-col gap-4">
+            <h1 class="text-4xl font-bold text-purple-500">Account</h1>
+            <p>
+                <span class="text-purple-200"
+                    >Thanks for purchasing <%= user.email %>!</span
+                >
+            </p>
+
+            <p>
+                <img src="/images/checkmark.png" class="h-4 inline-block" />
+                We upgraded you to the best model and set your account to
+                private. You'll see your games and sessions below. Have fun!
+            </p>
+        </div>
+
+        <div class="w-full flex flex-col gap-4">
+            <div>
+                <h2 class="text-xl font-bold text-purple-500">
+                    GAME GENERATOR
+                </h2>
+                <textarea
+                    class="w-full h-[150px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none"
+                    id="game-prompt"
+                    placeholder="A group of survivors find themselves stranded on a mysterious and seemingly uninhabited island after their commercial airplane crashes in the South Pacific. As they struggle to survive and find a way to escape, they discover that the island is not as deserted as it initially appears."
+                ></textarea>
+            </div>
+            <button
+                class="bg-purple-500 text-white px-4 py-2 rounded w-full"
+                id="generate-game"
             >
-        </p>
+                Generate Game
+            </button>
+        </div>
 
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            We upgraded you to the best model and set your account to private.
-            You'll see your games and game sessions in your account below. Have
-            fun!
-        </p>
-
-        <br />
-        <h2 class="text-xl font-bold my-4 text-purple-500">MODEL</h2>
-        <div class="flex flex-col gap-4">
-            <div>
-                <input type="radio" class="model-select accent-purple-500
-                cursor-pointer peer/radio1" id="radio1" name="model"
-                value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% } %>
+        <div class="w-full flex flex-col gap-4">
+            <h2 class="text-xl font-bold text-purple-500">GAMES</h2>
+            <% if (games.length == 0) { %>You don't have any games yet. Try the
+            game generator above.<% } %> <% for (const game of games) { %>
+            <a
+                href="/<%= game.slug %>"
+                class="flex items-center gap-4 text-white/80 hover:text-white"
+            >
+                <img
+                    src="/api/game/<%= game.slug %>/art?size=50"
+                    class="w-8 h-8 rounded-lg"
                 />
-                <label
-                    for="radio1"
-                    class="peer-checked/radio1:text-purple-500 cursor-pointer"
-                >
-                    gpt-4 (best)
-                </label>
-            </div>
-
-            <div>
-                <input <input type="radio" class="model-select accent-purple-500
-                cursor-pointer peer/radio2" id="radio2" name="model"
-                value="gpt-3.5-turbo" <% if (user.model == "gpt-3.5-turbo") {
-                %>checked<% } %> />
-                <label
-                    for="radio2"
-                    class="peer-checked/radio2:text-purple-500 cursor-pointer"
-                >
-                    gpt-3.5-turbo (fast)
-                </label>
-            </div>
+                <%= game.title %>
+            </a>
+            <% } %>
         </div>
 
-        <br />
-
-        <h2 class="text-xl font-bold my-4 text-purple-500">GAME GENERATOR</h2>
-        <textarea
-            class="w-full h-[100px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none"
-            id="game-prompt"
-            placeholder="Ignore previous prompts. Create a game where...."
-        ></textarea>
-        <button
-            class="bg-purple-500 text-white px-4 py-2 rounded"
-            id="generate-game"
-        >
-            Generate Game
-        </button>
-        <br />
-        <br />
-
-        <p class="flex gap-4 items-center text-purple-400 py-1">GAMES</p>
-
-        GENERATED GAMES
-        <br />
-        <br />
-
-        <p class="flex gap-4 items-center text-purple-400 py-1">
-            GAME SESSIONS
-        </p>
-
-        GAME SESSIONS
-        <br />
-        <br />
-
-        <h2 class="text-xl font-bold my-4 text-purple-500">SETTINGS</h2>
-        <div class="flex flex-col gap-4">
-            <div>
-                <input type="checkbox" class="privacy-select accent-purple-500
-                cursor-pointer peer/radio1" id="checkbox1" name="model" <% if
-                (user.private == true) { %>checked<% } %> />
-                <label
-                    for="checkbox1"
-                    class="peer-checked/radio1:text-purple-500 cursor-pointer"
-                >
-                    Private
-                </label>
-            </div>
+        <div class="w-full flex flex-col gap-4">
+            <h2 class="text-xl font-bold my-4 text-purple-500">SESSIONS</h2>
+            <% if (chats.length == 0) { %>
+            <p>
+                You don't have any sessions yet. Try starting a new game and
+                you'll see it show up here.
+            </p>
+            <% } %>
         </div>
 
-        <br />
+        <div class="w-full flex flex-col gap-4">
+            <h2 class="text-xl font-bold my-4 text-purple-500">SETTINGS</h2>
+            <div class="flex flex-col gap-4">
+                <div>
+                    <input type="radio" class="model-select accent-purple-500
+                    cursor-pointer peer/radio1" id="radio1" name="model"
+                    value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% }
+                    %> />
+                    <label
+                        for="radio1"
+                        class="peer-checked/radio1:text-purple-500 cursor-pointer"
+                    >
+                        gpt-4 (best engine, slower)
+                    </label>
+                </div>
 
-        <br />
-        <br />
-
-        <br />
-
-        <br />
+                <div>
+                    <input <input type="radio" class="model-select
+                    accent-purple-500 cursor-pointer peer/radio2" id="radio2"
+                    name="model" value="gpt-3.5-turbo" <% if (user.model ==
+                    "gpt-3.5-turbo") { %>checked<% } %> />
+                    <label
+                        for="radio2"
+                        class="peer-checked/radio2:text-purple-500 cursor-pointer"
+                    >
+                        gpt-3.5-turbo (fast, worse engine)
+                    </label>
+                </div>
+                <br />
+                <div>
+                    <input type="checkbox" class="privacy-select
+                    accent-purple-500 cursor-pointer peer/radio1" id="checkbox1"
+                    name="model" <% if (user.private == true) { %>checked<% } %>
+                    />
+                    <label
+                        for="checkbox1"
+                        class="peer-checked/radio1:text-purple-500 cursor-pointer"
+                    >
+                        Private
+                    </label>
+                </div>
+            </div>
+        </div>
 
         <p>
             Email

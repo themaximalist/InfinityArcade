@@ -58,11 +58,18 @@
         </div>
         <div class="flex flex-col w-full gap-4">
             <div class="flex flex-col gap-2">
-                <h1 class="text-4xl font-bold md:mt-8"
-                    style="color: <%= game.primary_color %>"
-                    id="title">
-                    <%= game.title %>
-                </h1>
+                <div class="md:mt-8">
+                    <% if (game.private) { %>
+                        <span 
+                        style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
+                        class="text-xs  p-1 px-2 mb-3 rounded-xl opacity-50 inline-block">PRIVATE</span>
+                    <% } %>
+                    <h1 class="text-4xl font-bold"
+                        style="color: <%= game.primary_color %>"
+                        id="title">
+                        <span><%= game.title %></span>
+                    </h1>
+                </div>
                 <h2
                     id="tagline"
                     style="color: <%= game.primary_color %>"
