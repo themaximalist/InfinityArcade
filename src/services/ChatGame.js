@@ -5,8 +5,8 @@ const GetChat = require("./GetChat");
 const prompts = require("./prompts");
 const { StreamChat } = require("./ai");
 
-async function* ChatGame(chat_id, content, prompt_name = "ChatGame-v1") {
-    log(`chatting game (chat_id=${chat_id})...`);
+async function* ChatGame(chat_id, content, model, prompt_name = "ChatGame-v1") {
+    log(`chatting game (chat_id=${chat_id}, model=${model})...`);
 
     try {
         const chat = await Chat.findOne({ where: { id: chat_id } });
@@ -15,7 +15,7 @@ async function* ChatGame(chat_id, content, prompt_name = "ChatGame-v1") {
         const user_chat = await Chat.create({
             parent_id: chat.parent_id,
             session_id: chat.session_id,
-            model: prompt_name,
+            model: `${model}:${prompt_name}`,
             GameId: chat.GameId,
             role: "user",
             content,
@@ -28,7 +28,7 @@ async function* ChatGame(chat_id, content, prompt_name = "ChatGame-v1") {
         });
 
         let response = "";
-        for await (const token of StreamChat(messages)) {
+        for await (const token of StreamChat(messages, model)) {
             yield token;
             response += token.content;
         }
@@ -36,7 +36,7 @@ async function* ChatGame(chat_id, content, prompt_name = "ChatGame-v1") {
         const assistant_chat = await Chat.create({
             parent_id: chat.parent_id,
             session_id: chat.session_id,
-            model: prompt_name,
+            model: `${model}:${prompt_name}`,
             GameId: chat.GameId,
             role: "assistant",
             content: response,

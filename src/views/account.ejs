@@ -32,18 +32,26 @@
         </p>
 
         <br />
+        <h2 class="text-xl font-bold my-4 text-purple-500">MODEL</h2>
+        <div class="flex flex-col gap-4">
+            <div>
+                <input type="radio" class="model-select accent-purple-500
+                peer/radio1" id="radio1" name="model" value="gpt-4" <% if
+                (user.model == "gpt-4") { %>checked<% } %> />
+                <label for="radio1" class="peer-checked/radio1:text-purple-500">
+                    gpt-4 (best)
+                </label>
+            </div>
 
-        <p class="flex gap-4 items-center text-purple-400 py-1">
-            Improved games
-        </p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Games will now automatically use GPT-4, a much smarter game engine!
-        </p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Generation and game art will use GPT-4, leading to better games.
-        </p>
+            <div>
+                <input <input type="radio" class="model-select accent-purple-500
+                peer/radio2" id="radio2" name="model" value="gpt-3.5-turbo" <%
+                if (user.model == "gpt-3.5-turbo") { %>checked<% } %> />
+                <label for="radio2" class="peer-checked/radio2:text-purple-500">
+                    gpt-3.5-turbo (fast)
+                </label>
+            </div>
+        </div>
 
         <br />
         <p class="flex gap-4 items-center text-purple-400 py-1">Faster games</p>
@@ -88,4 +96,33 @@
         <p>Have fun!</p>
     </div>
 </div>
+<script>
+    document.addEventListener("ia-loaded", (e) => {
+        const selects = document.querySelectorAll(".model-select");
+        for (const select of selects) {
+            select.onchange = async (e) => {
+                if (!e || !e.target || e.target.checked == false) {
+                    return;
+                }
+
+                const model = e.target.value;
+                console.log(model);
+
+                try {
+                    const response = await window.ia.api.updateAccount({
+                        model: model,
+                    });
+
+                    if (response !== true) {
+                        throw new Error("Error updating model");
+                    }
+                } catch (e) {
+                    alert("Error updating model");
+                }
+            };
+        }
+    });
+</script>
+<%- include("scripts.ejs") %>
+<!-- -->
 <%- include("footer.ejs") %>

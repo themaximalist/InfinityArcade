@@ -18,6 +18,11 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
+    model: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "gpt-4"
+    },
 }, {
     sequelize,
 });

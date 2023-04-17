@@ -85,6 +85,10 @@ class InfinityArcadeAPI {
             yield token;
         }
     }
+
+    async updateAccount(options) {
+        return await this.fetch(`${this.base_url}/account`, options);
+    }
 }
 
 async function* yieldStreamResponse(response) {

@@ -4,8 +4,8 @@ const prompts = require("./prompts");
 const Chat = require("../models/chat");
 const ChatGame = require("./ChatGame");
 
-async function* StartGame(game, session_id, prompt_name = "StartGame-v1") {
-    log(`starting game (game=${game.slug}, session_id=${session_id})...`);
+async function* StartGame(game, session_id, model = process.env.MODEL, prompt_name = "StartGame-v1") {
+    log(`starting game (game=${game.slug}, model=${model}, session_id=${session_id})...`);
 
     try {
         // CREATE INITIAL GAME
@@ -17,7 +17,7 @@ async function* StartGame(game, session_id, prompt_name = "StartGame-v1") {
             let chat = await Chat.create({
                 parent_id,
                 session_id,
-                model: prompt_name,
+                model: `${model}:${prompt_name}`,
                 GameId: game.id,
                 role: message.role,
                 content: message.content,
@@ -31,7 +31,7 @@ async function* StartGame(game, session_id, prompt_name = "StartGame-v1") {
             log(`created chat (id=${chat_id})`);
         }
 
-        for await (const response of ChatGame(chat_id, "Start Game")) {
+        for await (const response of ChatGame(chat_id, "Start Game", model)) {
             yield response;
         }
     } catch (e) {

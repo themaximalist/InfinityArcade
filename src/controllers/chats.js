@@ -13,7 +13,8 @@ async function start(req, res) {
         const { session_id } = req.body;
         if (!session_id) { throw new Error(`Error: Could not start game, no session_id provided`) }
 
-        for await (const token of StartGame(game, session_id)) {
+        let model = (req.user ? req.user.model : process.env.MODEL);
+        for await (const token of StartGame(game, session_id, model)) {
             res.write(JSON.stringify(token) + "\n");
         }
     } catch (e) {
@@ -26,7 +27,8 @@ async function start(req, res) {
 async function chat(req, res) {
     try {
         const { chat_id, content } = req.body;
-        for await (const token of ChatGame(chat_id, content)) {
+        let model = (req.user ? req.user.model : process.env.MODEL);
+        for await (const token of ChatGame(chat_id, content, model)) {
             res.write(JSON.stringify(token) + "\n");
         }
     } catch (e) {

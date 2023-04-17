@@ -34,8 +34,9 @@ class Server {
         this.app.post("/api/game/generate", optional_user, controllers.games.generate);
         this.app.get("/api/game/:slug/art", controllers.art.get);
         this.app.get("/api/art/generate", optional_user, controllers.art.generate);
-        this.app.post("/api/chat/:slug/start", controllers.chats.start);
-        this.app.post("/api/chat", controllers.chats.chat);
+        this.app.post("/api/chat/:slug/start", optional_user, controllers.chats.start);
+        this.app.post("/api/chat", optional_user, controllers.chats.chat);
+        this.app.post("/api/account", verify_user, controllers.users.account_update);
 
         this.app.get("/login", controllers.users.login);
         this.app.post("/login", controllers.users.handle_login);

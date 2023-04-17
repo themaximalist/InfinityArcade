@@ -29,6 +29,7 @@ async function Chat(messages, model = process.env.MODEL) {
 }
 
 async function* StreamChat(messages, model = process.env.MODEL) {
+    log(`StreamChat response for ${messages.length} message (model: ${model})`);
     try {
         const response = await openai.createChatCompletion(
             {

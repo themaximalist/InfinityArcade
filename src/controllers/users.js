@@ -63,10 +63,51 @@ async function signup(req, res) {
     }
 }
 
+const ALLOWED_UPDATE_KEYS = ["model"];
+const ALLOWED_MODELS = ["gpt-4", "gpt-3.5-turbo"];
+async function account_update(req, res) {
+    try {
+        const update = req.body;
+
+        for (const key in update) {
+            if (!ALLOWED_UPDATE_KEYS.includes(key)) {
+                throw new Error("Invalid update key");
+            }
+        }
+
+        if (update.model) {
+            if (!ALLOWED_MODELS.includes(update.model)) {
+                throw new Error("Invalid model");
+            }
+        }
+
+        const saved = await User.update(update, {
+            where: {
+                id: req.user.id,
+            },
+        });
+
+        if (!saved) {
+            throw new Error("Error updating account");
+        }
+
+        return res.json({
+            status: "success",
+            data: true,
+        });
+    } catch (e) {
+        return res.json({
+            status: "error",
+            message: `Error updating account: ${e.message}`,
+        });
+    }
+}
+
 module.exports = {
     login,
     signup,
     handle_login,
     account,
+    account_update,
     logout,
 };
