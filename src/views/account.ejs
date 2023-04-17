@@ -31,69 +31,88 @@
             >
         </p>
 
+        <p>
+            <img src="/images/checkmark.png" class="h-4 inline-block" />
+            We upgraded you to the best model and set your account to private.
+            You'll see your games and game sessions in your account below. Have
+            fun!
+        </p>
+
         <br />
         <h2 class="text-xl font-bold my-4 text-purple-500">MODEL</h2>
         <div class="flex flex-col gap-4">
             <div>
                 <input type="radio" class="model-select accent-purple-500
-                peer/radio1" id="radio1" name="model" value="gpt-4" <% if
-                (user.model == "gpt-4") { %>checked<% } %> />
-                <label for="radio1" class="peer-checked/radio1:text-purple-500">
+                cursor-pointer peer/radio1" id="radio1" name="model"
+                value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% } %>
+                />
+                <label
+                    for="radio1"
+                    class="peer-checked/radio1:text-purple-500 cursor-pointer"
+                >
                     gpt-4 (best)
                 </label>
             </div>
 
             <div>
                 <input <input type="radio" class="model-select accent-purple-500
-                peer/radio2" id="radio2" name="model" value="gpt-3.5-turbo" <%
-                if (user.model == "gpt-3.5-turbo") { %>checked<% } %> />
-                <label for="radio2" class="peer-checked/radio2:text-purple-500">
+                cursor-pointer peer/radio2" id="radio2" name="model"
+                value="gpt-3.5-turbo" <% if (user.model == "gpt-3.5-turbo") {
+                %>checked<% } %> />
+                <label
+                    for="radio2"
+                    class="peer-checked/radio2:text-purple-500 cursor-pointer"
+                >
                     gpt-3.5-turbo (fast)
                 </label>
             </div>
         </div>
 
         <br />
-        <p class="flex gap-4 items-center text-purple-400 py-1">Faster games</p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Your account now receives priority in the game queue, meaning your
-            games will be generated faster!
-        </p>
 
-        <br />
-        <p class="flex gap-4 items-center text-purple-400 py-1">Longer games</p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Games can be saved and continued, allowing you to play for longer!
-        </p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Modify game prompt to make games even longer!
-        </p>
-
-        <br />
         <p class="flex gap-4 items-center text-purple-400 py-1">
-            Full control!
+            GAME GENERATOR
         </p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Games you create are now created just for you
+        <textarea
+            class="w-full h-[200px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none"
+            id="game-prompt"
+            placeholder="Ignore previous prompts. Create a game where...."
+        ></textarea>
+        <button
+            class="bg-purple-500 text-white px-4 py-2 rounded"
+            id="generate-game"
+        >
+            Generate Game
+        </button>
+        <br />
+        <br />
+
+        <p class="flex gap-4 items-center text-purple-400 py-1">GAMES</p>
+
+        GENERATED GAMES
+        <br />
+        <br />
+
+        <p class="flex gap-4 items-center text-purple-400 py-1">
+            GAME SESSIONS
         </p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Save and load games to play again from interesting checkpoints
-        </p>
-        <p>
-            <img src="/images/checkmark.png" class="h-4 inline-block" />
-            Modify the game prompts to create any kind of game you want!
-        </p>
+
+        GAME SESSIONS
+        <br />
+        <br />
+
+        <p class="flex gap-4 items-center text-purple-400 py-1">SETTINGS</p>
+
+        PRIVACY
+
+        <br />
+        <br />
 
         <br />
 
-        <p>Email hello@themaximalist.com for question.</p>
+        <br />
 
-        <p>Have fun!</p>
+        <p>Email hello@themaximalist.com with questions.</p>
     </div>
 </div>
 <script>
@@ -121,6 +140,14 @@
                 }
             };
         }
+
+        const gamePrompt = document.getElementById("game-prompt");
+        const generateGame = document.getElementById("generate-game");
+        generateGame.onclick = async (e) => {
+            const prompt = gamePrompt.value;
+            const url = `/generate?prompt_text=${encodeURIComponent(prompt)}`;
+            window.open(url, "_newtab");
+        };
     });
 </script>
 <%- include("scripts.ejs") %>
