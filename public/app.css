@@ -586,6 +586,10 @@ video {
   top: 1rem;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -828,6 +832,10 @@ video {
   flex-direction: column;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -836,12 +844,20 @@ video {
   justify-content: flex-start;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-center {
   justify-content: center;
 }
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-items-end {
+  justify-items: end;
 }
 
 .gap-1 {
@@ -876,6 +892,10 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+.justify-self-end {
+  justify-self: end;
 }
 
 .overflow-y-scroll {
@@ -919,6 +939,10 @@ video {
 .rounded-t-xl {
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
+}
+
+.border-2 {
+  border-width: 2px;
 }
 
 .bg-black {
@@ -1027,6 +1051,10 @@ video {
   padding: 1.5rem;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1080,6 +1108,11 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .pb-2 {
@@ -1150,6 +1183,10 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[8px\] {
+  font-size: 8px;
 }
 
 .font-bold {
@@ -1679,6 +1716,18 @@ body {
 }
 
 @media (min-width: 768px) {
+  .md\:absolute {
+    position: absolute;
+  }
+
+  .md\:right-0 {
+    right: 0px;
+  }
+
+  .md\:right-4 {
+    right: 1rem;
+  }
+
   .md\:ml-8 {
     margin-left: 2rem;
   }
@@ -1689,6 +1738,10 @@ body {
 
   .md\:mt-8 {
     margin-top: 2rem;
+  }
+
+  .md\:block {
+    display: block;
   }
 
   .md\:inline-block {
@@ -1714,8 +1767,20 @@ body {
 }
 
 @media (min-width: 1024px) {
+  .lg\:visible {
+    visibility: visible;
+  }
+
   .lg\:mt-3 {
     margin-top: 0.75rem;
+  }
+
+  .lg\:block {
+    display: block;
+  }
+
+  .lg\:w-8 {
+    width: 2rem;
   }
 
   .lg\:max-w-lg {
@@ -1736,6 +1801,34 @@ body {
 
   .lg\:items-center {
     align-items: center;
+  }
+
+  .lg\:justify-center {
+    justify-content: center;
+  }
+
+  .lg\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .lg\:py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .lg\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .lg\:text-\[10px\] {
+    font-size: 10px;
+  }
+
+  .lg\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 

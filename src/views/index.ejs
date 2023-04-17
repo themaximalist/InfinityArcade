@@ -1,32 +1,36 @@
 <%- include("header.ejs") %>
 
-<div class="w-full text-center flex items-center justify-center gap-4">
+<div
+    class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0"
+>
     <a href="/" class="flex items-center gap-2">
         <img
             src="/images/logo.png"
             alt="Infinity Arcade"
-            class="w-8 opacity-60"
+            class="w-6 lg:w-8 opacity-60"
         />
         <div
             href="/"
-            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-sm opacity-60 tracking-wider inline-block"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
         >
             Infinity Arcade
         </div>
     </a>
-    <% if (user) { %>
-    <a
-        href="/account"
-        class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block"
-        >Account</a
-    >
-    <% } else { %>
-    <a
-        href="/pro"
-        class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[10px] inline-block"
-        >GO PRO!</a
-    >
-    <% } %>
+    <div class="flex justify-center">
+        <% if (user) { %>
+        <a
+            href="/account"
+            class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block"
+            >Account</a
+        >
+        <% } else { %>
+        <a
+            href="/pro"
+            class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block"
+            >GO PRO!</a
+        >
+        <% } %>
+    </div>
 </div>
 <!-- -->
 <% let i = 0 %>
@@ -34,7 +38,7 @@
 <% let num = games.length %>
 
 <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-8 sm:px-4"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-2 lg:py-8 sm:px-4"
 >
     <% for (const game of games) { %>
     <a
