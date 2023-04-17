@@ -6,6 +6,7 @@ const { Op } = require("sequelize");
 const User = require("../models/user");
 const Game = require("../models/game");
 const Chat = require("../models/chat");
+const Session = require("../models/session");
 
 async function index(req, res) {
     const totalUsers = await User.count();
@@ -73,6 +74,10 @@ async function index(req, res) {
         },
     });
 
+    const totalUniqueSessions = await Session.count({
+        distinct: true,
+        col: 'id'
+    });
 
     res.render("admin/index", {
         totalUsers,
@@ -81,6 +86,7 @@ async function index(req, res) {
         top5Games,
         top5Users,
         newUsersLast7Days,
+        totalUniqueSessions
     });
 }
 

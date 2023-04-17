@@ -24,14 +24,14 @@
                 <div
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
-                    <% [totalUsers, totalGames, totalChats,
-                    newUsersLast7Days].forEach((stat, index) => { %>
+                    <% [totalUsers, totalGames, totalChats, totalUniqueSessions,
+                    newUsersLast7Days, ].forEach((stat, index) => { %>
                     <div
                         class="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-200"
                     >
                         <h2 class="text-xl font-semibold mb-2">
-                            <%= ['Total Users', 'Total Games', 'Total Chats',
-                            'New Users'][index] %>
+                            <%- ['Users', 'Games', 'Chats', 'Sessions',
+                            'New&nbsp;Users'][index] %>
                         </h2>
                         <p class="text-xl font-bold"><%= stat %></p>
                     </div>
