@@ -31,27 +31,28 @@
     <form
         action="/login"
         method="post"
-        class="w-full lg:max-w-lg border-4 border-dashed border-white/10 p-8"
+        class="w-full lg:max-w-lg flex flex-col gap-6"
     >
-        <label for="email">Email</label>
-        <input
-            type="email"
-            name="email"
-            placeholder="email@address.com"
-            class="w-full bg-black text-white py-4 px-1 focus:border-none focus:ring-0 focus:outline-none"
-            required
-        />
-        <br />
-        <br />
-        <label for="password">Password</label>
-        <input
-            type="password"
-            name="password"
-            placeholder="password"
-            class="w-full bg-black text-white py-4 px-1 focus:border-none focus:ring-0 focus:outline-none"
-            required
-        />
-        <br />
+        <div>
+            <label for="email" class="pb-2 pl-2 block">Email</label>
+            <input
+                type="email"
+                name="email"
+                placeholder="email@address.com"
+                class="w-full bg-gray-900 text-white py-4 px-3 focus:border-none focus:ring-0 focus:outline-none rounded-xl"
+                required
+            />
+        </div>
+        <div>
+            <label for="password" class="pb-2 pl-2 block">Password</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="password"
+                class="w-full bg-gray-900 text-white py-4 px-3 focus:border-none focus:ring-0 focus:outline-none rounded-xl"
+                required
+            />
+        </div>
         <input
             type="submit"
             class="bg-purple-500 hover:bg-purple-600 transition-colors text-white px-6 py-4 rounded-lg mt-4 w-full md:w-auto cursor-pointer focus:ring-0 focus:outline-none"

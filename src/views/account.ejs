@@ -70,11 +70,9 @@
 
         <br />
 
-        <p class="flex gap-4 items-center text-purple-400 py-1">
-            GAME GENERATOR
-        </p>
+        <h2 class="text-xl font-bold my-4 text-purple-500">GAME GENERATOR</h2>
         <textarea
-            class="w-full h-[200px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none"
+            class="w-full h-[100px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none"
             id="game-prompt"
             placeholder="Ignore previous prompts. Create a game where...."
         ></textarea>
@@ -101,9 +99,22 @@
         <br />
         <br />
 
-        <p class="flex gap-4 items-center text-purple-400 py-1">SETTINGS</p>
+        <h2 class="text-xl font-bold my-4 text-purple-500">SETTINGS</h2>
+        <div class="flex flex-col gap-4">
+            <div>
+                <input type="checkbox" class="privacy-select accent-purple-500
+                cursor-pointer peer/radio1" id="checkbox1" name="model" <% if
+                (user.private == true) { %>checked<% } %> />
+                <label
+                    for="checkbox1"
+                    class="peer-checked/radio1:text-purple-500 cursor-pointer"
+                >
+                    Private
+                </label>
+            </div>
+        </div>
 
-        PRIVACY
+        <br />
 
         <br />
         <br />
@@ -112,7 +123,11 @@
 
         <br />
 
-        <p>Email hello@themaximalist.com with questions.</p>
+        <p>
+            Email
+            <a href="mailto:hello@themaximalist.com">hello@themaximalist.com</a>
+            with questions.
+        </p>
     </div>
 </div>
 <script>
@@ -125,11 +140,10 @@
                 }
 
                 const model = e.target.value;
-                console.log(model);
 
                 try {
                     const response = await window.ia.api.updateAccount({
-                        model: model,
+                        model,
                     });
 
                     if (response !== true) {
@@ -140,6 +154,25 @@
                 }
             };
         }
+
+        const privacy = document.querySelector(".privacy-select");
+        privacy.onchange = async (e) => {
+            if (!e || !e.target) {
+                return;
+            }
+
+            const private = e.target.checked;
+
+            try {
+                const response = await window.ia.api.updateAccount({ private });
+
+                if (response !== true) {
+                    throw new Error("Error updating privacy");
+                }
+            } catch (e) {
+                alert("Error updating privacy");
+            }
+        };
 
         const gamePrompt = document.getElementById("game-prompt");
         const generateGame = document.getElementById("generate-game");

@@ -63,7 +63,7 @@ async function signup(req, res) {
     }
 }
 
-const ALLOWED_UPDATE_KEYS = ["model"];
+const ALLOWED_UPDATE_KEYS = ["model", "private"];
 const ALLOWED_MODELS = ["gpt-4", "gpt-3.5-turbo"];
 async function account_update(req, res) {
     try {

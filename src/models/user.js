@@ -18,6 +18,11 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
+    private: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+    },
     model: {
         type: DataTypes.STRING,
         allowNull: false,
