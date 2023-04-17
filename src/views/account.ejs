@@ -60,8 +60,13 @@
 
         <div class="w-full flex flex-col gap-4">
             <h2 class="text-xl font-bold text-purple-500">GAMES</h2>
-            <% if (games.length == 0) { %>You don't have any games yet. Try the
-            game generator above.<% } %> <% for (const game of games) { %>
+            <% if (games.length == 0) { %>
+            <div>
+                You don't have any games yet. Try the game generator above.
+            </div>
+            <% } %>
+            <!-- -->
+            <% for (const game of games) { %>
             <a
                 href="/<%= game.slug %>"
                 class="flex items-center gap-4 text-white/80 hover:text-white"
@@ -82,6 +87,37 @@
                 You don't have any sessions yet. Try starting a new game and
                 you'll see it show up here.
             </p>
+            <% } %>
+            <!-- -->
+
+            <% if (chats.length > 0) { %>
+            <table>
+                <!-- -->
+                <% for (const chat of chats) { %>
+                <tr class="">
+                    <td class="w-12 align-middle pb-6">
+                        <img
+                            src="/api/game/<%= chat.Game.slug %>/art?size=50"
+                            class="w-8 h-8 rounded-lg"
+                        />
+                    </td>
+                    <td class="px-4 pb-6 pt-0 align-middle">
+                        <a
+                            href="/<%- chat.Game.slug %>?chat_id=<%- chat.id %>&action=resume"
+                        >
+                            <%= chat.Game.title %>
+                        </a>
+                    </td>
+                    <td
+                        class="whitespace-nowrap px-4 pb-6 pt-0 text-xs text-right align-middle"
+                    >
+                        <div><%= chat.dataValues.childCount %> turns</div>
+                        <div><%= chat.dataValues.relativeTime %></div>
+                    </td>
+                </tr>
+                <% } %>
+                <!-- -->
+            </table>
             <% } %>
         </div>
 
@@ -130,9 +166,8 @@
         </div>
 
         <p>
-            Email
+            Send bugs &amp; feature requests to
             <a href="mailto:hello@themaximalist.com">hello@themaximalist.com</a>
-            with questions.
         </p>
     </div>
 </div>

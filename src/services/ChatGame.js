@@ -5,18 +5,20 @@ const GetChat = require("./GetChat");
 const prompts = require("./prompts");
 const { StreamChat } = require("./ai");
 
-async function* ChatGame(chat_id, content, model, prompt_name = "ChatGame-v1") {
-    log(`chatting game (chat_id=${chat_id}, model=${model})...`);
+async function* ChatGame(chat_id, content, user_id, model = process.env.MODEL, prompt_name = "ChatGame-v1") {
+    log(`chatting game (chat_id=${chat_id}, user_id=${user_id}, model=${model})...`);
 
     try {
         const chat = await Chat.findOne({ where: { id: chat_id } });
         if (!chat) throw new Error(`Could not find chat with id ${chat_id}`);
+        if (chat.UserId && chat.UserId !== user_id) throw new Error(`User ${user_id} does not own chat ${chat_id}`);
 
         const user_chat = await Chat.create({
             parent_id: chat.parent_id,
             session_id: chat.session_id,
             model: `${model}:${prompt_name}`,
             GameId: chat.GameId,
+            UserId: user_id,
             role: "user",
             content,
         });
@@ -38,6 +40,7 @@ async function* ChatGame(chat_id, content, model, prompt_name = "ChatGame-v1") {
             session_id: chat.session_id,
             model: `${model}:${prompt_name}`,
             GameId: chat.GameId,
+            UserId: user_id,
             role: "assistant",
             content: response,
         });

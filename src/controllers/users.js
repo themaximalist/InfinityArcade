@@ -1,6 +1,11 @@
 const log = require("debug")("ia:controllers:users");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const Chat = require("../models/chat");
+const Game = require("../models/game");
+const sequelize = require("../sequelize");
+const utils = require("../utils");
+
 
 async function login(req, res) {
     res.render("login");
@@ -47,10 +52,51 @@ async function handle_login(req, res) {
 
 async function account(req, res) {
     const games = await req.user.getGames();
+    const chats = (await Chat.findAll({
+        where: {
+            UserId: req.user.id,
+            parent_id: null,
+        },
+        include: [
+            {
+                model: Game,
+                required: true
+            }
+        ],
+        attributes: {
+            include: [
+                [
+                    sequelize.literal(`(
+                    SELECT COUNT(*)
+                    FROM "Chats" AS "childChats"
+                    WHERE "childChats"."parent_id" = "Chat"."id"
+                )`),
+                    'childCount',
+                ],
+                [
+                    sequelize.literal(`(
+                    SELECT MAX("childChats"."createdAt")
+                    FROM "Chats" AS "childChats"
+                    WHERE "childChats"."parent_id" = "Chat"."id"
+                )`),
+                    'mostRecentChatDate',
+                ],
+            ],
+        },
+        order: [
+            ["createdAt", "DESC"]
+        ],
+    })).map(chat => {
+        chat.dataValues.relativeTime = utils.relativeTime(chat.dataValues.mostRecentChatDate);
+        return chat;
+    });
+
+    console.log(chats);
+
     res.render("account", {
         user: req.user,
         games,
-        chats: [],
+        chats,
     });
 }
 

@@ -1,6 +1,10 @@
 const slugifyjs = require("slugify");
 const uuid = require("uuid");
-const { readFileSync } = require("fs");
+
+const TimeAgo = require("javascript-time-ago");
+const en = require("javascript-time-ago/locale/en");
+TimeAgo.addLocale(en)
+const timeAgo = new TimeAgo('en-US')
 
 function slugify(input) {
     return slugifyjs(input, {
@@ -22,8 +26,13 @@ function shuffle(array) {
     return array;
 }
 
+function relativeTime(date) {
+    return timeAgo.format(date);
+}
+
 module.exports = {
     slugify,
     rand,
     shuffle,
+    relativeTime
 };

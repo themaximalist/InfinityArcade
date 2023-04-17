@@ -3,6 +3,7 @@ const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../sequelize");
 const utils = require("../utils");
 const Game = require("./game");
+const User = require("./user");
 
 class Chat extends Model {
 }
@@ -46,6 +47,9 @@ Chat.init({
 
 Chat.belongsTo(Game, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
 Game.hasMany(Chat, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+
+Chat.belongsTo(User, { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
+User.hasMany(Chat, { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
 
 
 module.exports = Chat;
