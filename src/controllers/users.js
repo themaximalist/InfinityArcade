@@ -115,7 +115,9 @@ async function signup(req, res) {
     try {
         const { session_id } = req.query;
 
-        if (!session_id) throw new Error("Couldn't find session id");
+        if (!session_id) {
+            return res.render("signup");
+        }
 
         const order = await Order.findOne({
             where: {
