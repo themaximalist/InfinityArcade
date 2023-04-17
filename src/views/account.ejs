@@ -103,7 +103,7 @@
                     </td>
                     <td class="px-4 pb-6 pt-0 align-middle">
                         <a
-                            href="/<%- chat.Game.slug %>?chat_id=<%- chat.id %>&action=resume"
+                            href="/<%- chat.Game.slug %>?parent_id=<%- chat.id %>&chat_id=<%- chat.dataValues.mostRecentChatId %>&action=resume"
                         >
                             <%= chat.Game.title %>
                         </a>

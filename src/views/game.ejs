@@ -145,9 +145,14 @@
     </div>
     <script>
         document.addEventListener("ia-loaded", (e) => {
-            window.ia.handleGame(<%- JSON.stringify(game) %>);
+            window.ia.handleGame(<%- JSON.stringify(game) %>, {
+                parent_id: window.ia.params.parent_id,
+                chat_id: window.ia.params.chat_id,
+                action: window.ia.params.action,
+            });
             window.ia.handleRadio();
-    });
+            window.history.pushState({}, document.title, window.location.pathname);
+        });
     </script>
 </div>
 <%- include("scripts.ejs") %>

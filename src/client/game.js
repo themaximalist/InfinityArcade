@@ -7,10 +7,8 @@ class InfinityArcadeGame {
         this.chat_id = null;
         this.parent_id = null;
         this.streaming = false;
-    }
 
-    async loop() {
-        this.render();
+        this.game_ui_loaded = false;
     }
 
     async streamFinished() {
@@ -29,6 +27,11 @@ class InfinityArcadeGame {
     }
 
     async handleStreamObject(obj) {
+        if (!this.game_ui_loaded) {
+            this.ui.enableGameUI();
+            this.game_ui_loaded = true;
+        }
+
         if (this.ui.loading) {
             this.ui.stopLoading();
         }
@@ -53,6 +56,7 @@ class InfinityArcadeGame {
         console.log(`Starting game: ${this.game.title}`);
 
         this.ui.enableGameUI();
+        this.game_ui_loaded = true;
         await this.handleStream(this.ia.api.startGame(this.game, this.ia.session_id));
     }
 

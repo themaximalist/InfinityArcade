@@ -24,9 +24,15 @@ class InfinityArcade {
         });
     }
 
-    async handleGame(game) {
+    async handleGame(game, options = null) {
         this.game = new InfinityArcadeGame(this, game);
         await this.game.setup();
+
+        if (options.parent_id && options.chat_id && options.action == "resume") {
+            this.game.parent_id = options.parent_id;
+            this.game.chat_id = options.chat_id;
+            this.ui.button1.innerHTML = `Resume ${this.game.game.title}!`;
+        }
     }
 
     async handleGenerate() {

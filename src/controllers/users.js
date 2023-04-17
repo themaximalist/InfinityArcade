@@ -81,6 +81,16 @@ async function account(req, res) {
                 )`),
                     'mostRecentChatDate',
                 ],
+                [
+                    sequelize.literal(`(
+                    SELECT "childChats"."id"
+                    FROM "Chats" AS "childChats"
+                    WHERE "childChats"."parent_id" = "Chat"."id"
+                    ORDER BY "childChats"."createdAt" DESC
+                    LIMIT 1
+                )`),
+                    'mostRecentChatId',
+                ],
             ],
         },
         order: [
@@ -101,16 +111,30 @@ async function account(req, res) {
 }
 
 async function signup(req, res) {
+    res.render("signup");
+}
+
+async function handle_signup(req, res) {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        console.log(hashedPassword);
-        await User.create({
+
+        const user = await User.create({
             email: req.body.email,
             password: hashedPassword,
         });
-        res.status(201).send("User created");
-    } catch (error) {
-        res.status(500).send("Error: " + error.message);
+
+        console.log(user);
+
+        if (!user) {
+            throw new Error("Error creating user");
+        }
+
+        // Set the user ID as a signed cookie
+        res.cookie("userId", user.id, { signed: true, httpOnly: true });
+
+        return res.redirect("/account");
+    } catch (e) {
+        res.render("signup", { error: e.message });
     }
 }
 
@@ -158,6 +182,7 @@ module.exports = {
     login,
     signup,
     handle_login,
+    handle_signup,
     account,
     account_update,
     logout,

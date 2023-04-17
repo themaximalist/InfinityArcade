@@ -41,7 +41,8 @@ class Server {
         this.app.get("/login", controllers.users.login);
         this.app.post("/login", controllers.users.handle_login);
         this.app.get("/logout", controllers.users.logout);
-        this.app.post("/signup", controllers.users.signup);
+        this.app.get("/signup", controllers.users.signup);
+        this.app.post("/signup", controllers.users.handle_signup);
         this.app.get("/account", verify_user, controllers.users.account);
         this.app.get("/pro", controllers.pro.index);
 
