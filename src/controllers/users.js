@@ -5,6 +5,7 @@ const Chat = require("../models/chat");
 const Game = require("../models/game");
 const sequelize = require("../sequelize");
 const utils = require("../utils");
+const Order = require("../models/order");
 
 
 async function login(req, res) {
@@ -111,23 +112,62 @@ async function account(req, res) {
 }
 
 async function signup(req, res) {
-    res.render("signup");
+    try {
+        const { session_id } = req.query;
+
+        if (!session_id) throw new Error("Couldn't find session id");
+
+        const order = await Order.findOne({
+            where: {
+                client_reference_id: session_id,
+                UserId: null,
+            }
+        });
+
+        if (!order) throw new Error("Couldn't find an order for this session. If you just purchased please wait a minute and try again, or contact hello@themaximalist.com");
+
+        return res.render("signup", {
+            session_id,
+            order,
+        });
+    } catch (e) {
+        return res.render("signup", {
+            error: e.message,
+        });
+    }
 }
 
 async function handle_signup(req, res) {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const { email, password, session_id, order_id } = req.body;
+        if (!email || !password || !session_id || !order_id) throw new Error("Missing required fields");
 
-        const user = await User.create({
-            email: req.body.email,
-            password: hashedPassword,
+        const order = await Order.findOne({
+            where: {
+                client_reference_id: session_id,
+                UserId: null,
+            }
         });
 
-        console.log(user);
+        if (!order) throw new Error("Couldn't find an order for this session. If you just purchased please wait a minute and try again, or contact hello@themaximalist.com");
+        if (Number(order_id) != order.id) throw new Error("Invalid order id");
 
-        if (!user) {
-            throw new Error("Error creating user");
-        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = await User.create({
+            email,
+            password: hashedPassword,
+        });
+        if (!user) throw new Error("Error creating user");
+
+        const updatedOrder = await Order.update({
+            UserId: user.id,
+        }, {
+            where: {
+                id: order.id,
+            }
+        });
+        if (!updatedOrder) throw new Error("Error updating order");
 
         // Set the user ID as a signed cookie
         res.cookie("userId", user.id, { signed: true, httpOnly: true });

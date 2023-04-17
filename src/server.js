@@ -4,6 +4,7 @@ const log = require("debug")("ia:server");
 
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const Database = require("./database");
 const controllers = require("./controllers");
@@ -13,6 +14,8 @@ class Server {
     constructor() {
         if (!process.env.COOKIE_SECRET) throw new Error("COOKIE_SECRET not set");
         this.app = express();
+
+        this.setupBufferHandlers();
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -22,8 +25,11 @@ class Server {
         };
         this.app.set("view engine", "ejs");
         this.app.set("views", "src/views");
-
         this.setupHandlers();
+    }
+
+    setupBufferHandlers() {
+        this.app.post("/webhook", bodyParser.raw({ type: 'application/json' }), controllers.orders.webhook);
     }
 
     setupHandlers() {

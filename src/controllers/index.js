@@ -10,5 +10,6 @@ module.exports = {
     pro: require("./pro"),
     users: require("./users"),
     admin: require("./admin"),
+    orders: require("./orders"),
     status,
 };
