@@ -22,6 +22,7 @@ class Server {
         this.app.use(express.static("public"));
         this.app.locals = {
             NODE_ENV: process.env.NODE_ENV,
+            SITE_URL: process.env.SITE_URL,
         };
         this.app.set("view engine", "ejs");
         this.app.set("views", "src/views");

@@ -30,23 +30,23 @@
         <% if (game.image_data) { %>
         <meta
             property="og:image"
-            content="/api/art/generate?game_id=<%= game.id %>"
+            content="<%- SITE_URL %>/api/game/<%= game.slug %>/art?size=300"
         />
         <% } %> <% } else { %>
         <title>Infinity Arcade</title>
         <meta
             property="og:image"
-            content="/images/banner.png"
+            content="<%- SITE_URL %>/images/banner.png"
         />
         <meta
             name="description"
-            content="Infinity Arcade is an arcade that never ends."
+            content="Generate and play any interactive text game."
         />
         <% } %>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">  
+        <link rel="apple-touch-icon" sizes="180x180" href="<%- SITE_URL %>/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<%- SITE_URL %>/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<%- SITE_URL %>/favicon-16x16.png">
+        <link rel="manifest" href="<%- SITE_URL %>/site.webmanifest">  
     </head>
     <script
         async
