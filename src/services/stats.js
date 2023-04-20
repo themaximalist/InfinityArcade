@@ -64,7 +64,7 @@ async function getDailySummary() {
     mergeData(chats, "chats");
     mergeData(users, "users");
 
-    return Object.values(summaryData).sort((a, b) => b.date - a.date);
+    return Object.values(summaryData).sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 async function getTotalCounts() {
