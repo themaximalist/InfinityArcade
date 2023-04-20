@@ -67,10 +67,18 @@ async function generate_handler(req, res) {
 }
 
 async function index(req, res) {
+    const filter = req.query.filter;
+
+    const where = {
+        private: false
+    };
+
+    if (filter == "empty_image") {
+        where.image_data = null;
+    }
+
     const games = (await Game.findAll({
-        where: {
-            private: false
-        },
+        where,
         order: [["id", "DESC"]],
         limit: 500
     })).map(g => g.dataValues);
