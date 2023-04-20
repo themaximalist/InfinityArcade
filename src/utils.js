@@ -30,9 +30,14 @@ function relativeTime(date) {
     return timeAgo.format(date);
 }
 
+function isURL(str) {
+    return str.startsWith("http://") || str.startsWith("https://");
+}
+
 module.exports = {
     slugify,
     rand,
     shuffle,
-    relativeTime
+    relativeTime,
+    isURL,
 };

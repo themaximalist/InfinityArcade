@@ -57,7 +57,7 @@ class Server {
 
         this.app.get("/generate", optional_user, controllers.games.generate_handler);
         this.app.get("/", optional_user, controllers.games.index);
-        this.app.get("/:slug", optional_user, controllers.games.wildcard_handler);
+        this.app.get("/*", optional_user, controllers.games.wildcard_handler);
     }
 
     start() {

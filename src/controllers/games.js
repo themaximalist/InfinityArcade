@@ -3,6 +3,8 @@ const log = require("debug")("ia:controllers:games");
 const Game = require("../models/game");
 const GenerateGame = require("../services/GenerateGame");
 const sequelize = require("../sequelize");
+const utils = require("../utils");
+const { scrape } = require("../services/scraper");
 const { wcagContrast } = require("../services/colors");
 
 async function create(req, res) {
@@ -27,7 +29,17 @@ async function create(req, res) {
 
 async function generate(req, res) {
     try {
-        const { prompt_text } = req.body;
+        let { prompt_text } = req.body;
+        if (utils.isURL(prompt_text)) {
+            const url = prompt_text;
+            const text = await scrape(prompt_text);
+            if (text) {
+                prompt_text = `The following game idea details have been scraped from ${url}, please generate a game appropriate for this story: ${text}`;
+            } else {
+                prompt_text = `Extract any useful game details out of what content you think is at this URL ${url} and generate a game appropriate for the story.`;
+            }
+        }
+
         let model = (req.user ? req.user.model : process.env.MODEL);
 
         const game = await GenerateGame(prompt_text, model);
@@ -66,7 +78,7 @@ async function index(req, res) {
 }
 
 async function wildcard_handler(req, res) {
-    const { slug } = req.params;
+    const slug = req.params[0];
 
     const game = await Game.findOne({ where: { slug } });
     if (game) {
