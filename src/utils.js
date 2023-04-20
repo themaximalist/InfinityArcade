@@ -31,7 +31,8 @@ function relativeTime(date) {
 }
 
 function isURL(str) {
-    return str.startsWith("http://") || str.startsWith("https://");
+    if (!str || typeof str !== "string") return false;
+    return str.indexOf("http://") == 0 || str.indexOf("https://") == 0;
 }
 
 module.exports = {
