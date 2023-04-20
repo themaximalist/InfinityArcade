@@ -13,15 +13,12 @@
             href="/"
             class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
         >
-            Infinity Arcade
+            Infinity Arcade News
         </div>
     </a>
 </div>
 
-<div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
-    <h1 class="text-4xl font-bold my-4 text-purple-500">
-        Infinity Arcade News
-    </h1>
+<div class="container mx-auto text-white max-w-4xl my-4 px-4">
     <div class="prose">
         <ul class="list-decimal ml-20 space-y-6 my-8">
             <% topStoriesData.map(story => { %>
@@ -50,9 +47,16 @@
             <% }) %>
         </ul>
     </div>
-    <div class="prose">
-        This page scrapes the top 20 stories from Hacker News and generates
-        interactive text games on-the-fly for each story.
+    <div class="prose flex flex-col gap-4">
+        <p>
+            This page scrapes the top 20 stories from Hacker News and generates
+            interactive text games on-the-fly for each story.
+        </p>
+
+        <p>
+            To create a game, go to infinityarcade.com/anything you want to make
+            a game about
+        </p>
     </div>
 </div>
 <%- include("scripts.ejs") %>
