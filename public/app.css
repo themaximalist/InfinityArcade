@@ -601,6 +601,11 @@ video {
   margin-bottom: 1rem;
 }
 
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .-mt-24 {
   margin-top: -6rem;
 }
@@ -619,6 +624,10 @@ video {
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.ml-20 {
+  margin-left: 5rem;
 }
 
 .ml-4 {
@@ -647,6 +656,10 @@ video {
 
 .inline-block {
   display: inline-block;
+}
+
+.inline {
+  display: inline;
 }
 
 .flex {
@@ -697,6 +710,10 @@ video {
   height: 100vh;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -723,6 +740,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .min-w-full {
@@ -800,6 +821,10 @@ video {
   resize: both;
 }
 
+.list-decimal {
+  list-style-type: decimal;
+}
+
 .list-none {
   list-style-type: none;
 }
@@ -872,6 +897,12 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
 .overflow-y-scroll {

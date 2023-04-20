@@ -11,5 +11,6 @@ module.exports = {
     users: require("./users"),
     admin: require("./admin"),
     orders: require("./orders"),
+    news: require("./news"),
     status,
 };
