@@ -154,13 +154,13 @@
         try {
             const { totalGames, games } = await window.ia.api.fetchGames(
                 ++currentPage,
-                10,
+                25,
                 filter
             );
 
             appendGames(games);
 
-            if (games.length === 0 || games.length < 10) {
+            if (games.length === 0 || games.length < 25) {
                 console.log("Finished loading games");
                 noMoreResults = true;
             }

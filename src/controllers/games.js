@@ -84,7 +84,7 @@ async function index(req, res) {
     const games = (await Game.findAll({
         where,
         order: [["id", "DESC"]],
-        limit: 10
+        limit: 25
     })).map(g => g.dataValues);
     return res.render("index", { games, user: req.user });
 }
@@ -113,7 +113,7 @@ async function wildcard_handler(req, res) {
 async function get_games(req, res) {
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const limit = parseInt(req.query.limit) || 25;
         const filter = req.query.filter;
 
         if (limit > 100) limit = 100;
