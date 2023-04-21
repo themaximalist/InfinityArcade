@@ -6,7 +6,7 @@ const prompts = require("./prompts");
 const { StreamChat } = require("@themaximalist/llm.js");
 const parseTokenStream = require("./parseTokenStream");
 
-async function* ChatGame(chat_id, content, user_id, model = process.env.MODEL, prompt_name = "ChatGame-v1") {
+async function* ChatGame(chat_id, content, user_id, model = process.env.LLM_MODEL, prompt_name = "ChatGame-v1") {
     log(`chatting game (chat_id=${chat_id}, user_id=${user_id}, model=${model})...`);
 
     try {

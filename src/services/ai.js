@@ -8,7 +8,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-async function Chat(messages, model = process.env.MODEL) {
+async function Chat(messages, model = process.env.LLM_MODEL) {
     log(`Generating Chat response for ${JSON.stringify(messages)} message (model: ${model})`);
 
     try {
@@ -24,32 +24,6 @@ async function Chat(messages, model = process.env.MODEL) {
     }
 }
 
-/*
-async function* StreamChat(messages, model = process.env.MODEL) {
-    log(`StreamChat response for ${messages.length} message (model: ${model})`);
-    try {
-        const response = await openai.createChatCompletion(
-            {
-                model,
-                messages,
-                stream: true,
-            },
-            { responseType: "stream" }
-        );
-
-        for await (const message of parseStream(response)) {
-            yield message;
-        }
-    } catch (e) {
-        log(`Error streaming AI response: ${e}`);
-        return;
-    }
-}
-*/
-
-
-
 module.exports = {
     Chat,
-    // StreamChat,
 };

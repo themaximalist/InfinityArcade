@@ -39,7 +39,7 @@ async function generate(req, res) {
             }
         }
 
-        let model = (req.user ? req.user.model : process.env.MODEL);
+        let model = (req.user ? req.user.model : process.env.LLM_MODEL);
 
         const game = await GenerateGame(prompt_text, model);
         if (!game) {
