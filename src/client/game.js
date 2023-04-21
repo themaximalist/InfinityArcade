@@ -40,6 +40,7 @@ class InfinityArcadeGame {
 
         if (obj.type == "content") {
             this.ui.addText(obj.content);
+            this.scrollChatIntoView();
         } else if (obj.type.indexOf("option") == 0) {
             this.ui.addOptionText(obj.type, obj.content);
         } else if (obj.type == "end") {
@@ -49,8 +50,6 @@ class InfinityArcadeGame {
         } else {
             console.log("UNKNOWN STREAM OBJ", JSON.stringify(obj));
         }
-
-        this.scrollChatIntoView();
     }
 
     scrollChatIntoView() {
@@ -81,7 +80,7 @@ class InfinityArcadeGame {
             return;
         }
 
-        this.ui.text.innerText += `\n> ${el.innerText.trim()}`
+        this.ui.text.innerHTML += `<br />> ${el.innerText.trim()}`
         this.scrollChatIntoView();
         await this.chat(el.innerText);
     }

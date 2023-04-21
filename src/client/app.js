@@ -31,7 +31,7 @@ class InfinityArcade {
         if (options.parent_id && options.chat_id && options.action == "resume") {
             this.game.parent_id = options.parent_id;
             this.game.chat_id = options.chat_id;
-            this.ui.button1.innerHTML = `Resume ${this.game.game.title}!\n`;
+            this.ui.button1.innerHTML = `Resume ${this.game.game.title}!`;
         }
     }
 

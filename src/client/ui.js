@@ -83,7 +83,6 @@ class UserInterface {
     }
 
     reset() {
-        // this.resetText();
         this.text.innerHTML += "<br /><br />"
         this.resetOptions();
         this.resetChat();
