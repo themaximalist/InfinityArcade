@@ -146,12 +146,16 @@
     }
 
     async function loadMoreGames() {
+        const filter = window.ia.params.filter;
+
         if (loading || noMoreResults) return;
         loading = true;
 
         try {
             const { totalGames, games } = await window.ia.api.fetchGames(
-                ++currentPage
+                ++currentPage,
+                10,
+                filter
             );
 
             appendGames(games);

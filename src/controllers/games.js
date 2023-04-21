@@ -114,12 +114,18 @@ async function get_games(req, res) {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
+        const filter = req.query.filter;
+
         if (limit > 100) limit = 100;
         const offset = (page - 1) * limit;
 
         const where = {
             private: false,
         };
+
+        if (filter == "empty_image") {
+            where.image_data = null;
+        }
 
         const { count: totalGames, rows: games } = await Game.findAndCountAll({
             where,

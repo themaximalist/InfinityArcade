@@ -90,8 +90,13 @@ class InfinityArcadeAPI {
         return await this.fetch(`${this.base_url}/account`, options);
     }
 
-    async fetchGames(page = 1, limit = 10) {
-        const url = `${this.base_url}/games?page=${page}&limit=${limit}`;
+    async fetchGames(page = 1, limit = 10, filter = null) {
+        let url;
+        if (filter) {
+            url = `${this.base_url}/games?page=${page}&limit=${limit}&filter=${filter}`;
+        } else {
+            url = `${this.base_url}/games?page=${page}&limit=${limit}`;
+        }
         return await this.fetch(url);
     }
 }
