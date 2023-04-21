@@ -11,6 +11,7 @@ class UserInterface {
         this.chat = document.getElementById("chat");
         this.chat_form = document.getElementById("chat-form");
         this.chat_input = document.getElementById("chat-input");
+        this.scrollend = document.getElementById("scrollend");
 
         this.option1 = document.getElementById("option1");
         this.button1 = document.getElementById("button1");

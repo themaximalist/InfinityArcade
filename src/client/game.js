@@ -49,6 +49,12 @@ class InfinityArcadeGame {
         } else {
             console.log("UNKNOWN STREAM OBJ", JSON.stringify(obj));
         }
+
+        this.scrollChatIntoView();
+    }
+
+    scrollChatIntoView() {
+        this.ui.scrollend.scrollIntoView({ behavior: 'instant', block: 'end' });
     }
 
 
@@ -76,6 +82,7 @@ class InfinityArcadeGame {
         }
 
         this.ui.text.innerText += `\n> ${el.innerText.trim()}`
+        this.scrollChatIntoView();
         await this.chat(el.innerText);
     }
 
