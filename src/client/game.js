@@ -75,6 +75,7 @@ class InfinityArcadeGame {
             return;
         }
 
+        this.ui.text.innerText += `\n> ${el.innerText.trim()}`
         await this.chat(el.innerText);
     }
 

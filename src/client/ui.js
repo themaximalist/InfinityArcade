@@ -82,7 +82,8 @@ class UserInterface {
     }
 
     reset() {
-        this.resetText();
+        // this.resetText();
+        this.text.innerHTML += "<br /><br />"
         this.resetOptions();
         this.resetChat();
         this.showDotLoader();
