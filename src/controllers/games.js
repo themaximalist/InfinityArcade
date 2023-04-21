@@ -5,6 +5,7 @@ const GenerateGame = require("../services/GenerateGame");
 const utils = require("../utils");
 const { scrape } = require("../services/scraper");
 const { wcagContrast } = require("../services/colors");
+const { Op } = require("sequelize");
 
 async function create(req, res) {
     try {
@@ -79,6 +80,8 @@ async function index(req, res) {
 
     if (filter == "empty_image") {
         where.image_data = null;
+    } else {
+        where.image_data = { [Op.ne]: null };
     }
 
     const games = (await Game.findAll({
@@ -125,6 +128,8 @@ async function get_games(req, res) {
 
         if (filter == "empty_image") {
             where.image_data = null;
+        } else {
+            where.image_data = { [Op.ne]: null };
         }
 
         const { count: totalGames, rows: games } = await Game.findAndCountAll({
