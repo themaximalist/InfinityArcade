@@ -9,63 +9,42 @@ const Chat = require("../models/chat");
 const Session = require("../models/session");
 
 async function getDailySummary() {
-    const sessions = await Session.findAll({
-        attributes: [
-            [sequelize.fn("date", sequelize.col("createdAt")), "date"],
-            [sequelize.fn("count", sequelize.col("id")), "count"],
-        ],
-        group: ["date"],
+    const query = `
+    SELECT date, SUM(sessions) as sessions, SUM(games) as games, SUM(chats) as chats, SUM(users) as users
+    FROM (
+      SELECT date_trunc('day', "createdAt")::date AS date, COUNT(*) AS sessions, 0 AS games, 0 AS chats, 0 AS users
+      FROM "Sessions"
+      GROUP BY date
+
+      UNION ALL
+
+      SELECT date_trunc('day', "createdAt")::date AS date, 0 AS sessions, COUNT(*) AS games, 0 AS chats, 0 AS users
+      FROM "Games"
+      GROUP BY date
+
+      UNION ALL
+
+      SELECT date_trunc('day', "createdAt")::date AS date, 0 AS sessions, 0 AS games, COUNT(*) AS chats, 0 AS users
+      FROM "Chats"
+      GROUP BY date
+
+      UNION ALL
+
+      SELECT date_trunc('day', "createdAt")::date AS date, 0 AS sessions, 0 AS games, 0 AS chats, COUNT(*) AS users
+      FROM "Users"
+      GROUP BY date
+    ) as aggregated_data
+    GROUP BY date
+    ORDER BY date DESC;
+  `;
+
+    const summaryData = await sequelize.query(query, {
+        type: sequelize.QueryTypes.SELECT,
     });
 
-    const games = await Game.findAll({
-        attributes: [
-            [sequelize.fn("date", sequelize.col("createdAt")), "date"],
-            [sequelize.fn("count", sequelize.col("id")), "count"],
-        ],
-        group: ["date"],
-    });
-
-    const chats = await Chat.findAll({
-        attributes: [
-            [sequelize.fn("date", sequelize.col("createdAt")), "date"],
-            [sequelize.fn("count", sequelize.col("id")), "count"],
-        ],
-        group: ["date"],
-    });
-
-    const users = await User.findAll({
-        attributes: [
-            [sequelize.fn("date", sequelize.col("createdAt")), "date"],
-            [sequelize.fn("count", sequelize.col("id")), "count"],
-        ],
-        group: ["date"],
-    });
-
-    const summaryData = {};
-
-    const mergeData = (data, key) => {
-        data.forEach((item) => {
-            const date = item.get("date");
-            if (!summaryData[date]) {
-                summaryData[date] = {
-                    date,
-                    sessions: 0,
-                    games: 0,
-                    chats: 0,
-                    users: 0,
-                };
-            }
-            summaryData[date][key] = item.get("count");
-        });
-    };
-
-    mergeData(sessions, "sessions");
-    mergeData(games, "games");
-    mergeData(chats, "chats");
-    mergeData(users, "users");
-
-    return Object.values(summaryData).sort((a, b) => new Date(b.date) - new Date(a.date));
+    return summaryData;
 }
+
 
 async function getTotalCounts() {
     const totalUsers = await User.count();
@@ -79,6 +58,8 @@ async function getTotalCounts() {
         totalSessions,
     };
 }
+
+
 
 async function getTopSummary() {
     const games = await Game.findAll({
@@ -109,6 +90,8 @@ async function getTopSummary() {
 
     return { games };
 }
+
+
 
 
 module.exports = {
