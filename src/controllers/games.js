@@ -2,7 +2,6 @@ const log = require("debug")("ia:controllers:games");
 
 const Game = require("../models/game");
 const GenerateGame = require("../services/GenerateGame");
-const sequelize = require("../sequelize");
 const utils = require("../utils");
 const { scrape } = require("../services/scraper");
 const { wcagContrast } = require("../services/colors");
@@ -43,6 +42,10 @@ async function generate(req, res) {
         let model = (req.user ? req.user.model : process.env.MODEL);
 
         const game = await GenerateGame(prompt_text, model);
+        if (!game) {
+            throw new Error("Could not generate game");
+        }
+
         if (req.user) {
             game.UserId = req.user.id;
             game.private = req.user.private;
