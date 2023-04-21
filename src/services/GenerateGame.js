@@ -1,5 +1,5 @@
 const log = require("debug")("ia:services:GenerateGame");
-const { AI } = require("./ai");
+const { AI } = require("@themaximalist/llm.js");
 const prompts = require("./prompts");
 
 async function GenerateGame(prompt_text = null, model = process.env.MODEL, prompt_name = "GenerateGame-v1") {

@@ -622,12 +622,12 @@ video {
   margin-bottom: 1.5rem;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
+.ml-12 {
+  margin-left: 3rem;
 }
 
-.ml-20 {
-  margin-left: 5rem;
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .ml-4 {
@@ -648,14 +648,6 @@ video {
 
 .mt-44 {
   margin-top: 11rem;
-}
-
-.ml-10 {
-  margin-left: 2.5rem;
-}
-
-.ml-12 {
-  margin-left: 3rem;
 }
 
 .block {
@@ -1749,12 +1741,12 @@ body {
 }
 
 @media (min-width: 1024px) {
-  .lg\:mt-3 {
-    margin-top: 0.75rem;
-  }
-
   .lg\:ml-20 {
     margin-left: 5rem;
+  }
+
+  .lg\:mt-3 {
+    margin-top: 0.75rem;
   }
 
   .lg\:w-8 {
