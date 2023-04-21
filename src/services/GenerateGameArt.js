@@ -4,7 +4,7 @@ const prompts = require("./prompts");
 const { replicate2image, stability2image } = require("./images");
 
 async function GenerateGameArt(game,
-    concept_model = process.env.OPENAI_MODEL,
+    concept_model = process.env.LLM_MODEL,
     image_prompt_name = "GenerateGameArt-v1",
     image_prompt_model = process.env.IMAGE_MODEL) {
     log(`generating game art (game=${JSON.stringify(game)}, concept_model=${concept_model}, prompt_name=${image_prompt_name}, image_dimensions=${image_prompt_model})...`);
