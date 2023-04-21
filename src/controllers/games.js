@@ -133,7 +133,10 @@ async function get_games(req, res) {
                 id: g.id,
                 title: g.title,
                 tagline: g.tagline,
+                genre: g.genre,
+                subgenre: g.subgenre,
                 description: g.description,
+                primary_color: g.primary_color,
                 slug: g.slug,
             };
         });
