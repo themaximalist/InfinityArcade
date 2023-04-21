@@ -84,7 +84,7 @@ async function index(req, res) {
     const games = (await Game.findAll({
         where,
         order: [["id", "DESC"]],
-        limit: 500
+        limit: 10
     })).map(g => g.dataValues);
     return res.render("index", { games, user: req.user });
 }
@@ -110,7 +110,49 @@ async function wildcard_handler(req, res) {
     }
 }
 
+async function get_games(req, res) {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        if (limit > 100) limit = 100;
+        const offset = (page - 1) * limit;
+
+        const where = {
+            private: false,
+        };
+
+        const { count: totalGames, rows: games } = await Game.findAndCountAll({
+            where,
+            order: [["id", "DESC"]],
+            limit,
+            offset,
+        });
+
+        const filteredGames = games.map(g => {
+            return {
+                id: g.id,
+                title: g.title,
+                tagline: g.tagline,
+                description: g.description,
+                slug: g.slug,
+            };
+        });
+
+        return res.json({
+            status: "success",
+            data: { totalGames, games: filteredGames }
+        });
+    } catch (e) {
+        return res.json({
+            status: "error",
+            message: `Error: Could not get games ${e.message}`
+        });
+    }
+}
+
+
 module.exports = {
+    get_games,
     index,
     create,
     generate,

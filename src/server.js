@@ -44,6 +44,7 @@ class Server {
         this.app.post("/api/chat/:slug/start", optional_user, controllers.chats.start);
         this.app.post("/api/chat", optional_user, controllers.chats.chat);
         this.app.post("/api/account", verify_user, controllers.users.account_update);
+        this.app.get("/api/games", optional_user, controllers.games.get_games);
 
         this.app.get("/login", controllers.users.login);
         this.app.post("/login", controllers.users.handle_login);

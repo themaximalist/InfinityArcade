@@ -47,10 +47,9 @@
     >
         <div class="relative pb-10/16 rounded-xl">
             <img
-                data-src="/api/game/<%- game.slug %>/art?size=256"
+                src="/api/game/<%- game.slug %>/art?size=256"
                 alt="<%- game.title
             %>"
-                style="visibility: hidden"
                 class="h-full w-full rounded-t-xl lazy-load min-w-full"
             />
         </div>
@@ -85,6 +84,8 @@
     </a>
     <% } %> <% } %>
 </div>
+
+<div id="loadMoreIndicator"></div>
 <a
     href="https://themaximalist.com"
     class="opacity-50 hover:opacity-100 transition-opacity"
@@ -97,46 +98,89 @@
     />
 </a>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Get all images with the 'lazy-load' class
-        const lazyImages = [].slice.call(
-            document.querySelectorAll("img.lazy-load")
-        );
+    let currentPage = 1;
+    let loading = false;
+    let noMoreResults = false;
 
-        // Create an Intersection Observer instance
-        const lazyImageObserver = new IntersectionObserver(function (
-            entries,
-            observer
-        ) {
-            entries.forEach(function (entry) {
-                // If the image is in the viewport
+    function createGameElement(game) {
+        const gameElement = document.createElement("a");
+        gameElement.href = `/${game.slug}`;
+        gameElement.className =
+            "text-white flex flex-col bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200";
+
+        const imgWrapper = document.createElement("div");
+        imgWrapper.className = "relative pb-10/16 rounded-xl";
+
+        const img = document.createElement("img");
+        img.src = `/api/game/${game.slug}/art?size=256`;
+        img.alt = game.title;
+        img.className = "h-full w-full rounded-t-xl lazy-load min-w-full";
+
+        imgWrapper.appendChild(img);
+
+        const gameInfo = document.createElement("div");
+        gameInfo.className = "flex flex-col h-full gap-1 p-3";
+        gameInfo.innerHTML = `
+        <div style="color: ${game.primary_color}" class="text-xl font-semibold truncate">
+            ${game.title}
+        </div>
+        <div class="text-gray-500 font-medium text-sm italic truncate">
+            ${game.genre} ${game.subgenre}
+        </div>
+        <div class="text-sm font-bold mt-2">${game.tagline}</div>
+    `;
+
+        gameElement.appendChild(imgWrapper);
+        gameElement.appendChild(gameInfo);
+
+        return gameElement;
+    }
+
+    function appendGames(games) {
+        const grid = document.querySelector(".grid");
+
+        for (const game of games) {
+            const gameElement = createGameElement(game);
+            grid.appendChild(gameElement);
+        }
+    }
+
+    async function loadMoreGames() {
+        if (loading || noMoreResults) return;
+        loading = true;
+
+        try {
+            const { totalGames, games } = await window.ia.api.fetchGames(
+                ++currentPage
+            );
+
+            appendGames(games);
+
+            if (games.length === 0 || games.length < 10) {
+                console.log("Finished loading games");
+                noMoreResults = true;
+            }
+        } catch (error) {
+            console.error("Error fetching more games:", error);
+        } finally {
+            loading = false;
+        }
+    }
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    const lazyImage = entry.target;
-
-                    // Set the 'src' attribute to the value of the 'data-src' attribute
-                    lazyImage.src = lazyImage.dataset.src;
-
-                    // Remove the 'lazy-load' class after the image has loaded
-                    lazyImage.onload = function () {
-                        lazyImage.style.visibility = "visible";
-                        lazyImage.classList.remove("lazy-load");
-                    };
-
-                    // Unobserve the image to avoid further checks
-                    observer.unobserve(lazyImage);
+                    loadMoreGames();
                 }
             });
-        });
-
-        // Observe each image
-        lazyImages.forEach(function (lazyImage) {
-            lazyImageObserver.observe(lazyImage);
-        });
-    });
+        },
+        { threshold: 1 }
+    );
 </script>
 <script>
     document.addEventListener("ia-loaded", (e) => {
-        console.log("IA Loaded");
+        observer.observe(document.querySelector("#loadMoreIndicator"));
     });
 </script>
 <%- include("scripts.ejs") %>

@@ -89,6 +89,11 @@ class InfinityArcadeAPI {
     async updateAccount(options) {
         return await this.fetch(`${this.base_url}/account`, options);
     }
+
+    async fetchGames(page = 1, limit = 10) {
+        const url = `${this.base_url}/games?page=${page}&limit=${limit}`;
+        return await this.fetch(url);
+    }
 }
 
 async function* yieldStreamResponse(response) {
