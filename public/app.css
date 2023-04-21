@@ -650,6 +650,14 @@ video {
   margin-top: 11rem;
 }
 
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.ml-12 {
+  margin-left: 3rem;
+}
+
 .block {
   display: block;
 }
@@ -1743,6 +1751,10 @@ body {
 @media (min-width: 1024px) {
   .lg\:mt-3 {
     margin-top: 0.75rem;
+  }
+
+  .lg\:ml-20 {
+    margin-left: 5rem;
   }
 
   .lg\:w-8 {
