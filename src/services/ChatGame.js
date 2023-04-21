@@ -2,7 +2,7 @@ const log = require("debug")("ia:services:ChatGame");
 
 const Chat = require("../models/chat");
 const GetChat = require("./GetChat");
-const prompts = require("./prompts");
+const prompt = require("@themaximalist/prompt.js")
 const { StreamChat } = require("@themaximalist/llm.js");
 const parseTokenStream = require("./parseTokenStream");
 
@@ -26,7 +26,7 @@ async function* ChatGame(chat_id, content, user_id, model = process.env.LLM_MODE
         if (!user_chat) throw new Error(`Could not create chat for user`);
 
         const chats = await GetChat(chat.parent_id);
-        const messages = prompts.load(prompt_name, {
+        const messages = prompt.load(prompt_name, {
             chats,
         });
 

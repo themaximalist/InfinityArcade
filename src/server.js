@@ -5,7 +5,9 @@ const log = require("debug")("ia:server");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const { join } = require("path");
 
+const prompt = require("@themaximalist/prompt.js");
 const Database = require("./database");
 const controllers = require("./controllers");
 const { verify_user, optional_user, verify_admin } = require("./middleware");
@@ -72,6 +74,10 @@ class Server {
 
 (async function main() {
     await Database.initialize();
+
+    const promptDir = join(__dirname, "..", "data", "prompts");
+    prompt.configure({ promptDir });
+
     const server = new Server();
     server.start();
 })();

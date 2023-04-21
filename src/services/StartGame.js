@@ -1,6 +1,6 @@
 const log = require("debug")("ia:services:StartGame");
 
-const prompts = require("./prompts");
+const prompt = require("@themaximalist/prompt.js");
 const Chat = require("../models/chat");
 const ChatGame = require("./ChatGame");
 
@@ -9,7 +9,7 @@ async function* StartGame(game, session_id, user_id = null, model = process.env.
 
     try {
         // CREATE INITIAL GAME
-        const messages = prompts.load(prompt_name, { game });
+        const messages = prompt.load(prompt_name, { game });
 
         let parent_id = null;
         let chat_id = null;
