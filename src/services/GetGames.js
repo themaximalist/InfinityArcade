@@ -54,7 +54,7 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
         };
     });
 
-    return { totalGames, games };
+    return { totalGames, games: filteredGames };
 }
 
 module.exports = GetGames;
