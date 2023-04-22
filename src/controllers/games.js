@@ -119,27 +119,15 @@ async function get_games(req, res) {
     }
 }
 
-async function all_games(req, res) {
-    const where = { private: false };
-    /*
-    let games = await Game.findAll({
-        where,
-        order: [["title", "ASC"]],
-    });
-    */
-
-    let games = [];
-
-    return res.render("games", {
-        games,
-    });
+async function games_index(req, res) {
+    const data = await GetGames(req.query, 100);
+    return res.render("games", data);
 }
-
 
 module.exports = {
     get_games,
     index,
-    all_games,
+    games_index,
     create,
     generate,
     generate_handler,

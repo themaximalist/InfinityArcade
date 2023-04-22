@@ -629,10 +629,6 @@ video {
   margin-top: 2.5rem;
 }
 
-.mt-16 {
-  margin-top: 4rem;
-}
-
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -1281,6 +1277,11 @@ video {
 .text-purple-200 {
   --tw-text-opacity: 1;
   color: rgb(233 213 255 / var(--tw-text-opacity));
+}
+
+.text-purple-400 {
+  --tw-text-opacity: 1;
+  color: rgb(192 132 252 / var(--tw-text-opacity));
 }
 
 .text-purple-500 {

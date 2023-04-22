@@ -20,17 +20,10 @@
 
 <div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
     <h1 class="text-4xl font-bold my-4 text-purple-500">
-        Games (<%= games.length %>)
+        Games (<%= totalGames %>)
     </h1>
-    <% let letter = "" %>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-3">
         <% games.forEach((game) => { %>
-        <!-- -->
-        <% if (letter !== game.title[0].toUpperCase()) { %> <% letter =
-        game.title[0].toUpperCase() %>
-        <div class="mt-16"><%= letter %></div>
-        <!-- -->
-        <% } %>
         <a
             href="/<%= game.slug %>"
             class="flex items-center gap-3"
@@ -45,6 +38,19 @@
             </div>
         </a>
         <% }) %>
+        <div id="pages" class="flex gap-4 my-8">
+            <% for (let i = 1; i <= Math.ceil(totalGames / limit); i++) { %>
+            <!-- -->
+            <% if (i == page) { %>
+            <div class="text-purple-400" href="/games?page=<%= i %>">
+                <%= i %>
+            </div>
+            <% } else { %>
+            <a href="/games?page=<%= i %>"><%= i %></a>
+            <% } %>
+            <!-- -->
+            <% } %>
+        </div>
     </div>
 </div>
 <%- include("scripts.ejs") %>
