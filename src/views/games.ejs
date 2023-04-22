@@ -18,6 +18,29 @@
     </a>
 </div>
 
+<% if (typeof search === "undefined") { %>
+<div class="text-white">
+    <form
+        id="search-form"
+        class="flex justify-center"
+        method="get"
+        action="/games"
+    >
+        <input
+            type="text"
+            name="search"
+            class="bg-transparent text-white w-96 text-center text-sm focus:border-0 focus:ring-0 focus:outline-none"
+            placeholder="Search..."
+        />
+        <input
+            type="submit"
+            value="Search"
+            class="text-sm opacity-50 hover:opacity-100 transition-opacity cursor-pointer hidden"
+        />
+    </form>
+</div>
+<% } %>
+
 <div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
     <h1 class="text-4xl font-bold my-4 text-purple-500">
         <% if (search) { %>
