@@ -1,0 +1,73 @@
+<%- include("header.ejs") %>
+
+<div
+    class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0"
+>
+    <a href="/" class="flex items-center gap-2">
+        <img
+            src="/images/logo.png"
+            alt="Infinity Arcade"
+            class="w-6 lg:w-8 opacity-60"
+        />
+        <div
+            href="/"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
+        >
+            Infinity Arcade
+        </div>
+    </a>
+</div>
+
+<div
+    class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4 flex flex-col gap-8"
+>
+    <h1 class="text-4xl font-bold my-4 text-blue-500">About</h1>
+    <div class="pb-8">
+        <div class="prose py-2 flex flex-col gap-6">
+            <p>Infinity Arcade is an arcade that can generate any game.</p>
+            <p>
+                It uses AI to generate the game concept, game art, and game
+                engine.
+            </p>
+            <p>
+                Infinity Arcade games are text games, best described as text
+                adventure games or Interactive Fiction.
+            </p>
+            <p>
+                What's never been possible before, is generating compelling
+                interactive games on-the-fly.
+            </p>
+
+            <p>
+                Infinity Arcade makes it so easy, you can even
+                <a class="text-blue-100 underline" href="/news"
+                    >generate games from the news</a
+                >
+                or
+                <a class="text-blue-100 underline" href="/https://www.cnn.com/"
+                    >from your website</a
+                >.
+            </p>
+
+            <p>
+                Infinity Arcade is
+                <a
+                    class="text-blue-100 underline"
+                    href="https://github.com/themaximal1st/InfinityArcade"
+                    >open source</a
+                >
+                and can be modified to create the game of your dreams.
+            </p>
+            <p>
+                —<a
+                    class="text-blue-100 underline"
+                    href="https://themaximalist.com"
+                    >The Maximalist</a
+                >
+            </p>
+        </div>
+    </div>
+</div>
+<%- include("scripts.ejs") %>
+<!-- -->
+<%- include("footer.ejs") %>

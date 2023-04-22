@@ -1,0 +1,147 @@
+<%- include("header.ejs") %>
+
+<div
+    class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0"
+>
+    <a href="/" class="flex items-center gap-2">
+        <img
+            src="/images/logo.png"
+            alt="Infinity Arcade"
+            class="w-6 lg:w-8 opacity-60"
+        />
+        <div
+            href="/"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
+        >
+            Infinity Arcade
+        </div>
+    </a>
+</div>
+
+<div
+    class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4 flex flex-col gap-8"
+>
+    <h1 class="text-4xl font-bold my-4 text-blue-500">
+        Frequently Asked Questions
+    </h1>
+    <div class="pb-8">
+        <h2 class="text-blue-300">What is Infinity Arcade?</h2>
+        <div class="prose py-2 flex flex-col gap-6">
+            <p>Infinity Arcade is an experiment in AI and game design.</p>
+            <ul class="ml-4 md:ml-6 text-white">
+                <li class="flex gap-4 items-center py-1">
+                    <div class="w-2 h-2 bg-white"></div>
+                    ChatGPT generates game concepts and the game engine
+                </li>
+                <li class="flex gap-4 items-center py-1">
+                    <div class="w-2 h-2 bg-white"></div>
+                    StableDiffusion generates the game art
+                </li>
+            </ul>
+            <p>
+                The big idea is a sufficiently advanced LLM (like ChatGPT), can
+                replace a text-game engine. Learn more at
+                <a
+                    class="text-blue-100 underline"
+                    href="https://themaximalist.com/infinityarcade/"
+                    >Infinity Arcade and Sparks of Generative Video Games</a
+                >.
+            </p>
+        </div>
+    </div>
+
+    <div class="pb-8">
+        <h2 class="text-blue-300">Is Infinity Arcade free?</h2>
+        <div class="prose py-2 flex flex-col gap-6">
+            <p>
+                Infinity Arcade is free to play, and I'll do my best to keep it
+                that way. The site may have ads in the future.
+            </p>
+            <p>
+                You can
+                <a
+                    class="text-blue-100 underline"
+                    href="https://infinityarcade.com/pro"
+                    >Go Pro</a
+                >
+                for $8 to unlock extra features, stay ad free and support the
+                site.
+            </p>
+            <p>
+                Also Infinity Arcade is
+                <a
+                    class="text-blue-100 underline"
+                    href="https://github.com/themaximal1st/InfinityArcade"
+                    >open source</a
+                >
+                so you can download it to your computer and play any way you
+                want.
+            </p>
+        </div>
+    </div>
+
+    <div class="pb-8">
+        <h2 class="text-blue-300">How do I generate a video game?</h2>
+        <div class="prose py-2 flex flex-col gap-6">
+            <p>
+                The easiest way to generate a video game is to head to
+                <a
+                    class="text-blue-100 underline"
+                    href="https://infinityarcade.com/generate"
+                    >https://infinityarcade.com/generate</a
+                >
+                and a random game will be created.
+            </p>
+            <p>
+                Infinity Arcade has a cool feature where you can type
+                <a
+                    class="text-blue-100 underline"
+                    href="https://infinityarcade.com/a game where you create a game on infinity arcade"
+                    >https://infinityarcade.com/anything you want</a
+                >
+                and a game about that will be generated.
+            </p>
+            <p>
+                You can also create a game from a URL
+                <a
+                    class="text-blue-100 underline"
+                    href="https://infinityarcade.com/https://infinityarcade.com"
+                    >https://infinityarcade.com/http://example.com</a
+                >
+                and a game will be created from the content of the website.
+            </p>
+            <p>
+                Finally, there are even more advanced ways to create games, by
+                modifying the game prompts. Learn
+                <a
+                    class="text-blue-100 underline"
+                    href="https://infinityarcade.com/articles/how-to-create-a-vide-game"
+                    >how to create any video game you want</a
+                >
+                on Infinity Arcade.
+            </p>
+        </div>
+    </div>
+
+    <div class="pb-8">
+        <h2 class="text-blue-300">Who made Infinity Arcade?</h2>
+        <div class="prose py-2 flex flex-col gap-6">
+            <p>
+                Infinity Arcade was made by
+                <a
+                    class="text-blue-100 underline"
+                    href="https://themaximalist.com"
+                    >The Maximalist</a
+                >.
+            </p>
+            <p>
+                Read
+                <a class="text-blue-100 underline" href="/about">about</a>
+                to learn more.
+            </p>
+        </div>
+    </div>
+</div>
+<%- include("scripts.ejs") %>
+<!-- -->
+<%- include("footer.ejs") %>

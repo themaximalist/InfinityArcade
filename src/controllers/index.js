@@ -1,6 +1,3 @@
-function status(req, res) {
-    res.send("ok");
-}
 
 module.exports = {
     sessions: require("./sessions"),
@@ -12,5 +9,5 @@ module.exports = {
     admin: require("./admin"),
     orders: require("./orders"),
     news: require("./news"),
-    status,
+    site: require("./site"),
 };
