@@ -20,37 +20,60 @@
 
 <div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
     <h1 class="text-4xl font-bold my-4 text-purple-500">
-        All Games (<%= totalGames %>)
+        <% if (search) { %>
+        <span><%= search %> Games (<%= totalGames %>)</span>
+        <% } else { %>
+        <span>All Games (<%= totalGames %>)</span>
+        <% } %>
     </h1>
     <div class="flex flex-col gap-3">
         <% games.forEach((game) => { %>
-        <a
-            href="/<%= game.slug %>"
-            class="flex items-center gap-3"
-            style="color: <%- game.primary_color %>"
-        >
-            <img src="/api/game/<%= game.slug %>/art?size=50" class="w-7 h-7" />
-            <div>
-                <%- game.title %>
-                <span class="text-gray-300 text-sm"
-                    ><%- game.genre %> <%- game.subgenre %></span
-                >
-            </div>
-        </a>
-        <% }) %>
+        <div class="flex items-center gap-3 flex-wrap">
+            <a
+                href="/<%= game.slug %>"
+                class="flex items-center gap-3"
+                style="color: <%- game.primary_color %>"
+            >
+                <img
+                    src="/api/game/<%= game.slug %>/art?size=50"
+                    class="w-7 h-7"
+                />
+                <div><%- game.title %></div>
+            </a>
+            <a
+                href="/games?search=<%= game.genre %>"
+                class="text-gray-300 text-sm"
+                ><%- game.genre %></a
+            >
+            <a
+                href="/games?search=<%= game.subgenre %>"
+                class="text-gray-300 text-sm"
+                ><%- game.subgenre %></a
+            >
+        </div>
+        <% }) %> <% let numPages = Math.ceil(totalGames / limit); %>
+        <!-- -->
+        <% if (numPages > 1) { %>
         <div id="pages" class="flex gap-4 my-8 flex-wrap">
-            <% for (let i = 1; i <= Math.ceil(totalGames / limit); i++) { %>
+            <% for (let i = 1; i <= numPages; i++) { %>
             <!-- -->
             <% if (i == page) { %>
             <div class="text-purple-400" href="/games?page=<%= i %>">
                 <%= i %>
             </div>
             <% } else { %>
+            <!-- -->
+            <% if (search) { %>
+            <a href="/games?search=<%= search %>&page=<%= i %>"><%= i %></a>
+            <% } else { %>
             <a href="/games?page=<%= i %>"><%= i %></a>
             <% } %>
             <!-- -->
             <% } %>
+            <!-- -->
+            <% } %>
         </div>
+        <% } %>
     </div>
 </div>
 <%- include("scripts.ejs") %>
