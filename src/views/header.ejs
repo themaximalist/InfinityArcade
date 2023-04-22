@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/app.css?cb=9" />
+        <link rel="stylesheet" href="/app.css?cb=10" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -45,20 +45,34 @@
             <% } %>
         <!-- -->
         <% } else { %>
-            <title>Infinity Arcade - Text-Based Games and Interactive Fiction</title>
+            <% if (typeof title !== "undefined") { %>
+                <title><%- title %> — Infinity Arcade</title>
+            <% } else { %>
+                <title>Infinity Arcade - Text-Based Games and Interactive Fiction</title>
+            <% } %>
             <meta
                 property="og:image"
                 content="<%- SITE_URL %>/images/banner.png"
             />
-            <meta
-                name="description"
-                content="Generate and play any interactive text game."
-            />
+
+            <% if (typeof description !== "undefined") { %>
+                <title><%- title %> — Infinity Arcade</title>
+                <meta
+                    name="description"
+                    content="<%- description %>"
+                />
+                <meta name="twitter:description" content="<%- description %>">
+            <% } else { %>
+                <meta
+                    name="description"
+                    content="Generate and play any interactive text game."
+                />
+                <meta name="twitter:description" content="Generate and play any interactive text game.">
+            <% } %>
 
             <meta name="twitter:card" content="summary_large_image">
             <meta name="twitter:site" content="@themaximalist">
             <meta name="twitter:title" content="Infinity Arcade">
-            <meta name="twitter:description" content="Generate and play any interactive text game.">
         <% } %>
         <link rel="apple-touch-icon" sizes="180x180" href="<%- SITE_URL %>/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="<%- SITE_URL %>/favicon-32x32.png">

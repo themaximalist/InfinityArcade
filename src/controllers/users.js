@@ -9,7 +9,10 @@ const Order = require("../models/order");
 
 
 async function login(req, res) {
-    res.render("login");
+    res.render("login", {
+        title: "Login",
+        description: "Login to Infinity Arcade",
+    });
 }
 
 async function logout(req, res) {
@@ -108,6 +111,8 @@ async function account(req, res) {
         user: req.user,
         games,
         chats,
+        title: "Account",
+        description: "Manage your Infinity Arcade account",
     });
 }
 
@@ -131,6 +136,8 @@ async function signup(req, res) {
         return res.render("signup", {
             session_id,
             order,
+            title: "Signup",
+            description: "Signup to Infinity Arcade",
         });
     } catch (e) {
         return res.render("signup", {
