@@ -90,13 +90,14 @@ class InfinityArcadeAPI {
         return await this.fetch(`${this.base_url}/account`, options);
     }
 
-    async fetchGames(page = 1, limit = 10, filter = null) {
-        let url;
-        if (filter) {
-            url = `${this.base_url}/games?page=${page}&limit=${limit}&filter=${filter}`;
-        } else {
-            url = `${this.base_url}/games?page=${page}&limit=${limit}`;
-        }
+    async fetchGames(page = 1, limit = 10, params = null) {
+        if (!params) params = {};
+
+        const query = Object.assign({}, { page, limit }, params);
+        const queryString = Object.keys(query).map(key => key + '=' + query[key]).join('&');
+
+        const url = `${this.base_url}/games?${queryString}`;
+        console.log(url);
         return await this.fetch(url);
     }
 }

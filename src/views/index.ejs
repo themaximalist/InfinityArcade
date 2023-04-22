@@ -32,6 +32,22 @@
         <% } %>
     </div>
 </div>
+<div class="text-white">
+    <form id="search-form" class="flex justify-center" method="get" action="/">
+        <input
+            type="text"
+            name="search"
+            value="<%- search %>"
+            class="bg-transparent text-white w-96 text-center text-sm focus:border-0 focus:ring-0 focus:outline-none"
+            placeholder="Search..."
+        />
+        <input
+            type="submit"
+            value="Search"
+            class="text-sm opacity-50 hover:opacity-100 transition-opacity cursor-pointer hidden"
+        />
+    </form>
+</div>
 <!-- -->
 <% let i = 0 %>
 <!-- -->
@@ -69,7 +85,7 @@
     <% if (++i % 32 == 0 || i == num) { %>
     <a
         href="/generate"
-        class="text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200 cursor-pointer"
+        class="generate-card text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200 cursor-pointer"
     >
         <div
             class="relative pb-10/16 rounded-xl flex items-center justify-center bg-gray-800"
@@ -101,6 +117,13 @@
     let currentPage = 1;
     let loading = false;
     let noMoreResults = false;
+    let currentIndex = 33;
+
+    function createGenerateElement() {
+        const generateElement = document.getElementsByClassName("generate-card")[0];
+        const clone = generateElement.cloneNode(true);
+        return clone;
+    }
 
     function createGameElement(game) {
         const gameElement = document.createElement("a");
@@ -121,14 +144,14 @@
         const gameInfo = document.createElement("div");
         gameInfo.className = "flex flex-col h-full gap-1 p-3";
         gameInfo.innerHTML = `
-        <div style="color: ${game.primary_color}" class="text-xl font-semibold truncate">
-            ${game.title}
-        </div>
-        <div class="text-gray-500 font-medium text-sm italic truncate">
-            ${game.genre} ${game.subgenre}
-        </div>
-        <div class="text-sm font-bold mt-2">${game.tagline}</div>
-    `;
+            <div style="color: ${game.primary_color}" class="text-xl font-semibold truncate">
+                ${game.title}
+            </div>
+            <div class="text-gray-500 font-medium text-sm italic truncate">
+                ${game.genre} ${game.subgenre}
+            </div>
+            <div class="text-sm font-bold mt-2">${game.tagline}</div>
+        `;
 
         gameElement.appendChild(imgWrapper);
         gameElement.appendChild(gameInfo);
@@ -142,25 +165,34 @@
         for (const game of games) {
             const gameElement = createGameElement(game);
             grid.appendChild(gameElement);
+
+            if (++currentIndex % 32 == 0) {
+                grid.appendChild(createGenerateElement());
+            }
         }
     }
 
     async function loadMoreGames() {
         const filter = window.ia.params.filter;
+        const search = window.ia.params.search;
 
         if (loading || noMoreResults) return;
         loading = true;
 
         try {
+            const query = {};
+            if (filter) query.filter = filter;
+            if (search) query.search = search;
+
             const { totalGames, games } = await window.ia.api.fetchGames(
                 ++currentPage,
-                25,
-                filter
+                <%- NUM_GAMES_TO_SHOW %>,
+                query,
             );
 
             appendGames(games);
 
-            if (games.length === 0 || games.length < 25) {
+            if (games.length === 0 || games.length < <%- NUM_GAMES_TO_SHOW %>) {
                 console.log("Finished loading games");
                 noMoreResults = true;
             }

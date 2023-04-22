@@ -5,7 +5,9 @@ const GenerateGame = require("../services/GenerateGame");
 const utils = require("../utils");
 const { scrape } = require("../services/scraper");
 const { wcagContrast } = require("../services/colors");
-const { Op } = require("sequelize");
+const GetGames = require("../services/GetGames");
+
+const NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_TO_SHOW || 25;
 
 async function create(req, res) {
     try {
@@ -72,24 +74,13 @@ async function generate_handler(req, res) {
 }
 
 async function index(req, res) {
-    const filter = req.query.filter;
-
-    const where = {
-        private: false
-    };
-
-    if (filter == "empty_image") {
-        where.image_data = null;
-    } else {
-        where.image_data = { [Op.ne]: null };
-    }
-
-    const games = (await Game.findAll({
-        where,
-        order: [["id", "DESC"]],
-        limit: 25
-    })).map(g => g.dataValues);
-    return res.render("index", { games, user: req.user });
+    const { games } = await GetGames(req.query, NUM_GAMES_TO_SHOW);
+    return res.render("index", {
+        games,
+        search: req.query.search,
+        user: req.user,
+        NUM_GAMES_TO_SHOW
+    });
 }
 
 async function wildcard_handler(req, res) {
@@ -115,46 +106,10 @@ async function wildcard_handler(req, res) {
 
 async function get_games(req, res) {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 25;
-        const filter = req.query.filter;
-
-        if (limit > 100) limit = 100;
-        const offset = (page - 1) * limit;
-
-        const where = {
-            private: false,
-        };
-
-        if (filter == "empty_image") {
-            where.image_data = null;
-        } else {
-            where.image_data = { [Op.ne]: null };
-        }
-
-        const { count: totalGames, rows: games } = await Game.findAndCountAll({
-            where,
-            order: [["id", "DESC"]],
-            limit,
-            offset,
-        });
-
-        const filteredGames = games.map(g => {
-            return {
-                id: g.id,
-                title: g.title,
-                tagline: g.tagline,
-                genre: g.genre,
-                subgenre: g.subgenre,
-                description: g.description,
-                primary_color: g.primary_color,
-                slug: g.slug,
-            };
-        });
-
+        const data = await GetGames(req.query, NUM_GAMES_TO_SHOW);
         return res.json({
             status: "success",
-            data: { totalGames, games: filteredGames }
+            data,
         });
     } catch (e) {
         return res.json({
