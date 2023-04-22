@@ -121,12 +121,14 @@ async function get_games(req, res) {
 
 async function all_games(req, res) {
     const where = { private: false };
+    /*
     let games = await Game.findAll({
         where,
         order: [["title", "ASC"]],
     });
+    */
 
-    games = [];
+    let games = [];
 
     return res.render("games", {
         games,
