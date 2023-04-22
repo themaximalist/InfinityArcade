@@ -7,6 +7,7 @@ async function GenerateGame(prompt_text = null, model = process.env.LLM_MODEL, p
 
     try {
         const input = prompt.load(prompt_name, { prompt_text });
+        // TODO: Make JSONAgent?
         const game = JSON.parse(await AI(input, model));
 
         game.prompt_model = model;
