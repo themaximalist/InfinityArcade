@@ -1,0 +1,52 @@
+<%- include("header.ejs") %>
+
+<div
+    class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0"
+>
+    <a href="/" class="flex items-center gap-2">
+        <img
+            src="/images/logo.png"
+            alt="Infinity Arcade"
+            class="w-6 lg:w-8 opacity-60"
+        />
+        <div
+            href="/"
+            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
+        >
+            Infinity Arcade
+        </div>
+    </a>
+</div>
+
+<div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
+    <h1 class="text-4xl font-bold my-4 text-purple-500">
+        Games (<%= games.length %>)
+    </h1>
+    <% let letter = "" %>
+    <div class="flex flex-col gap-2">
+        <% games.forEach((game) => { %>
+        <!-- -->
+        <% if (letter !== game.title[0].toUpperCase()) { %> <% letter =
+        game.title[0].toUpperCase() %>
+        <div class="mt-16"><%= letter %></div>
+        <!-- -->
+        <% } %>
+        <a
+            href="/<%= game.slug %>"
+            class="flex items-center gap-3"
+            style="color: <%- game.primary_color %>"
+        >
+            <img src="/api/game/<%= game.slug %>/art?size=50" class="w-7 h-7" />
+            <div>
+                <%- game.title %>
+                <span class="text-gray-300 text-sm"
+                    ><%- game.genre %> <%- game.subgenre %></span
+                >
+            </div>
+        </a>
+        <% }) %>
+    </div>
+</div>
+<%- include("scripts.ejs") %>
+<!-- -->
+<%- include("footer.ejs") %>

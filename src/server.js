@@ -58,6 +58,7 @@ class Server {
 
         this.app.get("/admin", verify_user, verify_admin, controllers.admin.index);
 
+        this.app.get("/games", optional_user, controllers.games.all_games);
         this.app.get("/generate", optional_user, controllers.games.generate_handler);
         this.app.get("/articles", optional_user, controllers.site.articles);
         this.app.get("/article/:slug", optional_user, controllers.site.article);
