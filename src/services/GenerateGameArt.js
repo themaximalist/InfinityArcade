@@ -1,5 +1,5 @@
 const log = require("debug")("ia:services:GenerateGameArt");
-const { Completion } = require("@themaximalist/llm.js");
+const LLM = require("@themaximalist/llm.js");
 const prompt = require("@themaximalist/prompt.js");
 const { replicate2image, stability2image } = require("./images");
 
@@ -11,7 +11,7 @@ async function GenerateGameArt(game,
 
     try {
         const messages = prompt.load(image_prompt_name, { game });
-        const image_prompt_text = await Completion(messages, concept_model);
+        const image_prompt_text = await LLM(messages, { model: concept_model });
 
         let image_data;
         switch (image_prompt_model) {
