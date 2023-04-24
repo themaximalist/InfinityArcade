@@ -21,7 +21,7 @@
     "author": "The Maximalist",
     "license": "MIT",
     "dependencies": {
-        "@themaximalist/llm.js": "^0.2.3",
+        "@themaximalist/llm.js": "^0.2.4",
         "@themaximalist/prompt.js": "^0.0.3",
         "bcrypt": "^5.1.0",
         "body-parser": "^1.20.2",
