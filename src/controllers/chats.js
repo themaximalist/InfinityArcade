@@ -13,7 +13,8 @@ async function start(req, res) {
         const { session_id } = req.body;
         if (!session_id) { throw new Error(`Error: Could not start game, no session_id provided`) }
 
-        let model = (req.user ? req.user.model : process.env.LLM_MODEL);
+        // let model = (req.user ? req.user.model : process.env.LLM_MODEL);
+        let model = process.env.LLM_MODEL; // all out of gpt4 credits for the month :(
         let user_id = (req.user ? req.user.id : null);
         for await (const token of StartGame(game, session_id, user_id, model)) {
             res.write(JSON.stringify(token) + "\n");
@@ -28,7 +29,8 @@ async function start(req, res) {
 async function chat(req, res) {
     try {
         const { chat_id, content } = req.body;
-        let model = (req.user ? req.user.model : process.env.LLM_MODEL);
+        // let model = (req.user ? req.user.model : process.env.LLM_MODEL);
+        let model = process.env.LLM_MODEL; // all out of gpt4 credits for the month :(
         let user_id = (req.user ? req.user.id : null);
         for await (const token of ChatGame(chat_id, content, user_id, model)) {
             res.write(JSON.stringify(token) + "\n");
