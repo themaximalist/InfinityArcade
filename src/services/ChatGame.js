@@ -32,7 +32,7 @@ async function* ChatGame(chat_id, content, user_id, model = process.env.LLM_MODE
 
         let response = "";
         const llm = new LLM(messages, { model, stream: true });
-        const stream = await llm.fetch({ streamParser: parseTokenStream });
+        const stream = await llm.fetch({ parser: parseTokenStream });
         for await (const token of stream) {
             yield token;
             response += token.content;
