@@ -6,7 +6,7 @@ let storyCache = {};
 let cachedTopStories = [];
 let lastTopStoriesFetch = null;
 
-async function topStories(num = 20) {
+async function topStories(num = 30) {
 
     if (cachedTopStories.length == 0 || lastTopStoriesFetch && new Date() - lastTopStoriesFetch < 1000 * 60 * 5) {
         try {
