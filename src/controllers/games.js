@@ -42,8 +42,7 @@ async function generate(req, res) {
             }
         }
 
-        // let model = (req.user ? req.user.model : process.env.LLM_MODEL);
-        let model = process.env.LLM_MODEL; // all out of gpt4 credits for the month :(
+        let model = (req.user ? req.user.model : process.env.LLM_MODEL);
 
         const game = await GenerateGame(prompt_text, model);
         if (!game) {
