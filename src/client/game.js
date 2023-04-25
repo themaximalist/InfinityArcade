@@ -69,8 +69,10 @@ class InfinityArcadeGame {
         this.ui.enableGameUI();
         this.game_ui_loaded = true;
 
-        const { container } = this.ui.addTextToChat(this.game.title, `game-start`, null, true);
+        const link = `<a href="/${this.game.slug}">${this.game.title}</a>`;
+        const { container } = this.ui.addTextToChat(link, `game-start`, null, true);
         container.style.color = this.game.primary_color;
+        // this.scrollChatIntoView();
 
         await this.handleStream(this.ia.api.startGame(this.game, this.ia.session_id));
     }

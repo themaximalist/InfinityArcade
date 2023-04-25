@@ -1697,10 +1697,6 @@ body {
   gap: 1.5rem;
 }
 
-.ia-game-started #text .content {
-  min-height: 224px;
-}
-
 .ia-game-started #footer {
   display: none;
 }
@@ -1711,6 +1707,10 @@ body {
 
 .ia-game-started #title {
   display: none;
+}
+
+.ia-game-started #text > .content:last-child {
+  min-height: 300px;
 }
 
 .cursor-fun {

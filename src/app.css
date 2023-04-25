@@ -230,10 +230,6 @@ body {
     @apply flex flex-col gap-6;
 }
 
-.ia-game-started #text .content {
-    min-height: 224px;
-}
-
 .ia-game-started #footer {
     @apply hidden;
 }
@@ -248,6 +244,10 @@ body {
 
 .ia-game-started #title {
     @apply hidden;
+}
+
+.ia-game-started #text > .content:last-child {
+    min-height: 300px;
 }
 
 .cursor-fun {
