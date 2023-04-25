@@ -108,6 +108,11 @@ class InfinityArcadeGame {
 
     async handleChatSubmit(event) {
         event.preventDefault();
+
+        const text = this.ui.chat_input.value;
+        const container = this.ui.addTextToChat(text, `${this.chat_id}-chat`);
+        container.style.color = this.game.primary_color;
+
         await this.chat(this.ui.chat_input.value);
     }
 
