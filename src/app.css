@@ -246,7 +246,11 @@ body {
     @apply hidden;
 }
 
-.ia-game-started #text > .content:last-child {
+.ia-game-started #text > div:last-child {
+    min-height: 300px;
+}
+
+.ia-game-started #options {
     min-height: 300px;
 }
 

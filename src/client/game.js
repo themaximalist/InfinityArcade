@@ -1,3 +1,5 @@
+const utils = require("./utils");
+
 class InfinityArcadeGame {
     constructor(ia, game) {
         this.ia = ia;
@@ -72,7 +74,9 @@ class InfinityArcadeGame {
         const link = `<a href="/${this.game.slug}">${this.game.title}</a>`;
         const { container } = this.ui.addTextToChat(link, `game-start`, null, true);
         container.style.color = this.game.primary_color;
-        // this.scrollChatIntoView();
+
+        this.ui.addTextToChat("", "start-buffer", null);
+        this.scrollChatIntoView();
 
         await this.handleStream(this.ia.api.startGame(this.game, this.ia.session_id));
     }
@@ -92,7 +96,8 @@ class InfinityArcadeGame {
             return;
         }
 
-        const { container } = this.ui.addTextToChat(el.innerText.trim(), `${this.chat_id}-option`);
+        const text = utils.sliceNumberPrefix(el.innerText.trim());
+        const { container } = this.ui.addTextToChat(text, `${this.chat_id}-option`);
         container.style.color = this.game.primary_color;
 
         this.scrollChatIntoView();

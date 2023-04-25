@@ -967,6 +967,10 @@ video {
   border-top-right-radius: 0.75rem;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -1709,7 +1713,11 @@ body {
   display: none;
 }
 
-.ia-game-started #text > .content:last-child {
+.ia-game-started #text > div:last-child {
+  min-height: 300px;
+}
+
+.ia-game-started #options {
   min-height: 300px;
 }
 
