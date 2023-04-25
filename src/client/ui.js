@@ -83,7 +83,6 @@ class UserInterface {
 
     showChatInput() {
         this.chat.style.display = "flex";
-        this.chat_input.focus();
     }
 
     imageLoaded() {
