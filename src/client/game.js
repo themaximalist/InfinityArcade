@@ -47,10 +47,7 @@ class InfinityArcadeGame {
         this.parent_id = obj.parent_id;
 
         if (obj.type == "content") {
-            const { created } = this.ui.addTextToChat(obj.content, obj.chat_id, "content");
-            if (created) {
-                this.scrollChatIntoView();
-            }
+            this.ui.addTextToChat(obj.content, obj.chat_id, "content");
         } else if (obj.type.indexOf("option") == 0) {
             this.ui.addOptionText(obj.type, obj.content);
         } else if (obj.type == "end") {
@@ -72,10 +69,14 @@ class InfinityArcadeGame {
         this.game_ui_loaded = true;
 
         const link = `<a href="/${this.game.slug}">${this.game.title}</a>`;
-        const { container } = this.ui.addTextToChat(link, `game-start`, null, true);
+        let container = this.ui.addTextToChat(link, `game-start`, null, true);
         container.style.color = this.game.primary_color;
 
-        this.ui.addTextToChat("", "start-buffer", null);
+        let container2 = this.ui.addTextToChat(`Start`, "start-buffer", null);
+        container2.style.color = this.game.primary_color;
+
+        this.ui.startLoading();
+
         this.scrollChatIntoView();
 
         await this.handleStream(this.ia.api.startGame(this.game, this.ia.session_id));
@@ -97,7 +98,7 @@ class InfinityArcadeGame {
         }
 
         const text = utils.sliceNumberPrefix(el.innerText.trim());
-        const { container } = this.ui.addTextToChat(text, `${this.chat_id}-option`);
+        const container = this.ui.addTextToChat(text, `${this.chat_id}-option`);
         container.style.color = this.game.primary_color;
 
         this.scrollChatIntoView();
@@ -112,6 +113,7 @@ class InfinityArcadeGame {
 
     async chat(input) {
         this.ui.startLoading();
+        this.scrollChatIntoView();
         await this.handleStream(this.ia.api.chat(this.chat_id, input));
     }
 

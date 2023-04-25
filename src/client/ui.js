@@ -34,7 +34,7 @@ class UserInterface {
 
     getChatContainer(chat_id, klass = null, addToStart = false) {
         if (this.chat_containers[chat_id]) {
-            return { created: false, container: this.chat_containers[chat_id] };
+            return this.chat_containers[chat_id];
         }
 
         console.log("Creating chat container");
@@ -50,13 +50,13 @@ class UserInterface {
         }
 
         this.chat_containers[chat_id] = container;
-        return { created: true, container };
+        return container;
     }
 
     addTextToChat(content, chat_id, klass = null, addToStart = false) {
-        const { created, container } = this.getChatContainer(chat_id, klass, addToStart);
+        const container = this.getChatContainer(chat_id, klass, addToStart);
         container.innerHTML += content;
-        return { created, container };
+        return container;
     }
 
     addOptionText(option, content) {
@@ -90,11 +90,16 @@ class UserInterface {
     }
 
     showDotLoader() {
-        this.dot_loader.style.display = "block";
+        const dot = this.dot_loader.cloneNode(true);
+        dot.style.display = "block";
+        this.text.appendChild(dot);
     }
 
     hideDotLoader() {
-        this.dot_loader.style.display = "none";
+        const loaders = this.text.querySelectorAll(".dot-animation");
+        for (const loader of loaders) {
+            loader.style.display = "none";
+        }
     }
 
     hideImageLoader() {
@@ -139,7 +144,6 @@ class UserInterface {
 
     enableGameUI() {
         document.body.classList.add("ia-game-started");
-        this.startLoading();
     }
 
     startLoading() {

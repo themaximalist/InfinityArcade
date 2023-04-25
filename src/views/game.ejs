@@ -100,42 +100,41 @@
                         Game
                         </span>
                 </div>
+                <div id="dot-loader" style="display: none" class="dot-animation"><span class="dots"></span></div>
                 <div 
                     class="text-sm lg:text-base grow overflow-y-scroll flex gap-4 leading-relaxed whitespace-pre-line max-h-96 flex-col"
                     ><div id="text"><%= game.description %></div><div id="scrollend" style="height: 0;"></div>
                 </div>
-    
             </div>
 
             <div id="options">
-                <div id="dot-loader" style="display: none" class="dot-animation"><span class="dots"></span></div>
                 <ul class="list-none space-y-2">
                     <li id="option1" class="opacity-100 hover:opacity-80 transition-opacity">
                         <button
                             id="button1"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full rounded py-2 px-3 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
+                            class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
                         >Play <%= game.title %>!</button>
                     </li>
                     <li id="option2" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button2"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full opacity-90 rounded py-2 px-3  shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
+                            class="text-sm w-full opacity-90 rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
                         >Option 1</button>
                     </li>
                     <li id="option3" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button3"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full rounded py-2 px-3  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
+                            class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
                         >Option 3</button>
                     </li>
                     <li id="option4" style="display: none" class="hover:opacity-80 transition-opacity">
                         <button
                             id="button4"
                             style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full rounded py-2 px-3  shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
+                            class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
                         >Option 4</button>
                     </li>
                 <li id="chat"
