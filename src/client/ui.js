@@ -115,6 +115,11 @@ class UserInterface {
     }
 
     enableGameUI() {
+        const footer = document.getElementById("footer");
+        if (footer) {
+            footer.style.display = "none";
+        }
+
         this.videogame.classList.add("ia-game-started");
         this.startLoading();
     }

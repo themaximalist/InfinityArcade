@@ -860,6 +860,10 @@ video {
   flex-direction: column;
 }
 
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -1694,15 +1698,6 @@ body {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-}
-
-#radio {
-  /* visibility: hidden; */
-  /* @apply pointer-events-none; */
-}
-
-.ia-game-started #radio {
-  /* visibility: visible; */
 }
 
 .cursor-fun {
