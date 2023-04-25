@@ -32,23 +32,31 @@ class UserInterface {
         this.text.style.display = "flex";
     }
 
-    getChatContainer(chat_id) {
+    getChatContainer(chat_id, klass = null, addToStart = false) {
         if (this.chat_containers[chat_id]) {
-            return this.chat_containers[chat_id];
+            return { created: false, container: this.chat_containers[chat_id] };
         }
 
         console.log("Creating chat container");
         const container = document.createElement("div");
         container.id = `chat-${chat_id}`;
-        this.text.appendChild(container);
+        if (klass) {
+            container.classList.add(klass);
+        }
+        if (addToStart) {
+            this.text.insertBefore(container, this.text.firstChild);
+        } else {
+            this.text.appendChild(container);
+        }
+
         this.chat_containers[chat_id] = container;
-        return container;
+        return { created: true, container };
     }
 
-    addTextToChat(content, chat_id) {
-        const container = this.getChatContainer(chat_id);
+    addTextToChat(content, chat_id, klass = null, addToStart = false) {
+        const { created, container } = this.getChatContainer(chat_id, klass, addToStart);
         container.innerHTML += content;
-        return container;
+        return { created, container };
     }
 
     addOptionText(option, content) {
@@ -131,12 +139,7 @@ class UserInterface {
     }
 
     enableGameUI() {
-        const footer = document.getElementById("footer");
-        if (footer) {
-            footer.style.display = "none";
-        }
-
-        this.videogame.classList.add("ia-game-started");
+        document.body.classList.add("ia-game-started");
         this.startLoading();
     }
 

@@ -45,8 +45,10 @@ class InfinityArcadeGame {
         this.parent_id = obj.parent_id;
 
         if (obj.type == "content") {
-            this.ui.addTextToChat(obj.content, obj.chat_id);
-            this.scrollChatIntoView();
+            const { created } = this.ui.addTextToChat(obj.content, obj.chat_id, "content");
+            if (created) {
+                this.scrollChatIntoView();
+            }
         } else if (obj.type.indexOf("option") == 0) {
             this.ui.addOptionText(obj.type, obj.content);
         } else if (obj.type == "end") {
@@ -57,7 +59,7 @@ class InfinityArcadeGame {
     }
 
     scrollChatIntoView() {
-        this.ui.scrollend.scrollIntoView({ behavior: 'instant', block: 'end' });
+        this.ui.scrollend.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
 
 
@@ -66,6 +68,10 @@ class InfinityArcadeGame {
 
         this.ui.enableGameUI();
         this.game_ui_loaded = true;
+
+        const { container } = this.ui.addTextToChat(this.game.title, `game-start`, null, true);
+        container.style.color = this.game.primary_color;
+
         await this.handleStream(this.ia.api.startGame(this.game, this.ia.session_id));
     }
 
@@ -84,7 +90,7 @@ class InfinityArcadeGame {
             return;
         }
 
-        const container = this.ui.addTextToChat(el.innerText.trim(), `${this.chat_id}-option`);
+        const { container } = this.ui.addTextToChat(el.innerText.trim(), `${this.chat_id}-option`);
         container.style.color = this.game.primary_color;
 
         this.scrollChatIntoView();
