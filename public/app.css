@@ -681,6 +681,10 @@ video {
   display: none;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
 .h-12 {
   height: 3rem;
 }
@@ -715,10 +719,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-10 {
-  height: 2.5rem;
 }
 
 .max-h-96 {
@@ -1664,7 +1664,7 @@ body {
   display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .ia-game-started #image-wrapper {
     display: flex;
   }
@@ -1702,6 +1702,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .ia-game-started #footer {
@@ -1718,14 +1720,6 @@ body {
 
 .ia-game-started #text > .content {
   white-space: pre-line;
-}
-
-.ia-game-started #text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 
 .ia-game-started #text > div:last-child {

@@ -211,7 +211,7 @@ body {
 }
 
 .ia-game-started #image-wrapper {
-    @apply hidden md:flex;
+    @apply hidden lg:flex;
 }
 
 #button1 {
@@ -227,7 +227,7 @@ body {
 }
 
 .ia-game-started #text {
-    @apply flex flex-col gap-6;
+    @apply flex flex-col py-0 gap-6;
 }
 
 .ia-game-started #footer {
@@ -248,10 +248,6 @@ body {
 
 .ia-game-started #text > .content {
     @apply whitespace-pre-line;
-}
-
-.ia-game-started #text {
-    @apply flex flex-col py-0 gap-2;
 }
 
 .ia-game-started #text > div:last-child {
