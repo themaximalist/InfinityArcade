@@ -38,14 +38,18 @@ class InfinityArcadeGame {
 
         if (!obj) return;
 
+        if (!obj.chat_id) return;
+        if (!obj.parent_id) return;
+
+        this.chat_id = obj.chat_id;
+        this.parent_id = obj.parent_id;
+
         if (obj.type == "content") {
-            this.ui.addText(obj.content);
+            this.ui.addTextToChat(obj.content, obj.chat_id);
             this.scrollChatIntoView();
         } else if (obj.type.indexOf("option") == 0) {
             this.ui.addOptionText(obj.type, obj.content);
         } else if (obj.type == "end") {
-            this.chat_id = obj.chat_id;
-            this.parent_id = obj.parent_id;
             await this.streamFinished();
         } else {
             console.log("UNKNOWN STREAM OBJ", JSON.stringify(obj));
@@ -80,7 +84,9 @@ class InfinityArcadeGame {
             return;
         }
 
-        this.ui.text.innerHTML += `<br />> ${el.innerText.trim()}`
+        const container = this.ui.addTextToChat(el.innerText.trim(), `${this.chat_id}-option`);
+        container.style.color = this.game.primary_color;
+
         this.scrollChatIntoView();
         await this.chat(el.innerText);
     }

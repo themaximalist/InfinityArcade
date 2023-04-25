@@ -22,6 +22,8 @@ class UserInterface {
         this.option4 = document.getElementById("option4");
         this.button4 = document.getElementById("button4");
 
+        this.chat_containers = {};
+
         this.loading = false;
     }
 
@@ -30,9 +32,23 @@ class UserInterface {
         this.text.style.display = "flex";
     }
 
-    addText(content) {
-        this.text.innerHTML += content;
-        this.text.style.display = "flex";
+    getChatContainer(chat_id) {
+        if (this.chat_containers[chat_id]) {
+            return this.chat_containers[chat_id];
+        }
+
+        console.log("Creating chat container");
+        const container = document.createElement("div");
+        container.id = `chat-${chat_id}`;
+        this.text.appendChild(container);
+        this.chat_containers[chat_id] = container;
+        return container;
+    }
+
+    addTextToChat(content, chat_id) {
+        const container = this.getChatContainer(chat_id);
+        container.innerHTML += content;
+        return container;
     }
 
     addOptionText(option, content) {
@@ -83,7 +99,7 @@ class UserInterface {
     }
 
     reset() {
-        this.text.innerHTML += "<br /><br />"
+        // this.text.innerHTML += "<br /><br />"
         this.resetOptions();
         this.resetChat();
         this.showDotLoader();

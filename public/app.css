@@ -860,10 +860,6 @@ video {
   flex-direction: column;
 }
 
-.flex-col-reverse {
-  flex-direction: column-reverse;
-}
-
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -1698,6 +1694,12 @@ body {
     font-size: 1.5rem;
     line-height: 2rem;
   }
+}
+
+.ia-game-started #text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .cursor-fun {
