@@ -717,6 +717,10 @@ video {
   height: 100vh;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
 .max-h-96 {
   max-height: 24rem;
 }
@@ -942,6 +946,10 @@ video {
   white-space: pre-line;
 }
 
+.break-words {
+  overflow-wrap: break-word;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -965,10 +973,6 @@ video {
 .rounded-t-xl {
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
-}
-
-.border-2 {
-  border-width: 2px;
 }
 
 .bg-black {
@@ -1125,11 +1129,6 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1236,6 +1235,10 @@ video {
 
 .-tracking-wider {
   letter-spacing: -0.05em;
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em;
 }
 
 .tracking-wider {
@@ -1713,12 +1716,27 @@ body {
   display: none;
 }
 
+.ia-game-started #text > .content {
+  white-space: pre-line;
+}
+
+.ia-game-started #text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .ia-game-started #text > div:last-child {
   min-height: 300px;
 }
 
 .ia-game-started #options {
   min-height: 300px;
+}
+
+.ia-game-started #videogame {
 }
 
 .cursor-fun {

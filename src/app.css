@@ -246,12 +246,23 @@ body {
     @apply hidden;
 }
 
+.ia-game-started #text > .content {
+    @apply whitespace-pre-line;
+}
+
+.ia-game-started #text {
+    @apply flex flex-col py-0 gap-2;
+}
+
 .ia-game-started #text > div:last-child {
     min-height: 300px;
 }
 
 .ia-game-started #options {
     min-height: 300px;
+}
+
+.ia-game-started #videogame {
 }
 
 .cursor-fun {
