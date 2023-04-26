@@ -13,8 +13,7 @@ async function generate(req, res) {
 
             if (game.image_data) return res.redirect(`/api/game/${game.slug}/art`);
 
-            // let model = (req.user ? req.user.model : process.env.LLM_MODEL);
-            let model = process.env.LLM_MODEL; // all out of gpt4 credits for the month :(
+            let model = (req.user ? req.user.model : process.env.LLM_MODEL);
 
             const art = await GenerateGameArt(game.llm_fields, model);
             if (!art) throw new Error(`art not generated`);
