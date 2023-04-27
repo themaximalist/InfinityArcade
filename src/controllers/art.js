@@ -43,21 +43,8 @@ async function get(req, res) {
         if (size < 64) size = 64;
 
         if (game.image_data) {
-            const contentType = (game.image_prompt_model === "replicate" ? "image/jpeg" : "image/png");
-
-            let resizedImage;
-            switch (game.image_prompt_model) {
-                case "replicate":
-                    resizedImage = await sharp(game.image_data).resize(size, size).jpeg().toBuffer();
-                    break;
-                case "stability":
-                    resizedImage = await sharp(game.image_data).resize(size, size).png().toBuffer();
-                    break;
-                default:
-                    throw new Error(`unknown image model name ${game.image_prompt_model}`);
-            }
-
-
+            const contentType = "image/png";
+            let resizedImage = await sharp(game.image_data).resize(size, size).png().toBuffer();
 
             res.writeHead(200, {
                 'Content-Type': contentType,

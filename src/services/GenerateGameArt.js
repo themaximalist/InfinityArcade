@@ -1,32 +1,30 @@
 const log = require("debug")("ia:services:GenerateGameArt");
 const AI = require("@themaximalist/ai.js");
 const prompt = require("@themaximalist/prompt.js");
-const { replicate2image, stability2image } = require("./images");
 
 async function GenerateGameArt(game,
     concept_model = process.env.AI_MODEL,
     image_prompt_name = "GenerateGameArt-v1",
+    image_prompt_service = process.env.AI_IMAGE_SERVICE,
     image_prompt_model = process.env.AI_IMAGE_MODEL) {
-    log(`generating game art (game=${JSON.stringify(game)}, concept_model=${concept_model}, prompt_name=${image_prompt_name}, image_dimensions=${image_prompt_model})...`);
+
+    log(`generating game art (game=${JSON.stringify(game)}, concept_model=${concept_model}, prompt_name=${image_prompt_name})...`);
 
     try {
-        const messages = prompt.load(image_prompt_name, { game });
-        const image_prompt_text = await AI(messages, { model: concept_model });
+        const concept_prompt = prompt.load(image_prompt_name);
+        const image = new AI.Image(JSON.stringify(game), {
+            service: image_prompt_service,
+            model: image_prompt_model,
+            concept_model,
+            concept_prompt,
+        });
 
-        let image_data;
-        switch (image_prompt_model) {
-            case "replicate":
-                image_data = await replicate2image(image_prompt_text);
-                break;
-            case "stability":
-                image_data = await stability2image(image_prompt_text);
-                break;
-            default:
-                throw new Error(`unknown image_prompt_model ${image_prompt_model}`);
-        }
+        const image_data = await image.concept();
+        const image_prompt_text = image.generated_prompt;
 
+        const model = `${image.service}:${image.model}`;
         return {
-            image_prompt_model,
+            image_prompt_model: model,
             image_prompt_name,
             image_prompt_text,
             image_data,
