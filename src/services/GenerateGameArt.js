@@ -1,17 +1,17 @@
 const log = require("debug")("ia:services:GenerateGameArt");
-const LLM = require("@themaximalist/llm.js");
+const AI = require("@themaximalist/ai.js");
 const prompt = require("@themaximalist/prompt.js");
 const { replicate2image, stability2image } = require("./images");
 
 async function GenerateGameArt(game,
-    concept_model = process.env.LLM_MODEL,
+    concept_model = process.env.AI_MODEL,
     image_prompt_name = "GenerateGameArt-v1",
-    image_prompt_model = process.env.IMAGE_MODEL) {
+    image_prompt_model = process.env.AI_IMAGE_MODEL) {
     log(`generating game art (game=${JSON.stringify(game)}, concept_model=${concept_model}, prompt_name=${image_prompt_name}, image_dimensions=${image_prompt_model})...`);
 
     try {
         const messages = prompt.load(image_prompt_name, { game });
-        const image_prompt_text = await LLM(messages, { model: concept_model });
+        const image_prompt_text = await AI(messages, { model: concept_model });
 
         let image_data;
         switch (image_prompt_model) {

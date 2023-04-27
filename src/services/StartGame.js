@@ -4,7 +4,7 @@ const prompt = require("@themaximalist/prompt.js");
 const Chat = require("../models/chat");
 const ChatGame = require("./ChatGame");
 
-async function* StartGame(game, session_id, user_id = null, model = process.env.LLM_MODEL, prompt_name = "StartGame-v1") {
+async function* StartGame(game, session_id, user_id = null, model = process.env.AI_MODEL, prompt_name = "StartGame-v1") {
     log(`starting game (game=${game.slug}, user_id=${user_id}, model=${model}, session_id=${session_id})...`);
 
     try {

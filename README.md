@@ -58,8 +58,8 @@ DATABASE_URI=postgres://username:password@localhost:5432/infinityarcade
 DEBUG=ia:*
 PORT=3000
 NODE_ENV=development
-MODEL=gpt-4
-IMAGE_MODEL=stability
+AI_MODEL=gpt-4
+AI_IMAGE_MODEL=stability
 ```
 
 3. Install dependencies:
@@ -91,4 +91,6 @@ A live demo is available at
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/themaximal1st/InfinityArcade/blob/main/LICENSE.md) file for details.
+This project is licensed under the MIT License - see the
+[LICENSE](https://github.com/themaximal1st/InfinityArcade/blob/main/LICENSE.md)
+file for details.

@@ -3,10 +3,10 @@ const log = require("debug")("ia:services:ChatGame");
 const Chat = require("../models/chat");
 const GetChat = require("./GetChat");
 const prompt = require("@themaximalist/prompt.js")
-const LLM = require("@themaximalist/llm.js");
+const AI = require("@themaximalist/ai.js");
 const parseTokenStream = require("./parseTokenStream");
 
-async function* ChatGame(chat_id, content, user_id, model = process.env.LLM_MODEL, prompt_name = "ChatGame-v1") {
+async function* ChatGame(chat_id, content, user_id, model = process.env.AI_MODEL, prompt_name = "ChatGame-v1") {
     log(`chatting game (chat_id=${chat_id}, user_id=${user_id}, model=${model})...`);
 
     try {
@@ -31,8 +31,8 @@ async function* ChatGame(chat_id, content, user_id, model = process.env.LLM_MODE
         });
 
         let response = "";
-        const llm = new LLM(messages, { model, stream: true });
-        const stream = await llm.fetch({ parser: parseTokenStream });
+        const ai = new AI(messages, { model, stream: true });
+        const stream = await ai.send({ parser: parseTokenStream });
         for await (const token of stream) {
             token.chat_id = chat_id;
             token.parent_id = chat.parent_id;
