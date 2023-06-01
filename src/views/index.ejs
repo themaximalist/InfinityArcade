@@ -1,51 +1,25 @@
 <%- include("header.ejs") %>
-
-<div
-    class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0"
->
+<div class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0">
     <a href="/" class="flex items-center gap-2">
-        <img
-            src="/images/logo.png"
-            alt="Infinity Arcade"
-            class="w-6 lg:w-8 opacity-60"
-        />
-        <div
-            href="/"
-            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
-        >
+        <img src="/images/logo.png" alt="Infinity Arcade" class="w-6 lg:w-8 opacity-60" />
+        <div href="/" class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block">
             Infinity Arcade
         </div>
     </a>
+    <% if (!mobile) { %>
     <div class="flex justify-center">
         <% if (user) { %>
-        <a
-            href="/account"
-            class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block"
-            >Account</a
-        >
+        <a href="/account" class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block">Account</a>
         <% } else { %>
-        <a
-            href="/pro"
-            class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block"
-            >GO PRO!</a
-        >
+        <a href="/pro" class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block">GO PRO!</a>
         <% } %>
     </div>
+    <% } %>
 </div>
 <div class="text-white">
     <form id="search-form" class="flex justify-center" method="get" action="/">
-        <input
-            type="text"
-            name="search"
-            value="<%- search %>"
-            class="bg-transparent text-white w-96 text-center text-sm focus:border-0 focus:ring-0 focus:outline-none"
-            placeholder="Search..."
-        />
-        <input
-            type="submit"
-            value="Search"
-            class="text-sm opacity-50 hover:opacity-100 transition-opacity cursor-pointer hidden"
-        />
+        <input type="text" name="search" value="<%- search %>" class="bg-transparent text-white w-96 text-center text-sm focus:border-0 focus:ring-0 focus:outline-none" placeholder="Search..." />
+        <input type="submit" value="Search" class="text-sm opacity-50 hover:opacity-100 transition-opacity cursor-pointer hidden" />
     </form>
 </div>
 <!-- -->
@@ -58,27 +32,15 @@
 <div class="text-white text-center my-8">No games</div>
 <% } %>
 
-<div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-2 lg:py-8 sm:px-4"
->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-2 lg:py-8 sm:px-4">
     <% for (const game of games) { %>
-    <a
-        href="/<%- game.slug %>"
-        class="text-white flex flex-col bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
-    >
+    <a href="/<%- game.slug %>" class="text-white flex flex-col bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
         <div class="relative pb-10/16 rounded-xl">
-            <img
-                src="/api/game/<%- game.slug %>/art?size=256"
-                alt="<%- game.title
-            %>"
-                class="h-full w-full rounded-t-xl lazy-load min-w-full"
-            />
+            <img src="/api/game/<%- game.slug %>/art?size=256" alt="<%- game.title
+            %>" class="h-full w-full rounded-t-xl lazy-load min-w-full" />
         </div>
         <div class="flex flex-col h-full gap-1 p-3">
-            <div
-                style="color: <%- game.primary_color %>"
-                class="text-xl font-semibold truncate"
-            >
+            <div style="color: <%- game.primary_color %>" class="text-xl font-semibold truncate">
                 <%- game.title %>
             </div>
             <div class="text-gray-500 font-medium text-sm italic truncate">
@@ -88,13 +50,8 @@
         </div>
     </a>
     <% if (++i % 32 == 0 || i == num) { %>
-    <a
-        href="/generate"
-        class="generate-card text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200 cursor-pointer"
-    >
-        <div
-            class="relative pb-10/16 rounded-xl flex items-center justify-center bg-gray-800"
-        ></div>
+    <a href="/generate" class="generate-card text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200 cursor-pointer">
+        <div class="relative pb-10/16 rounded-xl flex items-center justify-center bg-gray-800"></div>
         <div class="flex flex-col h-full gap-1 justify-between items-center">
             <div class="py-16"></div>
             <div class="text-xl font-semibold">Generate Game</div>
@@ -178,7 +135,10 @@
             if (filter) query.filter = filter;
             if (search) query.search = search;
 
-            const { totalGames, games } = await window.ia.api.fetchGames(
+            const {
+                totalGames,
+                games
+            } = await window.ia.api.fetchGames(
                 ++currentPage,
                 <%- NUM_GAMES_TO_SHOW %>,
                 query,
@@ -204,8 +164,9 @@
                     loadMoreGames();
                 }
             });
-        },
-        { threshold: 1 }
+        }, {
+            threshold: 1
+        }
     );
 </script>
 <script>

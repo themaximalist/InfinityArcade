@@ -10,7 +10,7 @@ const { join } = require("path");
 const prompt = require("@themaximalist/prompt.js");
 const Database = require("./database");
 const controllers = require("./controllers");
-const { verify_user, optional_user, verify_admin } = require("./middleware");
+const { verify_user, optional_user, verify_admin, check_mobile } = require("./middleware");
 
 class Server {
     constructor() {
@@ -22,6 +22,7 @@ class Server {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cookieParser(process.env.COOKIE_SECRET));
         this.app.use(express.static("public"));
+        this.app.use(check_mobile);
         this.app.locals = {
             NODE_ENV: process.env.NODE_ENV,
             SITE_URL: process.env.SITE_URL,
