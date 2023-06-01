@@ -10,7 +10,6 @@ async function generate(req, res) {
         if (game.music_prompt_text) throw new Error("Music already generated");
 
         const music = await GenerateGameMusic(game);
-        console.log(music);
 
         await game.update({
             music_prompt_text: music.prompt,
