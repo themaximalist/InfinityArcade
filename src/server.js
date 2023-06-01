@@ -60,6 +60,7 @@ class Server {
 
         this.app.get("/admin", verify_user, verify_admin, controllers.admin.index);
 
+        this.app.get("/privacy", optional_user, controllers.site.privacy);
         this.app.get("/games", optional_user, controllers.games.games_index);
         this.app.get("/generate", optional_user, controllers.games.generate_handler);
         this.app.get("/articles", optional_user, controllers.site.articles);

@@ -733,10 +733,6 @@ video {
   max-height: 24rem;
 }
 
-.min-h-screen {
-  min-height: 100vh;
-}
-
 .w-12 {
   width: 3rem;
 }
@@ -985,10 +981,6 @@ video {
 .rounded-t-xl {
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
-}
-
-.border-2 {
-  border-width: 2px;
 }
 
 .bg-black {

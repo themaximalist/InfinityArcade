@@ -3,6 +3,13 @@ function status(req, res) {
     res.send("ok");
 }
 
+function privacy(req, res) {
+    res.render("privacy", {
+        title: "Privacy Policy",
+        description: "Privacy Policy"
+    });
+}
+
 function articles(req, res) {
     res.render("articles", {
         title: "Articles",
@@ -46,4 +53,5 @@ module.exports = {
     articles,
     article,
     faq,
+    privacy,
 };
