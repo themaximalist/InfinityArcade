@@ -99,7 +99,7 @@
                 action: window.ia.params.action,
             });
             <% if (game.music_prompt_text) { %>
-            window.ia.handleRadio(<%- game.id %>, <%- game.music_prompt_text %>, <%- game.music_prompt_seed_image %>);
+            window.ia.handleRadio(<%- game.id %>, <%- JSON.stringify(game.music_prompt_text) %>, <%- JSON.stringify(game.music_prompt_seed_image) %>);
             <% } else { %>
             window.ia.handleRadio(<%- game.id %>);
             <% } %>
