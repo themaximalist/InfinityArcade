@@ -67,6 +67,14 @@ Game.init({
         type: DataTypes.BLOB,
         allowNull: true,
     },
+    music_prompt_text: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    music_prompt_seed_image: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     private: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

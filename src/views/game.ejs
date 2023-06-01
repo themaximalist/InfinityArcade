@@ -1,52 +1,27 @@
 <%- include("header.ejs") %>
-<div
-    class="container mx-auto py-4 flex flex-col w-full justify-center h-full gap-4 lg:mt-3"
-    id="videogame"
+<div class="container mx-auto py-4 flex flex-col w-full justify-center h-full gap-4 lg:mt-3 relative" id="videogame">
 
->
-
-    <div
-        class="w-full text-center flex items-center justify-between gap-4 px-2 lg:px-0" id="navigation"
-    >
-    <div class="flex gap-4 items-center">
-        <a href="/" class="flex items-center gap-2">
-            <img
-                src="/images/logo.png"
-                alt="Infinity Arcade"
-                class="w-6 lg:w-8 opacity-60"
-            />
-            <div
-                href="/"
-                class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
-            >
-                Infinity Arcade
+    <div class="w-full text-center flex items-center justify-between gap-4 px-2 lg:px-0" id="navigation">
+        <div class="flex gap-4 items-center">
+            <a href="/" class="flex items-center gap-2">
+                <img src="/images/logo.png" alt="Infinity Arcade" class="w-6 lg:w-8 opacity-60" />
+                <div href="/" class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block">
+                    Infinity Arcade
+                </div>
+            </a>
+            <div class="flex items-center">
+                <% if (user) { %>
+                <a href="/account" class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block">Account</a>
+                <% } else { %>
+                <a href="/pro" class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block">GO PRO!</a>
+                <% } %>
             </div>
-        </a>
-        <div class="flex items-center">
-            <% if (user) { %>
-            <a
-                href="/account"
-                class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block"
-                >Account</a
-            >
-            <% } else { %>
-            <a
-                href="/pro"
-                class="ml-2 bg-purple-500/80 hover:bg-purple-500 transition-colors text-white py-1 px-3 rounded-lg text-[8px] lg:text-[10px] inline-block"
-                >GO PRO!</a
-            >
-            <% } %>
         </div>
     </div>
-    <div class="hidden md:block">
     <%- include("radio.ejs") %>
-    </div>
-    </div>
 
 
-    <div
-        class="bg-black rounded-lg shadow-lg pb-4 text-white flex gap-8 w-full flex-col lg:flex-row-reverse h-full"
-    >
+    <div class="bg-black rounded-lg shadow-lg pb-4 text-white flex gap-8 w-full flex-col lg:flex-row-reverse h-full">
 
         <div class="flex flex-col w-full justify-start lg:items-center gap-4" id="image-wrapper">
             <div class="mt-44" id="image-loader" <%- (game.image_data ? `style="display: none"` : "") %>>
@@ -61,99 +36,57 @@
                     <div></div>
                 </div>
             </div>
-            <img
-                id="image"
-                class="object-cover rounded-md image-hover w-full max-w-lg lg:max-w-xl"
-                src="/api/art/generate?game_id=<%= game.id %>"
-                alt="Scene Image"
-            />
+            <img id="image" class="object-cover rounded-md image-hover w-full max-w-lg lg:max-w-xl" src="/api/art/generate?game_id=<%= game.id %>" alt="Scene Image" />
         </div>
         <div class="flex flex-col w-full gap-4 px-3">
             <div class="flex flex-col gap-2">
                 <div class="md:mt-8">
                     <% if (game.private) { %>
-                        <span 
-                        style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                        class="text-xs  p-1 px-2 mb-3 rounded-xl opacity-50 inline-block">PRIVATE</span>
+                    <span style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;" class="text-xs  p-1 px-2 mb-3 rounded-xl opacity-50 inline-block">PRIVATE</span>
                     <% } %>
-                    <h1 class="text-4xl font-bold"
-                        style="color: <%= game.primary_color %>"
-                        id="title">
+                    <h1 class="text-4xl font-bold" style="color: <%= game.primary_color %>" id="title">
                         <span><%= game.title %></span>
                     </h1>
                 </div>
-                <h2
-                    id="tagline"
-                    style="color: <%= game.primary_color %>"
-                    class="text-xl font-bold flex opacity-80"
-                >
+                <h2 id="tagline" style="color: <%= game.primary_color %>" class="text-xl font-bold flex opacity-80">
                     <%= game.tagline %>
                 </h2>
-                <div
-                    id="genre-wrapper"
-                    class="text-xs font-bold text-gray-50 mb-6 flex gap-10 justify-start opacity-70"
-                >
-                    <span id="genre" class="text-gray-50"
-                        >
+                <div id="genre-wrapper" class="text-xs font-bold text-gray-50 mb-6 flex gap-10 justify-start opacity-70">
+                    <span id="genre" class="text-gray-50">
                         <%= game.genre %>
                         <%= game.subgenre %>
                         Game
-                        </span>
+                    </span>
                 </div>
                 <div id="dot-loader" style="display: none" class="dot-animation"><span class="dots"></span></div>
-                <div 
-                    class="text-sm lg:text-base grow overflow-y-scroll flex gap-4 leading-relaxed whitespace-pre-line max-h-96 flex-col"
-                    ><div id="text"><%= game.description %></div><div id="scrollend" style="height: 0;"></div>
+                <div class="text-sm lg:text-base grow overflow-y-scroll flex gap-4 leading-relaxed whitespace-pre-line max-h-96 flex-col">
+                    <div id="text"><%= game.description %></div>
+                    <div id="scrollend" style="height: 0;"></div>
                 </div>
             </div>
 
             <div id="options">
                 <ul class="list-none space-y-2">
                     <li id="option1" class="opacity-100 hover:opacity-80 transition-opacity">
-                        <button
-                            id="button1"
-                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
-                        >Play <%= game.title %>!</button>
+                        <button id="button1" style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;" class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight">Play <%= game.title %>!</button>
                     </li>
                     <li id="option2" style="display: none" class="hover:opacity-80 transition-opacity">
-                        <button
-                            id="button2"
-                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full opacity-90 rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
-                        >Option 1</button>
+                        <button id="button2" style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;" class="text-sm w-full opacity-90 rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight">Option 1</button>
                     </li>
                     <li id="option3" style="display: none" class="hover:opacity-80 transition-opacity">
-                        <button
-                            id="button3"
-                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
-                        >Option 3</button>
+                        <button id="button3" style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;" class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight">Option 3</button>
                     </li>
                     <li id="option4" style="display: none" class="hover:opacity-80 transition-opacity">
-                        <button
-                            id="button4"
-                            style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;"
-                            class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight"
-                        >Option 4</button>
+                        <button id="button4" style="background-color: <%= game.primary_color %>; color: <%= contrast_color %>;" class="text-sm w-full rounded py-2 px-3 lg:py-4 lg:px-5 shadow-md opacity-0 animate__animated animate__fadeInUp animate__delay-0s animate__faster text-left break-words tracking-tight">Option 4</button>
                     </li>
-                <li id="chat"
-                            class="text-left w-full"
-                            style="display: none"
-                >
+                    <li id="chat" class="text-left w-full" style="display: none">
 
-                    <form id="chat-form" class="flex flex-row justify-between gap-4 items-center w-full">
-                        <img src="/images/chat.png" alt="Chat Icon" class="w-6 h-6 opacity-60" />
-                        <input id="chat-input"
-                        data-gramm="false"
-                        data-gramm_editor="false"
-                        data-enable-grammarly="false"
-                        autocomplete="off"
-                        class="w-full h-10 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none resize-none grow text-xs"
-                        placeholder="..." />
-                        <button type="submit" class="bg-transparent text-gray-300 hover:cursor-pointer focus:ring-0 focus:border-0 focus:outline-none text-xs">CHAT</button>
-                    </form>
-                </li>
+                        <form id="chat-form" class="flex flex-row justify-between gap-4 items-center w-full">
+                            <img src="/images/chat.png" alt="Chat Icon" class="w-6 h-6 opacity-60" />
+                            <input id="chat-input" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" autocomplete="off" class="w-full h-10 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none resize-none grow text-xs" placeholder="..." />
+                            <button type="submit" class="bg-transparent text-gray-300 hover:cursor-pointer focus:ring-0 focus:border-0 focus:outline-none text-xs">CHAT</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -165,7 +98,11 @@
                 chat_id: window.ia.params.chat_id,
                 action: window.ia.params.action,
             });
-            window.ia.handleRadio();
+            <% if (game.music_prompt_text) { %>
+            window.ia.handleRadio(<%- game.id %>, <%- game.music_prompt_text %>, <%- game.music_prompt_seed_image %>);
+            <% } else { %>
+            window.ia.handleRadio(<%- game.id %>);
+            <% } %>
             window.history.pushState({}, document.title, window.location.pathname);
         });
     </script>

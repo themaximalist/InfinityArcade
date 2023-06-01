@@ -8,7 +8,7 @@ class InfinityArcade {
     constructor() {
         this.api = new InfinityArcadeAPI();
         this.ui = new UserInterface();
-        this.radio = new Radio();
+        this.radio = new Radio(this.api);
         this.game = null;
         this.session_id = null;
     }
@@ -41,8 +41,13 @@ class InfinityArcade {
         document.location = `/${game.slug}`;
     }
 
-    async handleRadio() {
-        this.radio.initialize();
+    async handleRadio(game_id, music_prompt_text, music_prompt_seed_image) {
+        this.radio.initialize(game_id);
+
+        if (!music_prompt_text) {
+            const music = await this.radio.generatePrompt();
+            this.radio.injectRadio(music);
+        }
     }
 
     static async initialize(api) {

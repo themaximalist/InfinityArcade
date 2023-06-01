@@ -582,6 +582,10 @@ video {
   top: 1rem;
 }
 
+.top-6 {
+  top: 1.5rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -681,6 +685,10 @@ video {
   display: none;
 }
 
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -731,10 +739,6 @@ video {
 
 .w-2 {
   width: 0.5rem;
-}
-
-.w-4 {
-  width: 1rem;
 }
 
 .w-6 {
@@ -1875,10 +1879,6 @@ body {
 
   .md\:mt-8 {
     margin-top: 2rem;
-  }
-
-  .md\:block {
-    display: block;
   }
 
   .md\:inline-block {

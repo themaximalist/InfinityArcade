@@ -100,6 +100,10 @@ class InfinityArcadeAPI {
         console.log(url);
         return await this.fetch(url);
     }
+
+    async generateRadioPrompt(id) {
+        return await this.fetch(`${this.base_url}/radio/generate`, { id });
+    }
 }
 
 async function* yieldStreamResponse(response) {
