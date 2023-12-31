@@ -9,7 +9,7 @@ if [[ $UPDATES != *"Already up to date"* ]]; then
   if pm2 list | grep -q $APP_NAME; then
     pm2 restart $APP_NAME
   else
-    pm2 start src/index.js --name $APP_NAME
+    pm2 start src/server.js --name $APP_NAME
   fi
 else
   echo "No updates found. Nothing to do."
