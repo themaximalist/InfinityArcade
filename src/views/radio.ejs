@@ -1,6 +1,0 @@
-<div id="radio" class="h-6 flex gap-4 items-center opacity-50 absolute right-4 top-6">
-    <% if (game.music_prompt_text) { %>
-    <% const url = `https://riffusion.infinityarcade.com/?prompt=${encodeURIComponent(game.music_prompt_text)}&seedImageId=${game.music_prompt_seed_image}`; %>
-    <iframe id="radio-frame" src="<%- url %>" class="aspect-square w-7"></iframe>
-    <% } %>
-</div>
