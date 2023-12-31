@@ -17,9 +17,9 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
     };
 
     if (filter == "empty_image") {
-        where.image_data = null;
+        where.image_prompt_model = null;
     } else {
-        where.image_data = { [Op.ne]: null };
+        where.image_prompt_model = { [Op.ne]: null };
     }
 
     if (search) {
