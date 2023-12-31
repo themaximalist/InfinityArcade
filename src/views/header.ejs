@@ -23,8 +23,8 @@
     <meta name="twitter:description" content="<%- game.description %>">
 
     <% if (game.image_data) { %>
-    <meta name="twitter:image" content="<%- SITE_URL %>/api/game/<%= game.slug %>/art?size=300">
-    <meta property="og:image" content="<%- SITE_URL %>/api/game/<%= game.slug %>/art?size=300" />
+    <meta name="twitter:image" content="<%- SITE_URL %>/images/art/<%= game.id %>-256.png">
+    <meta property="og:image" content="<%- SITE_URL %>/images/art/<%= game.id %>-256.png" />
     <% } else { %>
     <meta name="twitter:image" content="<%- SITE_URL %>/images/banner.png">
     <meta property="og:image" content="<%- SITE_URL %>/images/banner.png" />

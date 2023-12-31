@@ -1,26 +1,14 @@
 <%- include("header.ejs") %>
 
-<div
-    class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0"
->
+<div class="w-full text-center flex items-center justify-between lg:justify-center gap-4 px-2 lg:px-0">
     <a href="/" class="flex items-center gap-2">
-        <img
-            src="/images/logo.png"
-            alt="Infinity Arcade"
-            class="w-6 lg:w-8 opacity-60"
-        />
-        <div
-            href="/"
-            class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block"
-        >
+        <img src="/images/logo.png" alt="Infinity Arcade" class="w-6 lg:w-8 opacity-60" />
+        <div href="/" class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block">
             Infinity Arcade
         </div>
     </a>
     <div class="flex justify-center md:absolute md:right-4">
-        <a
-            href="/logout"
-            class="text-purple-500 hover:text-purple-400 text-xs lg:text-sm"
-        >
+        <a href="/logout" class="text-purple-500 hover:text-purple-400 text-xs lg:text-sm">
             Logout
         </a>
     </div>
@@ -31,9 +19,7 @@
         <div class="prose flex flex-col gap-4">
             <h1 class="text-4xl font-bold text-purple-500">Account</h1>
             <p>
-                <span class="text-purple-200"
-                    >Thanks for purchasing <%= user.email %>!</span
-                >
+                <span class="text-purple-200">Thanks for purchasing <%= user.email %>!</span>
             </p>
 
             <p>
@@ -48,16 +34,9 @@
                 <h2 class="text-xl font-bold text-purple-500">
                     GAME GENERATOR
                 </h2>
-                <textarea
-                    class="w-full h-[150px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none"
-                    id="game-prompt"
-                    placeholder="A group of survivors find themselves stranded on a mysterious and seemingly uninhabited island after their commercial airplane crashes in the South Pacific. As they struggle to survive and find a way to escape, they discover that the island is not as deserted as it initially appears."
-                ></textarea>
+                <textarea class="w-full h-[150px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none" id="game-prompt" placeholder="A group of survivors find themselves stranded on a mysterious and seemingly uninhabited island after their commercial airplane crashes in the South Pacific. As they struggle to survive and find a way to escape, they discover that the island is not as deserted as it initially appears."></textarea>
             </div>
-            <button
-                class="bg-purple-500 text-white px-4 py-2 rounded w-full"
-                id="generate-game"
-            >
+            <button class="bg-purple-500 text-white px-4 py-2 rounded w-full" id="generate-game">
                 Generate Game
             </button>
         </div>
@@ -71,14 +50,8 @@
             <% } %>
             <!-- -->
             <% for (const game of games) { %>
-            <a
-                href="/<%= game.slug %>"
-                class="flex items-center gap-4 text-white/80 hover:text-white"
-            >
-                <img
-                    src="/api/game/<%= game.slug %>/art?size=50"
-                    class="w-8 h-8 rounded-lg"
-                />
+            <a href="/<%= game.slug %>" class="flex items-center gap-4 text-white/80 hover:text-white">
+                <img src="/images/art/<%= game.id %>-50.png" class="w-8 h-8 rounded-lg" />
                 <%= game.title %>
             </a>
             <% } %>
@@ -100,21 +73,14 @@
                 <% for (const chat of chats) { %>
                 <tr class="">
                     <td class="w-12 align-middle pb-6">
-                        <img
-                            src="/api/game/<%= chat.Game.slug %>/art?size=50"
-                            class="w-8 h-8 rounded-lg"
-                        />
+                        <img src="/images/art/<%= chat.Game.id %>-50.png" class="w-8 h-8 rounded-lg" />
                     </td>
                     <td class="px-4 pb-6 pt-0 align-middle">
-                        <a
-                            href="/<%- chat.Game.slug %>?parent_id=<%- chat.id %>&chat_id=<%- chat.dataValues.mostRecentChatId %>&action=resume"
-                        >
+                        <a href="/<%- chat.Game.slug %>?parent_id=<%- chat.id %>&chat_id=<%- chat.dataValues.mostRecentChatId %>&action=resume">
                             <%= chat.Game.title %>
                         </a>
                     </td>
-                    <td
-                        class="whitespace-nowrap px-4 pb-6 pt-0 text-xs text-right align-middle"
-                    >
+                    <td class="whitespace-nowrap px-4 pb-6 pt-0 text-xs text-right align-middle">
                         <div><%= chat.dataValues.childCount %> turns</div>
                         <div><%= chat.dataValues.relativeTime %></div>
                     </td>
@@ -130,39 +96,26 @@
             <div class="flex flex-col gap-4">
                 <div>
                     <input type="radio" class="model-select accent-purple-500
-                    cursor-pointer peer/radio1" id="radio1" name="model"
-                    value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% }
+                    cursor-pointer peer/radio1" id="radio1" name="model" value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% }
                     %> />
-                    <label
-                        for="radio1"
-                        class="peer-checked/radio1:text-purple-500 cursor-pointer"
-                    >
+                    <label for="radio1" class="peer-checked/radio1:text-purple-500 cursor-pointer">
                         gpt-4 (best engine, slower)
                     </label>
                 </div>
 
                 <div>
                     <input <input type="radio" class="model-select
-                    accent-purple-500 cursor-pointer peer/radio2" id="radio2"
-                    name="model" value="gpt-3.5-turbo" <% if (user.model ==
+                    accent-purple-500 cursor-pointer peer/radio2" id="radio2" name="model" value="gpt-3.5-turbo" <% if (user.model ==
                     "gpt-3.5-turbo") { %>checked<% } %> />
-                    <label
-                        for="radio2"
-                        class="peer-checked/radio2:text-purple-500 cursor-pointer"
-                    >
+                    <label for="radio2" class="peer-checked/radio2:text-purple-500 cursor-pointer">
                         gpt-3.5-turbo (fast, worse engine)
                     </label>
                 </div>
                 <br />
                 <div>
                     <input type="checkbox" class="privacy-select
-                    accent-purple-500 cursor-pointer peer/radio1" id="checkbox1"
-                    name="model" <% if (user.private == true) { %>checked<% } %>
-                    />
-                    <label
-                        for="checkbox1"
-                        class="peer-checked/radio1:text-purple-500 cursor-pointer"
-                    >
+                    accent-purple-500 cursor-pointer peer/radio1" id="checkbox1" name="model" <% if (user.private == true) { %>checked<% } %> />
+                    <label for="checkbox1" class="peer-checked/radio1:text-purple-500 cursor-pointer">
                         Private
                     </label>
                 </div>
@@ -209,7 +162,9 @@
             const private = e.target.checked;
 
             try {
-                const response = await window.ia.api.updateAccount({ private });
+                const response = await window.ia.api.updateAccount({
+                    private
+                });
 
                 if (response !== true) {
                     throw new Error("Error updating privacy");

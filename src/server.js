@@ -42,7 +42,6 @@ class Server {
         this.app.get("/api/session/new", controllers.sessions.create);
         this.app.post("/api/game/new", controllers.games.create);
         this.app.post("/api/game/generate", optional_user, controllers.games.generate);
-        this.app.get("/api/game/:slug/art", controllers.art.get);
         this.app.get("/api/art/generate", optional_user, controllers.art.generate);
         this.app.post("/api/chat/:slug/start", optional_user, controllers.chats.start);
         this.app.post("/api/chat", optional_user, controllers.chats.chat);

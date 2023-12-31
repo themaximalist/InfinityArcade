@@ -36,8 +36,7 @@
     <% for (const game of games) { %>
     <a href="/<%- game.slug %>" class="text-white flex flex-col bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
         <div class="relative pb-10/16 rounded-xl">
-            <img src="/api/game/<%- game.slug %>/art?size=256" alt="<%- game.title
-            %>" class="h-full w-full rounded-t-xl lazy-load min-w-full" />
+            <img src="/images/art/<%- game.id %>-256.png" alt="<%- game.title %>" class="h-full w-full rounded-t-xl lazy-load min-w-full" />
         </div>
         <div class="flex flex-col h-full gap-1 p-3">
             <div style="color: <%- game.primary_color %>" class="text-xl font-semibold truncate">
@@ -86,7 +85,7 @@
         imgWrapper.className = "relative pb-10/16 rounded-xl";
 
         const img = document.createElement("img");
-        img.src = `/api/game/${game.slug}/art?size=256`;
+        img.src = `/images/art/${game.id}-256.png`;
         img.alt = game.title;
         img.className = "h-full w-full rounded-t-xl lazy-load min-w-full";
 

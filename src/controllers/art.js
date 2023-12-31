@@ -11,7 +11,7 @@ async function generate(req, res) {
             const game = await Game.findOne({ where: { id: game_id } });
             if (!game) throw new Error(`game with id ${game_id} not found`);
 
-            if (game.image_data) return res.redirect(`/api/game/${game.slug}/art`);
+            if (game.image_data) return res.redirect(`/images/art/${game.id}.png`);
 
             let model = (req.user ? req.user.model : process.env.AI_MODEL);
 
@@ -20,7 +20,7 @@ async function generate(req, res) {
 
             await Game.update(art, { where: { id: game.id } });
 
-            return res.redirect(`/api/game/${game.slug}/art`);
+            return res.redirect(`/images/art/${game.id}.png`);
         } else {
             throw new Error(`invalid request parameters`);
         }
@@ -32,39 +32,6 @@ async function generate(req, res) {
     }
 }
 
-async function get(req, res) {
-    try {
-        const { slug } = req.params;
-        let size = Number(req.query.size) || 512;
-        const game = await Game.findOne({ where: { slug } });
-        if (!game) throw new Error(`game with slug ${slug} not found`);
-
-        if (size > 512) size = 512;
-        if (size < 64) size = 64;
-
-        if (game.image_data) {
-            const contentType = "image/png";
-            let resizedImage = await sharp(game.image_data).resize(size, size).png().toBuffer();
-
-            res.writeHead(200, {
-                'Content-Type': contentType,
-                'Cache-control': 'public, max-age=3000'
-            });
-
-            res.end(resizedImage, "binary");
-        } else {
-            throw new Error(`game with slug ${slug} has no art`)
-        }
-    } catch (e) {
-        return res.json({
-            status: "error",
-            message: `cannot get art: ${e.message}`
-        });
-    }
-}
-
-
 module.exports = {
     generate,
-    get
 };
