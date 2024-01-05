@@ -1,23 +1,12 @@
-```
-            _____        __ _       _ _                                      _
-           |_   _|      / _(_)     (_) |             /\                     | |
-             | |  _ __ | |_ _ _ __  _| |_ _   _     /  \   _ __ ___ __ _  __| | ___
-             | | | '_ \|  _| | '_ \| | __| | | |   / /\ \ | '__/ __/ _` |/ _` |/ _ \
-            _| |_| | | | | | | | | | | |_| |_| |  / ____ \| | | (_| (_| | (_| |  __/
-           |_____|_| |_|_| |_|_| |_|_|\__|\__, | /_/    \_\_|  \___\__,_|\__,_|\___|
-                                           __/ |
-                                          |___/
-
-                                       Play Anything
-```
-
 # Infinity Arcade
 
-Infinity Arcade is a game that can create any game. It uses GPT-4 to create
-interactive text games based on the users prompts. It also calls Stable
-Diffusion to generate game art. It's open source and can be installed on your
-computer (mac, windows, linux) or played at
-[https://infinityarcade.com](https://infinityarcade.com).
+> create and play any game
+
+![infinityarcade-product](infinityarcade-product.png)
+
+[Infinity Arcade](https://infinityarcade.com/) is a game that can create any game. It uses GPT-4 to create interactive text games based on the users prompts. It also calls Stable Diffusion to generate game art. It's open source and can be installed on your computer (mac, windows, linux) or played at [https://infinityarcade.com](https://infinityarcade.com).
+
+
 
 ## Features
 
@@ -25,10 +14,7 @@ computer (mac, windows, linux) or played at
 -   Uses Stable Diffusion to generate game art
 -   Open source
 
-## Getting Started
 
-These instructions will get you a copy of the project up and running on your
-local machine for development and testing purposes.
 
 ### Prerequisites
 
@@ -38,6 +24,8 @@ To run InfinityArcade locally, you'll need:
 -   PostgreSQL
 -   OpenAI API key
 -   Replicate or Stability API key
+
+
 
 ### Installing
 
@@ -76,21 +64,26 @@ npm run dev
 
 The application will now be running at `http://localhost:3000`.
 
+
+
 ## Contributing
 
 To contribute to the project, please create a pull request.
 
+
+
 ## Demo
 
-A live demo is available at
-[https://infinityarcade.com](https://infinityarcade.com).
+A live demo is available at [https://infinityarcade.com](https://infinityarcade.com).
+
+
 
 ## Authors
 
 -   The Maximalist - [hello@themaximalist.com](mailto:hello@themaximalist.com)
 
+
+
 ## License
 
-This project is licensed under the MIT License - see the
-[LICENSE](https://github.com/themaximal1st/InfinityArcade/blob/main/LICENSE.md)
-file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/themaximal1st/InfinityArcade/blob/main/LICENSE.md) file for details.
