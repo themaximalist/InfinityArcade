@@ -55,7 +55,13 @@
     </div>
 
 <% } %>
-    <script data-collect-dnt="true" async defer src="https://x.cac.app/latest.js"></script>
-    <noscript><img src="https://x.cac.app/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <script>
+        var script = document.createElement('script');
+        script.defer = true;
+        script.src = "https://s.cac.app/js/script.outbound-links.js";
+        script.dataset.domain = "infinityaracde.com";
+
+        document.getElementsByTagName('head')[0].appendChild(script);
+    </script>
     </body>
 </html>
