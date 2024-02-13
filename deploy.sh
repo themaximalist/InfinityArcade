@@ -2,8 +2,17 @@
 
 APP_NAME="infinityarcade.com"
 
+# Check if the first argument is "--deploy"
+if [[ $1 == "--deploy" ]]; then
+  FORCE_DEPLOY=true
+else
+  FORCE_DEPLOY=false
+fi
+
 UPDATES=$(git pull)
-if [[ $UPDATES != *"Already up to date"* ]]; then
+
+# Check if updates are found or if forced to deploy
+if [[ $UPDATES != *"Already up to date"* ]] || [[ $FORCE_DEPLOY == true ]]; then
   npm install
 
   if pm2 list | grep -q $APP_NAME; then
