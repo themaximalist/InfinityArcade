@@ -37,11 +37,21 @@ class InfinityArcade {
 
     async handleGenerate() {
         const prompt_text = this.params.prompt_text;
+        console.log("PROMPT TEXT", prompt_text);
+
+        if (!prompt_text) {
+            console.log("NEEDS PROMPT");
+            // TODO: show ui
+            return;
+        }
+
         const game = await this.api.generateGame(prompt_text);
         document.location = `/${game.slug}`;
     }
 
     async handleRadio(game_id, music_prompt_text, music_prompt_seed_image) {
+        return;
+
         this.radio.initialize(game_id);
 
         if (!music_prompt_text) {

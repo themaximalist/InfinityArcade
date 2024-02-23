@@ -1,0 +1,12 @@
+<%- include("header.ejs") %>
+<!-- -->
+<%- include("loader.ejs") %>
+<!-- -->
+<script>
+    document.addEventListener("ia-loaded", (e) => {
+        window.ia.handleGenerate();
+    });
+</script>
+<%- include("scripts.ejs") %>
+<!-- -->
+<%- include("footer.ejs") %>

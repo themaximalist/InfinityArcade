@@ -69,7 +69,11 @@ async function generate(req, res) {
 }
 
 async function generate_handler(req, res) {
-    return res.render("generate");
+    if (req.query.prompt_text) {
+        return res.render("loading");
+    } else {
+        return res.render("generate");
+    }
 }
 
 async function index(req, res) {
