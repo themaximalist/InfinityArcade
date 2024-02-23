@@ -14,6 +14,16 @@ function slugify(input) {
     });
 }
 
+// https://github.com/danny-wood/unslugify
+const unslugify = (slug) => slug.replace(/\-/g, " ")
+    .replace(/\w\S*/g,
+        (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+    );
+
+function unslugify2(slug) {
+    return slug.split("-").map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join("-");
+}
+
 function rand() {
     return uuid.v4().split("-")[0].toLowerCase();
 }
@@ -37,6 +47,8 @@ function isURL(str) {
 
 module.exports = {
     slugify,
+    unslugify,
+    unslugify2,
     rand,
     shuffle,
     relativeTime,

@@ -10,6 +10,7 @@ const { join } = require("path");
 const prompt = require("@themaximalist/prompt.js");
 const Database = require("./database");
 const controllers = require("./controllers");
+const slugify = require("./utils").slugify;
 const { verify_user, optional_user, verify_admin, check_mobile } = require("./middleware");
 
 class Server {
@@ -26,6 +27,7 @@ class Server {
         this.app.locals = {
             NODE_ENV: process.env.NODE_ENV,
             SITE_URL: process.env.SITE_URL,
+            slugify,
         };
         this.app.set("view engine", "ejs");
         this.app.set("views", "src/views");
@@ -61,6 +63,10 @@ class Server {
 
         this.app.get("/privacy", optional_user, controllers.site.privacy);
         this.app.get("/games", optional_user, controllers.games.games_index);
+        this.app.get("/genres", optional_user, controllers.genres.index);
+        this.app.get("/genres/:slug", optional_user, controllers.genres.get_genre);
+        this.app.get("/subgenres", optional_user, controllers.genres.subgenres_index);
+        this.app.get("/subgenres/:slug", optional_user, controllers.genres.get_subgenre);
         this.app.get("/generate", optional_user, controllers.games.generate_handler);
         this.app.get("/articles", optional_user, controllers.site.articles);
         this.app.get("/article/:slug", optional_user, controllers.site.article);

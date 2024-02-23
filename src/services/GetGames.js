@@ -1,8 +1,10 @@
 const Game = require("../models/game");
 const { Op } = require("sequelize");
 
-async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_TO_SHOW || 25) {
+async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_TO_SHOW || 25, where = {}) {
     if (!query) query = {};
+
+    const hasWhere = Object.keys(where).length > 0;
 
     const page = parseInt(query.page) || 1;
     let limit = parseInt(query.limit) || NUM_GAMES_TO_SHOW;
@@ -12,9 +14,7 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
     const filter = query.filter;
     const search = query.search;
 
-    const where = {
-        private: false
-    };
+    where.private = false;
 
     if (filter == "empty_image") {
         where.image_prompt_model = null;
@@ -22,7 +22,7 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
         where.image_prompt_model = { [Op.ne]: null };
     }
 
-    if (search) {
+    if (search && !hasWhere) {
         where[Op.or] = {
             title: { [Op.iLike]: `%${search}%` },
             description: { [Op.iLike]: `%${search}%` },

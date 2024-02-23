@@ -16,11 +16,22 @@
     </div>
     <% } %>
 </div>
-<div class="text-white">
-    <form id="search-form" class="flex justify-center" method="get" action="/">
-        <input type="text" name="search" value="<%- search %>" class="bg-transparent text-white w-96 text-center text-sm focus:border-0 focus:ring-0 focus:outline-none" placeholder="Search..." />
+<div class="text-gray-50 max-w-3xl mx-auto text-xs text-center flex flex-col gap-4">
+    <p>Play any Text Adventure Game! </p>
+
+    <div class="flex flex-row gap-4 items-center justify-center">
+        <a href="/games" class="text-purple-400 hover:text-purple-500 underline">Games</a>
+        <a href="/genres" class="text-purple-400 hover:text-purple-500 underline">Genres</a>
+        <a href="/subgenres" class="text-purple-400 hover:text-purple-500 underline">Subgenres</a>
+        <a href="/generate" class="text-purple-400 hover:text-purple-500 underline">Create Game</a>
+    </div>
+
+    <form id="search-form" class="m-0 p-0" method="get" action="/">
+        <input type="text" name="search" value="<%- search %>" class="bg-transparent text-white text-center text-xs w-48 focus:border-0 focus:ring-0 focus:outline-none" placeholder="Search..." />
         <input type="submit" value="Search" class="text-sm opacity-50 hover:opacity-100 transition-opacity cursor-pointer hidden" />
     </form>
+</div>
+<div class="text-white">
 </div>
 <!-- -->
 <% let i = 0 %>
