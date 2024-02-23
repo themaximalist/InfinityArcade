@@ -25,20 +25,8 @@
             <p>
                 <img src="/images/checkmark.png" class="h-4 inline-block" />
                 We upgraded you to the best model and set your account to
-                private. You'll see your games and sessions below. Have fun!
+                private. You'll see your games and sessions below. <a href="/account?limit=1000">See all</a>. Have fun!
             </p>
-        </div>
-
-        <div class="w-full flex flex-col gap-4">
-            <div>
-                <h2 class="text-xl font-bold text-purple-500">
-                    GAME GENERATOR
-                </h2>
-                <textarea class="w-full h-[150px] p-4 bg-black text-white focus:ring-0 focus:border-0 focus:outline-none" id="game-prompt" placeholder="A group of survivors find themselves stranded on a mysterious and seemingly uninhabited island after their commercial airplane crashes in the South Pacific. As they struggle to survive and find a way to escape, they discover that the island is not as deserted as it initially appears."></textarea>
-            </div>
-            <button class="bg-purple-500 text-white px-4 py-2 rounded w-full" id="generate-game">
-                Generate Game
-            </button>
         </div>
 
         <div class="w-full flex flex-col gap-4">
@@ -96,18 +84,27 @@
             <div class="flex flex-col gap-4">
                 <div>
                     <input type="radio" class="model-select accent-purple-500
-                    cursor-pointer peer/radio1" id="radio1" name="model" value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% }
+                    cursor-pointer" id="radio1" name="model" value="gpt-4-turbo-preview" <% if (user.model == "gpt-4-turbo-preview") { %>checked<% }
                     %> />
                     <label for="radio1" class="peer-checked/radio1:text-purple-500 cursor-pointer">
+                        gpt-4-turbo-preview (best and fastest)
+                    </label>
+                </div>
+
+                <div>
+                    <input type="radio" class="model-select accent-purple-500
+                    cursor-pointer" id="radio2" name="model" value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% }
+                    %> />
+                    <label for="radio2" class="peer-checked/radio1:text-purple-500 cursor-pointer">
                         gpt-4 (best engine, slower)
                     </label>
                 </div>
 
                 <div>
                     <input <input type="radio" class="model-select
-                    accent-purple-500 cursor-pointer peer/radio2" id="radio2" name="model" value="gpt-3.5-turbo" <% if (user.model ==
+                    accent-purple-500 cursor-pointer" id="radio3" name="model" value="gpt-3.5-turbo" <% if (user.model ==
                     "gpt-3.5-turbo") { %>checked<% } %> />
-                    <label for="radio2" class="peer-checked/radio2:text-purple-500 cursor-pointer">
+                    <label for="radio3" class="peer-checked/radio2:text-purple-500 cursor-pointer">
                         gpt-3.5-turbo (fast, worse engine)
                     </label>
                 </div>

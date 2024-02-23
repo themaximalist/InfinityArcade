@@ -55,7 +55,12 @@ async function handle_login(req, res) {
 }
 
 async function account(req, res) {
-    const games = await req.user.getGames();
+    const limit = req.query.limit || 10;
+
+    const games = await req.user.getGames({
+        limit,
+    });
+
     const chats = (await Chat.findAll({
         where: {
             UserId: req.user.id,
@@ -100,12 +105,11 @@ async function account(req, res) {
         order: [
             ["createdAt", "DESC"]
         ],
+        limit,
     })).map(chat => {
         chat.dataValues.relativeTime = utils.relativeTime(chat.dataValues.mostRecentChatDate);
         return chat;
     });
-
-    console.log(chats);
 
     res.render("account", {
         user: req.user,
@@ -188,7 +192,7 @@ async function handle_signup(req, res) {
 }
 
 const ALLOWED_UPDATE_KEYS = ["model", "private"];
-const ALLOWED_MODELS = ["gpt-4", "gpt-3.5-turbo"];
+const ALLOWED_MODELS = ["gpt-4", "gpt-4-turbo-preview", "gpt-3.5-turbo"];
 async function account_update(req, res) {
     try {
         const update = req.body;
