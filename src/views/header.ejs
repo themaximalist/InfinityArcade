@@ -10,46 +10,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <% if (typeof game !== "undefined") { %>
-    <title><%- game.title %> Text Game — Infinity Arcade</title>
-    <meta name="description" content="<%- game.description %>" />
+        <title><%- game.title %> Text Game — Infinity Arcade</title>
+        <meta name="description" content="<%- game.description %>" />
 
-    <meta property="og:url" content="<%- game.slug %>" />
-    <meta property="og:title" content="<%- game.title %> — Infinity Arcade" />
-    <meta property="og:description" content="<%- game.description %>" />
+        <meta property="og:url" content="<%- game.slug %>" />
+        <meta property="og:title" content="<%- game.title %> — Infinity Arcade" />
+        <meta property="og:description" content="<%- game.description %>" />
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@themaximalist">
-    <meta name="twitter:title" content="<%- game.title %>">
-    <meta name="twitter:description" content="<%- game.description %>">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@themaximalist">
+        <meta name="twitter:title" content="<%- game.title %>">
+        <meta name="twitter:description" content="<%- game.description %>">
 
-    <% if (game.image_data) { %>
-    <meta name="twitter:image" content="<%- SITE_URL %>/images/art/<%= game.id %>-256.png">
-    <meta property="og:image" content="<%- SITE_URL %>/images/art/<%= game.id %>-256.png" />
+        <% if (game.image_prompt_model) { %>
+            <meta name="twitter:image" content="<%- SITE_URL %>/images/art/<%= game.id %>">
+            <meta property="og:image" content="<%- SITE_URL %>/images/art/<%= game.id %>" />
+        <% } else { %>
+            <meta name="twitter:image" content="<%- SITE_URL %>/images/banner.png">
+            <meta property="og:image" content="<%- SITE_URL %>/images/banner.png" />
+        <% } %>
     <% } else { %>
-    <meta name="twitter:image" content="<%- SITE_URL %>/images/banner.png">
-    <meta property="og:image" content="<%- SITE_URL %>/images/banner.png" />
-    <% } %>
-    <!-- -->
-    <% } else { %>
-    <% if (typeof title !== "undefined") { %>
-    <title><%- title %> — Infinity Arcade</title>
-    <% } else { %>
-    <title>Infinity Arcade - Text-Based Games and Interactive Fiction</title>
-    <% } %>
-    <meta property="og:image" content="<%- SITE_URL %>/images/banner.png" />
+        <% if (typeof title !== "undefined") { %>
+            <title><%- title %> — Infinity Arcade</title>
+        <% } else { %>
+            <title>Infinity Arcade - Text-Based Games and Interactive Fiction</title>
+        <% } %>
 
-    <% if (typeof description !== "undefined") { %>
-    <title><%- title %> — Infinity Arcade</title>
-    <meta name="description" content="<%- description %>" />
-    <meta name="twitter:description" content="<%- description %>">
-    <% } else { %>
-    <meta name="description" content="Generate and play any interactive text game." />
-    <meta name="twitter:description" content="Generate and play any interactive text game.">
-    <% } %>
+        <meta property="og:image" content="<%- SITE_URL %>/images/banner.png" />
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@themaximalist">
-    <meta name="twitter:title" content="Infinity Arcade">
+        <% if (typeof description !== "undefined") { %>
+            <title><%- title %> — Infinity Arcade</title>
+            <meta name="description" content="<%- description %>" />
+            <meta name="twitter:description" content="<%- description %>">
+        <% } else { %>
+            <meta name="description" content="Generate and play any interactive text game." />
+            <meta name="twitter:description" content="Generate and play any interactive text game.">
+        <% } %>
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@themaximalist">
+        <meta name="twitter:title" content="Infinity Arcade">
     <% } %>
     <link rel="apple-touch-icon" sizes="180x180" href="<%- SITE_URL %>/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<%- SITE_URL %>/favicon-32x32.png">

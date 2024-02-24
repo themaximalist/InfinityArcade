@@ -103,6 +103,10 @@ async function wildcard_handler(req, res) {
             contrast_color,
         });
     } else {
+        if (slug.indexOf("/") > -1 || slug.indexOf(".png") > -1) {
+            return res.send(404, "Not Found");
+        }
+
         return res.redirect(`/generate?prompt_text=${encodeURIComponent(slug)}`);
     }
 }
