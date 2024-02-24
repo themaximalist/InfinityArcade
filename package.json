@@ -11,6 +11,7 @@
         "build": "npm run build:js && npm run build:css",
         "build:js": "rollup -c",
         "build:css": "npx tailwindcss -i ./src/app.css -o ./public/app.css",
+        "watch:server": "nodemon -x npm run server",
         "watch:js": "rollup -c --watch",
         "watch:css": "npx tailwindcss -i ./src/app.css -o ./public/app.css --watch"
     },
@@ -46,6 +47,7 @@
     "devDependencies": {
         "@babel/core": "^7.21.4",
         "@babel/preset-env": "^7.21.4",
+        "nodemon": "^3.1.0",
         "rollup": "^2.79.1",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-commonjs": "^10.1.0",

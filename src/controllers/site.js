@@ -29,6 +29,11 @@ function article(req, res) {
             title: "Generative Video Game Soundtracks",
             description: "How Infinity Arcade is using generative music to create video game soundtracks."
         });
+    } else if (req.params.slug === "how-infinityarcade-was-built") {
+        return res.render("articles/how-infinityarcade-was-built", {
+            title: "How Infinity Arcade was built",
+            description: "How Infinity Arcade was built, the free and open source text adventure game engine."
+        });
     }
     res.status(404).send("Not found");
 }
