@@ -49,7 +49,7 @@ Game.init({
     prompt_model: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: "gpt-3.5-turbo"
+        defaultValue: "gpt-4o-mini"
     },
     image_prompt_model: {
         type: DataTypes.STRING,

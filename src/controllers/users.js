@@ -192,7 +192,7 @@ async function handle_signup(req, res) {
 }
 
 const ALLOWED_UPDATE_KEYS = ["model", "private"];
-const ALLOWED_MODELS = ["gpt-4", "gpt-4-turbo-preview", "gpt-3.5-turbo"];
+const ALLOWED_MODELS = ["gpt-4", "gpt-4o", "gpt-4-turbo-preview", "gpt-3.5-turbo", "gpt-4o-mini"];
 async function account_update(req, res) {
     try {
         const update = req.body;

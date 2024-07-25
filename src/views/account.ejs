@@ -93,10 +93,19 @@
 
                 <div>
                     <input type="radio" class="model-select accent-purple-500
+                    cursor-pointer" id="radio2" name="model" value="gpt-4" <% if (user.model == "gpt-4o") { %>checked<% }
+                    %> />
+                    <label for="radio2" class="peer-checked/radio1:text-purple-500 cursor-pointer">
+                        gpt-4o (best engine)
+                    </label>
+                </div>
+
+                <div>
+                    <input type="radio" class="model-select accent-purple-500
                     cursor-pointer" id="radio2" name="model" value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% }
                     %> />
                     <label for="radio2" class="peer-checked/radio1:text-purple-500 cursor-pointer">
-                        gpt-4 (best engine, slower)
+                        gpt-4 (previous best engine, slower)
                     </label>
                 </div>
 
@@ -105,7 +114,7 @@
                     accent-purple-500 cursor-pointer" id="radio3" name="model" value="gpt-3.5-turbo" <% if (user.model ==
                     "gpt-3.5-turbo") { %>checked<% } %> />
                     <label for="radio3" class="peer-checked/radio2:text-purple-500 cursor-pointer">
-                        gpt-3.5-turbo (fast, worse engine)
+                        gpt-3.5-turbo (really fast)
                     </label>
                 </div>
                 <br />
