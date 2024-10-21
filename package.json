@@ -22,8 +22,9 @@
     "author": "The Maximalist",
     "license": "MIT",
     "dependencies": {
-        "@themaximalist/ai.js": "^0.2.6",
+        "@themaximalist/ai.js": "^0.2.7",
         "@themaximalist/prompt.js": "^0.0.3",
+        "axios": "^1.7.7",
         "bcrypt": "^5.1.0",
         "body-parser": "^1.20.2",
         "cookie-parser": "^1.4.6",

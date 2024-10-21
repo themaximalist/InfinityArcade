@@ -3,11 +3,41 @@ const log = require("debug")("ia:controllers:games");
 const Game = require("../models/game");
 const GenerateGame = require("../services/GenerateGame");
 const utils = require("../utils");
-const { scrape } = require("../services/scraper");
 const { wcagContrast } = require("../services/colors");
 const GetGames = require("../services/GetGames");
+const axios = require("axios");
 
 const NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_TO_SHOW || 25;
+
+async function scrapeWebsite(url) {
+    // Basic URL validation
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        throw new Error('URL must start with http:// or https://');
+    }
+
+    const apiKey = process.env.SCRAPINGWEB_API_KEY;
+    if (!apiKey) {
+        throw new Error('SCRAPINGWEB_API_KEY is not set in the environment');
+    }
+
+    try {
+        const response = await axios.get('https://scrapingweb.com/api/v1/text', {
+            params: {
+                apikey: apiKey,
+                url: url
+            }
+        });
+
+        if (response.data && response.data.text) {
+            return response.data.text;
+        } else {
+            throw new Error('Invalid response from scraping API');
+        }
+    } catch (error) {
+        console.error('Web scraping error:', error);
+        throw new Error('Failed to scrape website');
+    }
+}
 
 async function create(req, res) {
     try {
@@ -34,7 +64,8 @@ async function generate(req, res) {
         let { prompt_text } = req.body;
         if (utils.isURL(prompt_text)) {
             const url = prompt_text;
-            const text = await scrape(prompt_text);
+            const text = await scrapeWebsite(prompt_text);
+            console.log(`scraped text: ${text}`);
             if (text) {
                 prompt_text = `The following game idea details have been scraped from ${url}, please generate a game appropriate for this story: ${text}`;
             } else {

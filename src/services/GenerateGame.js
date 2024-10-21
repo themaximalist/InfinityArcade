@@ -33,6 +33,7 @@ async function GenerateGame(prompt_text = null, model = process.env.AI_MODEL, pr
 
         return game;
     } catch (e) {
+        throw e;
         log(`error generating game ${e.message}`);
         return null;
     }
