@@ -31,12 +31,23 @@ async function* ChatGame(chat_id, content, user_id, model = process.env.AI_MODEL
         });
 
         let response = "";
-        const ai = new AI(messages, { model, stream: true });
-        const stream = await ai.send({ parser: parseTokenStream });
+        let parseState = { last_token: null, option: null };
+
+        const ai = new AI(messages, { model, stream: true});
+        const stream = await ai.send();
         for await (const token of stream) {
-            token.chat_id = chat_id;
-            token.parent_id = chat.parent_id;
-            yield token;
+
+            const parsedToken = parseTokenStream(token, parseState);
+            parseState = parsedToken.newState;
+
+            if (parsedToken.type) {
+                yield {
+                    ...parsedToken,
+                    chat_id: chat_id,
+                    parent_id: chat.parent_id
+                };
+            }
+
             response += token.content;
         }
 

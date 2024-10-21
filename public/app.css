@@ -960,8 +960,8 @@ video {
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
-.overflow-y-scroll {
-  overflow-y: scroll;
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .truncate {
