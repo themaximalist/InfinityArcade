@@ -39,20 +39,7 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
         offset,
     });
 
-    const filteredGames = games.map(g => {
-        return {
-            id: g.id,
-            title: g.title,
-            tagline: g.tagline,
-            genre: g.genre,
-            subgenre: g.subgenre,
-            description: g.description,
-            primary_color: g.primary_color,
-            slug: g.slug,
-        };
-    });
-
-    return { totalGames, games: filteredGames, page, limit, offset, search };
+    return { totalGames, games, page, limit, offset, search };
 }
 
 module.exports = GetGames;

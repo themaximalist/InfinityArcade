@@ -7,12 +7,16 @@ async function GenerateGameArt(game,
     image_prompt_service = process.env.AI_IMAGE_SERVICE,
     image_prompt_model = process.env.AI_IMAGE_MODEL) {
 
+    if (!game) {
+        throw new Error("Game is required");
+    }
+
     const AI = (await import("@themaximalist/ai.js")).default;
 
     log(`generating game art (game=${JSON.stringify(game)}, concept_model=${concept_model}, prompt_name=${image_prompt_name})...`);
 
     try {
-        const concept_prompt = promptlib.load(image_prompt_name);
+        // const concept_prompt = promptlib.load(image_prompt_name);
         const { prompt, buffer } = await AI.Imagine.Concept(JSON.stringify(game), {
             service: image_prompt_service,
             model: image_prompt_model,
