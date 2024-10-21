@@ -16,8 +16,10 @@ async function GenerateGameArt(game,
         const { prompt, buffer } = await AI.Imagine.Concept(JSON.stringify(game), {
             service: image_prompt_service,
             model: image_prompt_model,
-            concept_model,
-            concept_prompt,
+            concept: {
+                model: concept_model,
+                prompt: concept_prompt,
+            }
         });
 
         const image_data = buffer;
