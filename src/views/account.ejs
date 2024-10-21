@@ -82,14 +82,6 @@
         <div class="w-full flex flex-col gap-4">
             <h2 class="text-xl font-bold my-4 text-purple-500">SETTINGS</h2>
             <div class="flex flex-col gap-4">
-                <div>
-                    <input type="radio" class="model-select accent-purple-500
-                    cursor-pointer" id="radio1" name="model" value="gpt-4-turbo-preview" <% if (user.model == "gpt-4-turbo-preview") { %>checked<% }
-                    %> />
-                    <label for="radio1" class="peer-checked/radio1:text-purple-500 cursor-pointer">
-                        gpt-4-turbo-preview (best and fastest)
-                    </label>
-                </div>
 
                 <div>
                     <input type="radio" class="model-select accent-purple-500
@@ -102,10 +94,27 @@
 
                 <div>
                     <input type="radio" class="model-select accent-purple-500
+                    cursor-pointer" id="radio1" name="model" value="gpt-4o-mini" <% if (user.model == "gpt-4o-mini") { %>checked<% }
+                    %> />
+                    <label for="radio1" class="peer-checked/radio1:text-purple-500 cursor-pointer">
+                        gpt-4o-mini (fastest)
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" class="model-select accent-purple-500
+                    cursor-pointer" id="radio1" name="model" value="gpt-4-turbo-preview" <% if (user.model == "gpt-4-turbo-preview") { %>checked<% }
+                    %> />
+                    <label for="radio1" class="peer-checked/radio1:text-purple-500 cursor-pointer">
+                        gpt-4-turbo-preview
+                    </label>
+                </div>
+
+                <div>
+                    <input type="radio" class="model-select accent-purple-500
                     cursor-pointer" id="radio2" name="model" value="gpt-4" <% if (user.model == "gpt-4") { %>checked<% }
                     %> />
                     <label for="radio2" class="peer-checked/radio1:text-purple-500 cursor-pointer">
-                        gpt-4 (previous best engine, slower)
+                        gpt-4
                     </label>
                 </div>
 
@@ -114,7 +123,7 @@
                     accent-purple-500 cursor-pointer" id="radio3" name="model" value="gpt-3.5-turbo" <% if (user.model ==
                     "gpt-3.5-turbo") { %>checked<% } %> />
                     <label for="radio3" class="peer-checked/radio2:text-purple-500 cursor-pointer">
-                        gpt-3.5-turbo (really fast)
+                        gpt-3.5-turbo
                     </label>
                 </div>
                 <br />
