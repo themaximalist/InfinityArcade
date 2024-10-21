@@ -21,7 +21,7 @@ async function generateMissingImages() {
         log("Starting to generate missing images...");
 
         // 1. Find all games with no image data
-        const { games } = await GetGames({ filter: "empty_image" }, 100, { image_prompt_model: null });
+        const { games } = await GetGames({ filter: "empty_image" }, 10000, { image_prompt_model: null });
         log(`Found ${games.length} games with missing images`);
 
         // 2. Generate image data for each game
