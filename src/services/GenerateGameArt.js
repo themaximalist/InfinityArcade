@@ -18,7 +18,6 @@ async function GenerateGameArt(game,
             model: image_prompt_model,
             concept: {
                 model: concept_model,
-                prompt: concept_prompt,
             }
         });
 
