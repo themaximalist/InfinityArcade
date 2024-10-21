@@ -1,5 +1,4 @@
 const log = require("debug")("ia:services:GenerateGameMusic");
-const AI = require("@themaximalist/ai.js");
 const prompt = require("@themaximalist/prompt.js");
 const { shuffle } = require("../utils");
 
@@ -10,6 +9,8 @@ function randomSeedImage() {
 
 async function GenerateGameMusic(game, model = process.env.AI_MODEL, prompt_name = "GenerateGameMusic-v1") {
     log(`generating game music (game=${game.llm_fields}, model=${model}, prompt_name=${prompt_name})...`);
+
+    const AI = (await import("@themaximalist/ai.js")).default;
 
     try {
         const input = prompt.load(prompt_name, { game: game.llm_fields });
