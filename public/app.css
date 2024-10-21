@@ -1783,6 +1783,19 @@ body {
         auto;
 }
 
+#text-wrapper::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#text-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#text-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
