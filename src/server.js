@@ -61,6 +61,8 @@ class Server {
 
         this.app.get("/admin", verify_user, verify_admin, controllers.admin.index);
 
+        this.app.get("/admin/generate-missing-images", controllers.admin.generate_missing_images);
+
         this.app.get("/privacy", optional_user, controllers.site.privacy);
         this.app.get("/games", optional_user, controllers.games.games_index);
         this.app.get("/genres", optional_user, controllers.genres.index);

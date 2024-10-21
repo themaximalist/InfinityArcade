@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Missing Images</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        h1 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        .generate-btn { padding: 5px 10px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        .generate-btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Games with Missing Images</h1>
+    <ul>
+        <% games.forEach(game => { %>
+            <li>
+                <%= game.title %> 
+                <img src="/api/art/generate?game_id=<%= game.id %>" alt="Missing Image" />
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
