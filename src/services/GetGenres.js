@@ -39,7 +39,11 @@ async function GetGenres(query = null, key = "genre") {
     }
 
     const items = [];
+    const added = [];
     for (const row of rows) {
+        if (added.includes(row.dataValues[key].toLowerCase())) continue;
+        added.push(row.dataValues[key].toLowerCase());
+
         items.push({
             item: row.dataValues[key],
             id: row.id,

@@ -24,36 +24,44 @@
     <a href="/subgenres" class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity">Subgenres</a>
 </div>
 
-<div class="container mx-auto text-white max-w-6xl my-4 mt-20 px-4">
+<div class="mx-auto text-white my-4 mt-20 px-4">
     <h1 class="text-4xl font-bold my-4 text-purple-500">
         <% if (search) { %>
-        <span><%= search %> Games (<%= totalGames %>)</span>
+        <span><%= search %> Text Games (<%= totalGames %>)</span>
         <% } else { %>
-        <span>All Games (<%= totalGames %>)</span>
+        <span>All Text Games (<%= totalGames %>)</span>
         <% } %>
     </h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <% games.forEach((game) => { %>
-        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative group">
-            <a href="/<%= game.slug %>" class="block">
-                <img src="/images/art/<%= game.id%>-256.png" class="w-full h-48 object-cover" alt="<%- game.title %>" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold mb-2 truncate" style="color: <%- game.primary_color %>"><%- game.title %></h2>
-                    <div class="w-full text-xs text-gray-400 truncate">
-                        <span class="" title="<%- game.genre %>">
-                            <a href="/genres/<%= locals.slugify(game.genre) %>" class="hover:text-gray-200"><%- game.genre %></a>
-                        </span>
-                        <span class="" title="<%- game.subgenre %>">
-                            <a href="/subgenres/<%= locals.slugify(game.subgenre) %>" class="hover:text-gray-200"><%- game.subgenre %></a>
-                        </span>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 bg-gray-800 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-                        <p class="text-xs text-gray-300"><%- game.description.substring(0, 100) %>...</p>
-                    </div>
+    <% let num = games.length %>
+    <% let j = 0 %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-2 lg:py-8 sm:px-4">
+        <% for (const game of games) { %>
+        <a href="/<%- game.slug %>" class="text-white flex flex-col bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+            <div class="relative pb-10/16 rounded-xl">
+                <img src="/images/art/<%- game.id %>-256.png" alt="<%- game.title %>" class="h-full w-full rounded-t-xl lazy-load min-w-full" />
+            </div>
+            <div class="flex flex-col h-full gap-1 p-3">
+                <div style="color: <%- game.primary_color %>" class="text-xl font-semibold truncate">
+                    <%- game.title %>
                 </div>
-            </a>
-        </div>
-        <% }) %>
+                <div class="text-gray-500 font-medium text-sm italic truncate">
+                    <%- game.genre %> <%- game.subgenre %>
+                </div>
+                <div class="text-sm font-bold mt-2"><%- game.tagline %></div>
+            </div>
+        </a>
+        <% if (++j % 32 == 0 || j == num) { %>
+        <a href="/generate" class="generate-card text-white p-4 flex flex-col gap-4 bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200 cursor-pointer">
+            <div class="relative pb-10/16 rounded-xl flex items-center justify-center bg-gray-800"></div>
+            <div class="flex flex-col h-full gap-1 justify-between items-center">
+                <div class="py-16"></div>
+                <div class="text-xl font-semibold text-center leading-relaxed">Generate <%= game.genre %> <%= game.subgenre %> Game</div>
+                <p class="text-sm mt-44 text-center">
+                    infinityarcade.com/any game you can think of
+                </p>
+            </div>
+        </a>
+        <% } %> <% } %>
     </div>
         <% let numPages = Math.ceil(totalGames / limit); %>
         <!-- -->
