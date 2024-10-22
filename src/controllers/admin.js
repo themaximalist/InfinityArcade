@@ -3,8 +3,13 @@ const stats = require("../services/stats");
 const GetGames = require("../services/GetGames");
 const GenerateGameArt = require("../services/GenerateGameArt");
 const { Article } = require('../models');
+const marked = require('marked');
 
 const ADMIN_KEY = process.env.ADMIN_KEY;
+
+function markdownToHtml(markdown) {
+  return marked.parse(markdown);
+}
 
 async function index(req, res) {
     const dailySummary = await stats.getDailySummary();
@@ -44,6 +49,9 @@ async function articlesList(req, res) {
         const articles = await Article.findAll({
             order: [['createdAt', 'DESC']]
         });
+        articles.forEach(article => {
+            article.contentHtml = markdownToHtml(article.content);
+        });
         res.render('admin/articles/list', { articles });
     } catch (error) {
         console.error('Error fetching articles:', error);
@@ -79,6 +87,7 @@ async function editArticleForm(req, res) {
         if (!article) {
             return res.status(404).send('Article not found');
         }
+        article.contentHtml = markdownToHtml(article.content);
         res.render('admin/articles/edit', { article });
     } catch (error) {
         console.error('Error fetching article:', error);

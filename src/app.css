@@ -279,3 +279,39 @@ body {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
 }
+
+.article-content {
+    a {
+        @apply text-yellow-500 hover:underline;
+    }
+
+    h1 {
+        @apply text-2xl lg:text-4xl font-bold my-4 text-yellow-500;
+    }
+
+    h2 {
+        @apply text-xl lg:text-2xl text-yellow-200 mt-10;
+    }
+
+    h3 {
+        @apply text-lg lg:text-xl text-yellow-100 mt-8;
+    }
+
+    h4 {
+        @apply text-base lg:text-lg text-yellow-100 mt-6;
+    }
+
+    h5 {
+        @apply text-sm lg:text-base text-yellow-100 mt-4;
+    }
+
+    h6 {
+        @apply text-xs lg:text-sm text-yellow-100 mt-2;
+    }
+
+    img,
+    video {
+        @apply rounded-lg max-w-xl;
+    }
+}
+

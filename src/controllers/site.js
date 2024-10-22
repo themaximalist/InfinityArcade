@@ -1,5 +1,10 @@
 const { Article } = require('../models');
 const { Op } = require('sequelize');
+const marked = require('marked');
+
+function markdownToHtml(markdown) {
+  return marked.parse(markdown);
+}
 
 function status(req, res) {
     res.send("ok");
@@ -22,6 +27,11 @@ async function articles(req, res) {
                 }
             }
         });
+        
+        allArticles.forEach(article => {
+            article.contentHtml = markdownToHtml(article.content);
+        });
+
         res.render("articles", {
             title: "Articles",
             description: "Articles about generative text adventure and interactive fiction games.",
@@ -44,10 +54,12 @@ async function article(req, res) {
             return res.status(404).send("Article not found");
         }
 
+        const contentHtml = markdownToHtml(article.content);
+
         res.render("article", {
             title: article.title,
             description: article.description,
-            content: article.content,
+            content: contentHtml,
             publishedAt: article.publishedAt,
             author: article.author
         });
