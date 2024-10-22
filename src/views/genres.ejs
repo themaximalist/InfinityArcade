@@ -29,7 +29,7 @@
     <% } %>
 </div>
 
-<div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4">
+<div class="container mx-auto text-white max-w-8xl my-4 mt-20 px-4">
     <h1 class="text-4xl font-bold my-4 text-purple-500">
         <% if (search) { %>
         <span><%= search.charAt(0).toUpperCase() + search.slice(1) %> Text Game <%= title %> (<%= items.length %>)</span>
@@ -37,14 +37,13 @@
         <span>All Text Game <%= title %> (<%= items.length %>)</span>
         <% } %>
     </h1>
-    <div class="flex flex-col gap-3">
+    <div class="gap-6 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
         <% items.forEach((genre) => { %>
-        <div class="flex items-center gap-3 flex-wrap">
-            <img src="/images/art/<%= genre.id %>-50.png" class="w-7 h-7" />
-            <a href="/<%= (locals.subgenre ? "subgenres" : "genres") %>/<%= locals.slugify(genre.item) %>" class="flex items-center gap-3">
-                <div><%- genre.item %> <%- genre.count %></div>
+            <a href="/<%= (locals.subgenre ? "subgenres" : "genres") %>/<%= locals.slugify(genre.item) %>" class="flex flex-col gap-2 relative group">
+                <img src="/images/art/<%= genre.id %>-256.png" class="w-64 h-64 aspect-square object-cover rounded-md group-hover:scale-105 transition-transform duration-200" />
+                <h2 class="text-sm text-gray-300 truncate group-hover:text-gray-100 transition-colors duration-200"><%- genre.item %></h2>
+                <span class="absolute top-1 right-1 bg-gray-900/50 backdrop-blur-sm text-xs px-2 py-1 rounded-md group-hover:opacity-100 opacity-0 transition-opacity duration-200"><%- genre.count %> Games</span>
             </a>
-        </div>
         <% }) %>
     </div>
 </div>

@@ -22,6 +22,8 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
         where.image_prompt_model = { [Op.ne]: null };
     }
 
+    console.log("WHERE", where);
+
     if (search && !hasWhere) {
         where[Op.or] = {
             title: { [Op.iLike]: `%${search}%` },

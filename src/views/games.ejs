@@ -27,13 +27,16 @@
 <div class="mx-auto text-white my-4 mt-20 px-4">
     <h1 class="text-4xl font-bold my-4 text-purple-500">
         <% if (search) { %>
-        <span><%= search %> Text Games (<%= totalGames %>)</span>
+        <span><%= search.charAt(0).toUpperCase() + search.slice(1) %> Text Games (<%= totalGames %>)</span>
         <% } else { %>
         <span>All Text Games (<%= totalGames %>)</span>
         <% } %>
     </h1>
     <% let num = games.length %>
     <% let j = 0 %>
+    <% if (num === 0) { %>
+    <div class="text-white text-center my-8">No games</div>
+    <% } %>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-full mx-auto gap-8 md:gap-4 py-2 lg:py-8 sm:px-4">
         <% for (const game of games) { %>
         <a href="/<%- game.slug %>" class="text-white flex flex-col bg-gray-900 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
