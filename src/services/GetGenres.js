@@ -2,7 +2,7 @@ const Game = require("../models/game");
 const { Op } = require("sequelize");
 const Sequelize = require("sequelize");
 
-async function GetGenres(query = null, key = "genre") {
+async function GetGenres(query = null) {
     if (!query) query = {};
 
     const filter = query.filter;
@@ -19,40 +19,62 @@ async function GetGenres(query = null, key = "genre") {
 
     if (search) {
         where[Op.or] = {
-            [key]: { [Op.iLike]: `%${search}%` },
+            genre: { [Op.iLike]: `%${search}%` },
+            subgenre: { [Op.iLike]: `%${search}%` }
         };
     }
 
-    const { count: itemCount, rows } = await Game.findAndCountAll({
-        where,
-        attributes: [
-            key,
-            [Sequelize.fn('MAX', Sequelize.col('id')), 'id'],
-        ],
-        group: [key],
-        order: [[key, 'ASC']],
-    });
-
-    const counts = {};
-    for (let { [key]: item, count } of itemCount) {
-        item = item.toLowerCase();
-        if (counts[item]) {
-            counts[item] += count;
-        } else {
-            counts[item] = count;
-        }
-    }
+    const [genreResults, subgenreResults] = await Promise.all([
+        Game.findAndCountAll({
+            where,
+            attributes: [
+                'genre',
+                [Sequelize.fn('MAX', Sequelize.col('id')), 'id'],
+                [Sequelize.fn('COUNT', Sequelize.col('*')), 'count']
+            ],
+            group: ['genre'],
+            order: [['genre', 'ASC']]
+        }),
+        Game.findAndCountAll({
+            where,
+            attributes: [
+                'subgenre',
+                [Sequelize.fn('MAX', Sequelize.col('id')), 'id'],
+                [Sequelize.fn('COUNT', Sequelize.col('*')), 'count']
+            ],
+            group: ['subgenre'],
+            order: [['subgenre', 'ASC']]
+        })
+    ]);
 
     const items = [];
-    const added = [];
-    for (const row of rows) {
-        if (added.includes(row.dataValues[key].toLowerCase())) continue;
-        added.push(row.dataValues[key].toLowerCase());
+    const added = new Set();
+
+    // Process genres
+    for (const row of genreResults.rows) {
+        const item = row.genre?.toLowerCase();
+        if (!item || added.has(item)) continue;
+        added.add(item);
+        
+        items.push({
+            item: row.genre,
+            id: row.id,
+            count: parseInt(row.get('count')),
+            type: 'genre'
+        });
+    }
+
+    // Process subgenres
+    for (const row of subgenreResults.rows) {
+        const item = row.subgenre?.toLowerCase();
+        if (!item || added.has(item)) continue;
+        added.add(item);
 
         items.push({
-            item: row.dataValues[key],
+            item: row.subgenre,
             id: row.id,
-            count: counts[row[key].toLowerCase()]
+            count: parseInt(row.get('count')),
+            type: 'subgenre'
         });
     }
 

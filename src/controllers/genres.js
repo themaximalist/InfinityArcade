@@ -21,8 +21,13 @@ async function handle_genre(req, res, key) {
     const name = unslugify(slug);
 
     const data = await GetGames(req.query, NUM_GAMES_TO_SHOW, {
-        [key]: {
-            [Op.iLike]: `${wildcardSlug}`
+        [Op.or]: {
+            genre: {
+                [Op.iLike]: `${wildcardSlug}`
+            },
+            subgenre: {
+                [Op.iLike]: `${wildcardSlug}` 
+            }
         }
     });
 
