@@ -285,28 +285,32 @@ body {
         @apply text-yellow-500 hover:underline;
     }
 
+    p {
+        @apply leading-loose mb-4;
+    }
+
     h1 {
         @apply text-2xl lg:text-4xl font-bold my-4 text-yellow-500;
     }
 
     h2 {
-        @apply text-xl lg:text-2xl text-yellow-200 mt-10;
+        @apply text-xl lg:text-2xl text-yellow-200 mt-10 mb-4;
     }
 
     h3 {
-        @apply text-lg lg:text-xl text-yellow-100 mt-8;
+        @apply text-lg lg:text-xl text-yellow-100 mt-8 mb-4;
     }
 
     h4 {
-        @apply text-base lg:text-lg text-yellow-100 mt-6;
+        @apply text-base lg:text-lg text-yellow-100 mt-6 mb-4;
     }
 
     h5 {
-        @apply text-sm lg:text-base text-yellow-100 mt-4;
+        @apply text-sm lg:text-base text-yellow-100 mt-4 mb-4;
     }
 
     h6 {
-        @apply text-xs lg:text-sm text-yellow-100 mt-2;
+        @apply text-xs lg:text-sm text-yellow-100 mt-2 mb-2;
     }
 
     img,
@@ -316,6 +320,65 @@ body {
 
     code {
         @apply rounded-lg block w-full bg-gray-800 p-2 overflow-x-auto;
+    }
+
+    strong {
+        @apply text-yellow-500;
+    }
+
+    ul {
+        @apply list-disc list-inside space-y-2 mb-4 -mt-8;
+    }
+
+    ol {
+        @apply list-decimal list-inside space-y-2 mb-4 -mt-8;
+    }
+
+    li {
+        @apply leading-loose;
+        p {
+            @apply inline;
+        }
+    }
+
+    table {
+        @apply w-full mb-4 -mt-6;
+
+        th {
+            @apply text-left py-2 text-yellow-500;
+
+            &:first-child {
+                @apply pr-2;
+            }
+
+            &:last-child {
+                @apply pl-2;
+            }
+
+            &:not(:first-child):not(:last-child) {
+                @apply px-2;
+            }
+        }
+
+        td {
+            @apply text-sm text-gray-300 py-1;
+
+            &:first-child {
+                @apply pr-2;
+            }
+
+            &:last-child {
+                @apply pl-2;
+            }
+
+            &:not(:first-child):not(:last-child) {
+                @apply px-2;
+            }
+        }
+    }
+
+    blockquote {
+        @apply border-l-4 border-yellow-500 pl-6 text-sm;
     }
 
     &.index {
