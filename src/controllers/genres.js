@@ -14,7 +14,7 @@ async function index(req, res) {
     return res.render("genres", data);
 }
 
-async function handle_genre(req, res, key) {
+async function get_genre(req, res) {
     const { slug } = req.params;
 
     const wildcardSlug = slug.replace(/[-\/]/g, "%");
@@ -36,10 +36,6 @@ async function handle_genre(req, res, key) {
     data.slug = req.path;
 
     return res.render("games", data);
-}
-
-async function get_genre(req, res) {
-    return await handle_genre(req, res, "genre");
 }
 
 async function get_subgenre(req, res) {

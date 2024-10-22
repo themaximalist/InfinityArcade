@@ -33,7 +33,7 @@
             <span>Text Game <%= title %></span>
             <% } %>
         </h1>
-        <span class="text-4xl font-bold text-purple-800 ml-2">(<%= items.length.toLocaleString() %>)</span>
+        <span class="text-4xl font-bold text-purple-800 ml-2">(<%= totalGenres.toLocaleString() %>)</span>
     </div>
     
     <div class="mb-8 text-gray-300">
@@ -58,6 +58,31 @@
         <% }) %>
     </div>
 </div>
+
+    <% let numPages = Math.ceil(totalGenres / limit); %>
+
+    <% if (numPages > 1) { %>
+    <div id="pages" class="flex gap-6 my-8 flex-wrap justify-center mt-16">
+        <% for (let i = 1; i <= numPages; i++) { %>
+        <!-- -->
+        <% if (i == page) { %>
+        <div class="text-purple-400" href="/genres?page=<%= i %>">
+            <%= i %>
+        </div>
+        <% } else { %>
+        <!-- -->
+        <% if (search) { %>
+        <a href="/genres?search=<%= search %>&page=<%= i %>" class="text-gray-400 hover:text-white"><%= i %></a>
+        <% } else { %>
+        <a href="/genres?page=<%= i %>" class="text-gray-400 hover:text-white"><%= i %></a>
+        <% } %>
+        <!-- -->
+        <% } %>
+        <!-- -->
+        <% } %>
+    </div>
+    <% } %>
+
 
 <div class="container mx-auto text-white max-w-8xl my-12 px-4 border-t border-gray-800 pt-8">
     <h2 class="text-2xl font-bold mb-4 text-purple-400">About Interactive Text Game <%= title %></h2>

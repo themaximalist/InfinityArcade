@@ -2,8 +2,13 @@ const Game = require("../models/game");
 const { Op } = require("sequelize");
 const Sequelize = require("sequelize");
 
-async function GetGenres(query = null) {
+async function GetGenres(query = null, NUM_GAMES_TO_SHOW = 100) {
     if (!query) query = {};
+
+    const page = parseInt(query.page) || 1;
+    let limit = parseInt(query.limit) || NUM_GAMES_TO_SHOW;
+    if (limit > 500) limit = 500;
+    const offset = (page - 1) * limit;
 
     const filter = query.filter;
     const search = query.search;
@@ -89,7 +94,9 @@ async function GetGenres(query = null) {
     const items = Array.from(itemMap.values());
     items.sort((a, b) => b.count - a.count);
 
-    return { items, search };
+    const paginatedItems = items.slice(offset, offset + limit);
+
+    return { items: paginatedItems, search, totalGenres: items.length, page, limit, offset };
 }
 
 module.exports = GetGenres;
