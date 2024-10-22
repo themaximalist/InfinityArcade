@@ -8,7 +8,7 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
 
     const page = parseInt(query.page) || 1;
     let limit = parseInt(query.limit) || NUM_GAMES_TO_SHOW;
-    if (limit > 10000) limit = 10000;
+    if (limit > 100) limit = 100;
     const offset = (page - 1) * limit;
 
     const filter = query.filter;
@@ -18,6 +18,8 @@ async function GetGames(query = null, NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_
 
     if (filter == "empty_image") {
         where.image_prompt_model = null;
+    } else {
+        where.image_prompt_model = { [Op.ne]: null };
     }
 
     if (search && !hasWhere) {
