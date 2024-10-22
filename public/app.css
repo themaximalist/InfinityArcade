@@ -2045,6 +2045,16 @@ body {
   code {
     padding: 0.5rem;
   }
+  &.index {
+    h1, h2, h3, h4, h5, h6 {
+      --tw-text-opacity: 1;
+      color: rgb(156 163 175 / var(--tw-text-opacity));
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+  }
 }
 
 .hover\:scale-105:hover {

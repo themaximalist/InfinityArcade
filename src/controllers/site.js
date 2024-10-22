@@ -30,6 +30,7 @@ async function articles(req, res) {
         
         allArticles.forEach(article => {
             article.contentHtml = markdownToHtml(article.content);
+            article.extract = markdownToHtml(article.content.substring(0, 250) + '...');
         });
 
         res.render("articles", {

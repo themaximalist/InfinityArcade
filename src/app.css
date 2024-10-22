@@ -317,5 +317,12 @@ body {
     code {
         @apply rounded-lg block w-full bg-gray-800 p-2 overflow-x-auto;
     }
+
+    &.index {
+        h1, h2, h3, h4, h5, h6 {
+            @apply text-gray-400;
+            @apply text-lg;
+        }
+    }
 }
 

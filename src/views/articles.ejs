@@ -20,8 +20,8 @@
                     <a href="/article/<%= article.slug %>" class="hover:underline"><%= article.title %></a>
                 </h2>
                 <p class="text-gray-300 mb-4"><%= article.description %></p>
-                <div class="prose prose-invert py-2 flex flex-col gap-6 leading-relaxed article-content">
-                    <%- article.contentHtml.substring(0, 300) %>...
+                <div class="prose prose-invert py-2 flex flex-col gap-6 leading-relaxed article-content index">
+                    <%- article.extract %>
                 </div>
                 <a href="/article/<%= article.slug %>" class="text-yellow-500 hover:underline">Read more</a>
             </article>
