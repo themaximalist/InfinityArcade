@@ -1,3 +1,5 @@
+const { Article } = require('../models');
+const { Op } = require('sequelize');
 
 function status(req, res) {
     res.send("ok");
@@ -10,32 +12,49 @@ function privacy(req, res) {
     });
 }
 
-function articles(req, res) {
-    res.render("articles", {
-        title: "Articles",
-        description: "Articles about generative text adventure and interactive fiction games."
-    });
+async function articles(req, res) {
+    try {
+        const allArticles = await Article.findAll({
+            order: [['publishedAt', 'DESC']],
+            where: {
+                publishedAt: {
+                    [Op.not]: null
+                }
+            }
+        });
+        res.render("articles", {
+            title: "Articles",
+            description: "Articles about generative text adventure and interactive fiction games.",
+            articles: allArticles
+        });
+    } catch (error) {
+        console.error("Error fetching articles:", error);
+        res.status(500).send("Error fetching articles");
+    }
 }
 
-function article(req, res) {
-    // TODO: unsustainable
-    if (req.params.slug === "how-to-create-your-own-text-adventure-game") {
-        return res.render("articles/how-to-create-your-own-text-adventure-game", {
-            title: "How to create your own text adventure game",
-            description: "A step-by-step guide to creating your own text adventure game with Infinity Arcade in seconds."
+async function article(req, res) {
+    try {
+        const articleSlug = req.params.slug;
+        const article = await Article.findOne({
+            where: { slug: articleSlug }
         });
-    } else if (req.params.slug === "generative-video-game-soundtracks") {
-        return res.render("articles/generative-video-game-soundtracks", {
-            title: "Generative Video Game Soundtracks",
-            description: "How Infinity Arcade is using generative music to create video game soundtracks."
+
+        if (!article) {
+            return res.status(404).send("Article not found");
+        }
+
+        res.render("article", {
+            title: article.title,
+            description: article.description,
+            content: article.content,
+            publishedAt: article.publishedAt,
+            author: article.author
         });
-    } else if (req.params.slug === "how-infinityarcade-was-built") {
-        return res.render("articles/how-infinityarcade-was-built", {
-            title: "How Infinity Arcade was built",
-            description: "How Infinity Arcade was built, the free and open source text adventure game engine."
-        });
+    } catch (error) {
+        console.error("Error fetching article:", error);
+        res.status(500).send("Error fetching article");
     }
-    res.status(404).send("Not found");
 }
 
 function about(req, res) {

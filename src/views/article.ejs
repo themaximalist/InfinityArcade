@@ -9,21 +9,21 @@
     </a>
 </div>
 
-<div class="container mx-auto text-white max-w-4xl my-4 mt-20 px-4 flex flex-col gap-8">
+<div class="container mx-auto text-white max-w-4xl my-4 mt-8 lg:mt-20 px-4 flex flex-col gap-8">
     <div>
-        <h1 class="text-4xl font-bold my-4 text-yellow-500">Articles</h1>
+        <h1 class="text-2xl lg:text-4xl font-bold my-4 text-yellow-500">
+            <%= title %>
+        </h1>
+        <span class="text-yellow-200"><%= description %></span>
     </div>
-    <div class="prose py-2 flex flex-col gap-6">
-        <ul class="ml-4 md:ml-8 text-white">
-            <% articles.forEach(article => { %>
-                <li class="flex gap-4 items-center hover:text-yellow-400 transition-colors py-1 cursor-pointer">
-                    <div class="w-2 h-2 bg-white"></div>
-                    <a href="/article/<%= article.slug %>"><%= article.title %></a>
-                </li>
-            <% }); %>
-        </ul>
+    <div class="prose py-2 flex flex-col gap-6 leading-relaxed">
+        <%- content %>
+    </div>
+    <div class="text-sm text-gray-400">
+        Published on <%= new Date(publishedAt).toLocaleDateString() %> by <%= author %>
     </div>
 </div>
+
 <%- include("scripts.ejs") %>
 <!-- -->
 <%- include("footer.ejs") %>
