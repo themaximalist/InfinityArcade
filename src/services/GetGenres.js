@@ -2,7 +2,7 @@ const Game = require("../models/game");
 const { Op } = require("sequelize");
 const Sequelize = require("sequelize");
 
-async function GetGenres(query = null, NUM_GAMES_TO_SHOW = 100) {
+async function GetGenres(query = null, NUM_GAMES_TO_SHOW = 200) {
     if (!query) query = {};
 
     const page = parseInt(query.page) || 1;
