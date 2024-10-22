@@ -161,6 +161,11 @@ async function get_games(req, res) {
 
 async function games_index(req, res) {
     const data = await GetGames(req.query, 100);
+    if (req.query.search) {
+        data.title = `${req.query.search.charAt(0).toUpperCase() + req.query.search.slice(1)} Text Games`;
+    } else {
+        data.title = "All Text Games";
+    }
     return res.render("games", data);
 }
 

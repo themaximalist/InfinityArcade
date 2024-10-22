@@ -9,6 +9,7 @@ const NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_TO_SHOW || 100;
 
 async function index(req, res) {
     const data = await GetGenres(req.query);
+    data.title = "All Text Game Genres";
     return res.render("genres", data);
 }
 
@@ -28,6 +29,8 @@ async function handle_genre(req, res, key) {
         }
     });
 
+    data.title = `${name} Text Games`;
+
     return res.render("games", data);
 }
 
@@ -42,6 +45,7 @@ async function get_subgenre(req, res) {
 async function subgenres_index(req, res) {
     const data = await GetGenres(req.query, "subgenre");
     data.subgenre = true;
+    data.title = "All Text Game Subgenres";
     return res.render("genres", data);
 }
 
