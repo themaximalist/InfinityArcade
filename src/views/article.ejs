@@ -19,8 +19,24 @@
     <div class="prose prose-invert py-2 flex flex-col gap-6 leading-relaxed article-content">
         <%- content %>
     </div>
-    <div class="text-sm text-gray-400">
-        Published on <%= new Date(publishedAt).toLocaleDateString() %> by <%= author %>
+    <div class="text-sm text-gray-400 flex justify-between items-center">
+        <a href="/articles" class="text-yellow-500 hover:underline">← Back to Articles</a>
+        <div>
+            <%= new Date(publishedAt).toLocaleDateString() %> by <%= author %>
+        </div>
+    </div>
+
+
+    <div class="mt-8">
+        <a href="/" class="flex items-center gap-2">
+            <img src="/images/logo.png" alt="Infinity Arcade" class="w-6 lg:w-8 opacity-60" />
+            <div href="/" class="bg-gradient-to-br from-white to-gray-400 text-transparent bg-clip-text text-center py-4 text-xs lg:text-sm opacity-60 tracking-wider inline-block">
+                Infinity Arcade
+            </div>
+        </a>
+        <a href="/" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+            Create and Play Any Game!
+        </a>
     </div>
 </div>
 

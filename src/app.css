@@ -314,7 +314,8 @@ body {
     }
 
     img,
-    video {
+    video,
+    iframe {
         @apply rounded-lg max-w-xl;
     }
 
