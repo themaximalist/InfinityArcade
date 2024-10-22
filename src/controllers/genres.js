@@ -30,8 +30,8 @@ async function handle_genre(req, res, key) {
         }
     });
 
-    data.title = `${name} Text Games`;
-    data.description = `Explore our extensive library of ${name} text games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.`;
+    data.title = `${name} Interactive Text Games`;
+    data.description = `Explore our extensive library of ${name} interactive text games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.`;
 
     return res.render("games", data);
 }
@@ -47,8 +47,8 @@ async function get_subgenre(req, res) {
 async function subgenres_index(req, res) {
     const data = await GetGenres(req.query, "subgenre");
     data.subgenre = true;
-    data.title = "All Text Game Subgenres";
-    data.description = "Explore our extensive library of text-based games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.";
+    data.title = "All Interactive Text Game Subgenres";
+    data.description = "Explore our extensive library of interactive text games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.";
     return res.render("genres", data);
 }
 
