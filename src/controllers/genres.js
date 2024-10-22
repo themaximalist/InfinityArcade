@@ -8,6 +8,7 @@ const { Op } = require("sequelize");
 const NUM_GAMES_TO_SHOW = process.env.NUM_GAMES_TO_SHOW || 100;
 
 async function index(req, res) {
+    console.log("QUERY", req.query);
     const data = await GetGenres(req.query);
     data.title = "All Text Game Genres";
     data.description = "Explore our extensive library of text-based games, browse by genre or subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.";
@@ -17,20 +18,16 @@ async function index(req, res) {
 async function handle_genre(req, res, key) {
     const { slug } = req.params;
 
+    const wildcardSlug = slug.replace(/-/g, "%");
     const name = unslugify(slug);
-    const slug2 = unslugify2(slug); // hack
 
-    const data = await GetGames({ search: name }, NUM_GAMES_TO_SHOW, {
+    const data = await GetGames({}, NUM_GAMES_TO_SHOW, {
         [key]: {
-            [Op.or]: [
-                name,
-                slug,
-                slug2
-            ]
+            [Op.iLike]: `${wildcardSlug}`
         }
     });
 
-    data.title = `${name} Interactive Text Games`;
+    data.title = `${name} Text Games`;
     data.description = `Explore our extensive library of ${name} interactive text games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.`;
 
     return res.render("games", data);
@@ -45,9 +42,10 @@ async function get_subgenre(req, res) {
 }
 
 async function subgenres_index(req, res) {
+    console.log(req.query);
     const data = await GetGenres(req.query, "subgenre");
     data.subgenre = true;
-    data.title = "All Interactive Text Game Subgenres";
+    data.title = "All Text Game Subgenres";
     data.description = "Explore our extensive library of interactive text games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.";
     return res.render("genres", data);
 }

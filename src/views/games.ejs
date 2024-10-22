@@ -25,13 +25,16 @@
 </div>
 
 <div class="mx-auto text-white my-4 mt-20 px-4">
-    <h1 class="text-4xl font-bold my-4 text-purple-500">
-        <% if (search) { %>
-        <span><%= search.charAt(0).toUpperCase() + search.slice(1) %> Text Games (<%= totalGames %>)</span>
-        <% } else { %>
-        <span>All Text Games (<%= totalGames %>)</span>
-        <% } %>
-    </h1>
+    <div class="flex items-center my-4">
+        <h1 class="text-4xl font-bold text-purple-500">
+            <% if (search) { %>
+            <span><%= search.charAt(0).toUpperCase() + search.slice(1) %> Text Games</span>
+            <% } else { %>
+            <span><%= title %></span>
+            <% } %>
+        </h1>
+        <span class="text-4xl font-bold text-purple-800 ml-2">(<%= totalGames %>)</span>
+    </div>
 
     <div class="mb-8 text-gray-300">
         <p class="intro-text">

@@ -34,8 +34,13 @@ async function GetGenres(query = null, key = "genre") {
     });
 
     const counts = {};
-    for (const { [key]: item, count } of itemCount) {
-        counts[item] = count;
+    for (let { [key]: item, count } of itemCount) {
+        item = item.toLowerCase();
+        if (counts[item]) {
+            counts[item] += count;
+        } else {
+            counts[item] = count;
+        }
     }
 
     const items = [];
@@ -47,7 +52,7 @@ async function GetGenres(query = null, key = "genre") {
         items.push({
             item: row.dataValues[key],
             id: row.id,
-            count: counts[row[key]]
+            count: counts[row[key].toLowerCase()]
         });
     }
 
