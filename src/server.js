@@ -60,8 +60,13 @@ class Server {
         this.app.get("/pro", controllers.pro.index);
 
         this.app.get("/admin", verify_user, verify_admin, controllers.admin.index);
-
         this.app.get("/admin/generate-missing-images", controllers.admin.generate_missing_images);
+        this.app.get("/admin/articles", verify_user, verify_admin, controllers.admin.articlesList);
+        this.app.get("/admin/articles/new", verify_user, verify_admin, controllers.admin.createArticleForm);
+        this.app.post("/admin/articles/new", verify_user, verify_admin, controllers.admin.createArticle);
+        this.app.get("/admin/articles/edit/:id", verify_user, verify_admin, controllers.admin.editArticleForm);
+        this.app.post("/admin/articles/edit/:id", verify_user, verify_admin, controllers.admin.updateArticle);
+        this.app.post("/admin/articles/toggle-publish/:id", verify_user, verify_admin, controllers.admin.togglePublish);
 
         this.app.get("/privacy", optional_user, controllers.site.privacy);
         this.app.get("/games", optional_user, controllers.games.games_index);
@@ -77,6 +82,7 @@ class Server {
         this.app.get("/news", optional_user, controllers.news.index);
         this.app.get("/", optional_user, controllers.games.index);
         this.app.get("/*", optional_user, controllers.games.wildcard_handler);
+
     }
 
     start() {

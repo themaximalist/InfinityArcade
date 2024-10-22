@@ -1,0 +1,39 @@
+<%- include("../../header.ejs") %>
+
+<div class="container max-w-4xl mx-auto">
+    <div class="text-white max-w-4xl flex flex-col gap-16 py-10">
+        <h1 class="text-4xl font-bold text-purple-500">Manage Articles</h1>
+        
+        <a href="/admin/articles/new" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 inline-block w-max">Create New Article</a>
+        
+        <table class="w-full">
+            <thead>
+                <tr>
+                    <th class="text-left">Title</th>
+                    <th class="text-left">Author</th>
+                    <th class="text-left">Status</th>
+                    <th class="text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(article => { %>
+                    <tr>
+                        <td><%= article.title %></td>
+                        <td><%= article.author %></td>
+                        <td><%= article.publishedAt ? 'Published' : 'Draft' %></td>
+                        <td>
+                            <a href="/admin/articles/edit/<%= article.id %>" class="text-blue-400 hover:text-blue-600">Edit</a>
+                            <form action="/admin/articles/toggle-publish/<%= article.id %>" method="POST" class="inline">
+                                <button type="submit" class="text-green-400 hover:text-green-600 ml-2">
+                                    <%= article.publishedAt ? 'Unpublish' : 'Publish' %>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%- include("../../footer.ejs") %>

@@ -1,0 +1,39 @@
+<%- include("../../header.ejs") %>
+
+<div class="container max-w-4xl mx-auto">
+    <div class="text-white max-w-4xl flex flex-col gap-16 py-10">
+        <h1 class="text-4xl font-bold text-purple-500">Edit Article</h1>
+        
+        <form action="/admin/articles/edit/<%= article.id %>" method="POST" class="space-y-4">
+            <div>
+                <label for="title" class="block">Title</label>
+                <input type="text" id="title" name="title" required class="w-full p-2 text-black" value="<%= article.title %>">
+            </div>
+            <div>
+                <label for="slug" class="block">Slug</label>
+                <input type="text" id="slug" name="slug" required class="w-full p-2 text-black" value="<%= article.slug %>">
+            </div>
+            <div>
+                <label for="description" class="block">Description</label>
+                <textarea id="description" name="description" class="w-full p-2 text-black"><%= article.description %></textarea>
+            </div>
+            <div>
+                <label for="content" class="block">Content</label>
+                <textarea id="content" name="content" required class="w-full p-2 h-64 text-black"><%= article.content %></textarea>
+            </div>
+            <div>
+                <label for="author" class="block">Author</label>
+                <input type="text" id="author" name="author" class="w-full p-2 text-black" value="<%= article.author %>">
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="publish" value="1" <%= article.publishedAt ? 'checked' : '' %>>
+                    Published
+                </label>
+            </div>
+            <button type="submit" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Update Article</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../../footer.ejs") %>
