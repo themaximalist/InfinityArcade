@@ -628,34 +628,6 @@ video {
   top: 1rem;
 }
 
-.right-5 {
-  right: 1.25rem;
-}
-
-.right-6 {
-  right: 1.5rem;
-}
-
-.right-2 {
-  right: 0.5rem;
-}
-
-.right-8 {
-  right: 2rem;
-}
-
-.right-16 {
-  right: 4rem;
-}
-
-.right-12 {
-  right: 3rem;
-}
-
-.right-14 {
-  right: 3.5rem;
-}
-
 .m-0 {
   margin: 0px;
 }
@@ -747,10 +719,6 @@ video {
   display: flex;
 }
 
-.inline-flex {
-  display: inline-flex;
-}
-
 .table {
   display: table;
 }
@@ -815,10 +783,6 @@ video {
   max-height: 24rem;
 }
 
-.max-h-64 {
-  max-height: 16rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -841,10 +805,6 @@ video {
 
 .w-6 {
   width: 1.5rem;
-}
-
-.w-64 {
-  width: 16rem;
 }
 
 .w-7 {
@@ -872,10 +832,6 @@ video {
   width: max-content;
 }
 
-.w-auto {
-  width: auto;
-}
-
 .min-w-full {
   min-width: 100%;
 }
@@ -886,6 +842,10 @@ video {
 
 .max-w-4xl {
   max-width: 56rem;
+}
+
+.max-w-64 {
+  max-width: 16rem;
 }
 
 .max-w-6xl {
@@ -900,12 +860,12 @@ video {
   max-width: 32rem;
 }
 
-.max-w-64 {
-  max-width: 16rem;
+.max-w-xl {
+  max-width: 36rem;
 }
 
-.shrink {
-  flex-shrink: 1;
+.max-w-2xl {
+  max-width: 42rem;
 }
 
 .grow {
@@ -1051,10 +1011,6 @@ video {
   gap: 2rem;
 }
 
-.gap-3 {
-  gap: 0.75rem;
-}
-
 .gap-y-10 {
   row-gap: 2.5rem;
 }
@@ -1147,10 +1103,6 @@ video {
 
 .border {
   border-width: 1px;
-}
-
-.border-2 {
-  border-width: 2px;
 }
 
 .border-b {
@@ -2464,16 +2416,8 @@ body {
     display: inline-block;
   }
 
-  .md\:max-h-64 {
-    max-height: 16rem;
-  }
-
   .md\:w-auto {
     width: auto;
-  }
-
-  .md\:max-w-64 {
-    max-width: 16rem;
   }
 
   .md\:grid-cols-2 {
@@ -2491,14 +2435,6 @@ body {
 }
 
 @media (min-width: 1024px) {
-  .lg\:right-8 {
-    right: 2rem;
-  }
-
-  .lg\:right-16 {
-    right: 4rem;
-  }
-
   .lg\:ml-20 {
     margin-left: 5rem;
   }
@@ -2609,40 +2545,12 @@ body {
 }
 
 @media (min-width: 1280px) {
-  .xl\:right-6 {
-    right: 1.5rem;
-  }
-
-  .xl\:right-4 {
-    right: 1rem;
-  }
-
-  .xl\:right-2 {
-    right: 0.5rem;
-  }
-
-  .xl\:right-1 {
-    right: 0.25rem;
-  }
-
-  .xl\:right-8 {
-    right: 2rem;
-  }
-
-  .xl\:right-10 {
-    right: 2.5rem;
-  }
-
   .xl\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1536px) {
-  .\32xl\:right-1 {
-    right: 0.25rem;
-  }
-
   .\32xl\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
