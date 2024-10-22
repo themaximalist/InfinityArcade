@@ -55,7 +55,7 @@
             <a href="/<%= (locals.subgenre ? "subgenres" : "genres") %>/<%= locals.slugify(genre.item) %>" class="w-full md:max-w-64 flex flex-col gap-2 relative group">
                 <img src="/images/art/<%= genre.id %>-256.png" alt="<%= genre.item %> text games" class="w-full aspect-square object-cover rounded-md group-hover:scale-105 transition-transform duration-200" />
                 <h2 class="text-md text-gray-300 truncate group-hover:text-gray-100 transition-colors duration-200">
-                    <%- genre.item %>
+                    <%- genre.item.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ") %>
                 </h2>
                 <span class="absolute top-1 right-1 bg-gray-900/50 backdrop-blur-sm text-xs px-2 py-1 rounded-md group-hover:opacity-100 opacity-0 transition-opacity duration-200"><%- genre.count %> Games</span>
             </a>

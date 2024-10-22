@@ -7,6 +7,7 @@ TimeAgo.addLocale(en)
 const timeAgo = new TimeAgo('en-US')
 
 function slugify(input) {
+    input = input.replace(/\//g, "-");
     return slugifyjs(input, {
         remove: /[*+~.()'"!:@]/g,
         lower: true,

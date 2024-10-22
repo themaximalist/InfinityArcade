@@ -1481,6 +1481,11 @@ video {
   color: rgb(168 85 247 / var(--tw-text-opacity));
 }
 
+.text-purple-800 {
+  --tw-text-opacity: 1;
+  color: rgb(107 33 168 / var(--tw-text-opacity));
+}
+
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
@@ -1512,16 +1517,6 @@ video {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity));
-}
-
-.text-purple-300 {
-  --tw-text-opacity: 1;
-  color: rgb(216 180 254 / var(--tw-text-opacity));
-}
-
-.text-purple-800 {
-  --tw-text-opacity: 1;
-  color: rgb(107 33 168 / var(--tw-text-opacity));
 }
 
 .underline {
