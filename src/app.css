@@ -313,5 +313,9 @@ body {
     video {
         @apply rounded-lg max-w-xl;
     }
+
+    code {
+        @apply rounded-lg block w-full bg-gray-800 p-2 overflow-x-auto;
+    }
 }
 

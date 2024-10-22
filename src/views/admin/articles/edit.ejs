@@ -26,10 +26,9 @@
                 <input type="text" id="author" name="author" class="w-full p-2 text-black" value="<%= article.author %>">
             </div>
             <div>
-                <label>
-                    <input type="checkbox" name="publish" value="1" <%= article.publishedAt ? 'checked' : '' %>>
-                    Published
-                </label>
+                <label for="publishDate" class="block">Publish Date (leave empty for draft)</label>
+                <input type="date" id="publishDate" name="publishDate" class="w-full p-2 text-black" 
+                       value="<%= article.publishedAt ? article.publishedAt.toISOString().split('T')[0] : '' %>">
             </div>
             <button type="submit" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Update Article</button>
         </form>

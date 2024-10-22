@@ -47,7 +47,7 @@ async function generate_missing_images(req, res) {
 async function articlesList(req, res) {
     try {
         const articles = await Article.findAll({
-            order: [['createdAt', 'DESC']]
+            order: [['publishedAt', 'DESC'], ['createdAt', 'DESC']]
         });
         articles.forEach(article => {
             article.contentHtml = markdownToHtml(article.content);
@@ -65,14 +65,14 @@ async function createArticleForm(req, res) {
 
 async function createArticle(req, res) {
     try {
-        const { title, slug, description, content, author } = req.body;
+        const { title, slug, description, content, author, publishDate } = req.body;
         await Article.create({
             title,
             slug,
             description,
             content,
             author,
-            publishedAt: req.body.publish ? new Date() : null
+            publishedAt: publishDate ? new Date(publishDate + 'T00:00:00Z') : null
         });
         res.redirect('/admin/articles');
     } catch (error) {
@@ -101,14 +101,14 @@ async function updateArticle(req, res) {
         if (!article) {
             return res.status(404).send('Article not found');
         }
-        const { title, slug, description, content, author } = req.body;
+        const { title, slug, description, content, author, publishDate } = req.body;
         await article.update({
             title,
             slug,
             description,
             content,
             author,
-            publishedAt: req.body.publish ? (article.publishedAt || new Date()) : null
+            publishedAt: publishDate ? new Date(publishDate + 'T00:00:00Z') : null
         });
         res.redirect('/admin/articles');
     } catch (error) {
