@@ -34,7 +34,11 @@
     </h1>
 
     <div class="mb-8 text-gray-300">
-        <p>Welcome to Infinity Arcade's vast collection of text-based games. Immerse yourself in interactive stories, solve puzzles, and embark on thrilling adventures - all through the power of words. Our diverse library caters to every taste, from classic text adventures to modern interactive fiction.</p>
+        <p class="intro-text">
+            <span class="intro-short">Welcome to Infinity Arcade's vast collection of text-based games. Immerse yourself in interactive stories...</span>
+            <span class="intro-full hidden">Welcome to Infinity Arcade's vast collection of text-based games. Immerse yourself in interactive stories, solve puzzles, and embark on thrilling adventures - all through the power of words. Our diverse library caters to every taste, from classic text adventures to modern interactive fiction.</span>
+        </p>
+        <button class="text-purple-400 text-sm mt-2 hover:underline intro-toggle">Read more</button>
     </div>
 
     <% let num = games.length %>
@@ -104,6 +108,20 @@
         <p>Explore our <a href="/genres" class="text-purple-400 hover:underline">genres</a> and <a href="/subgenres" class="text-purple-400 hover:underline">subgenres</a> to discover new favorites, or use our search feature to find specific themes or styles. Join our community of text game enthusiasts and embark on countless text-based adventures!</p>
     </div>
 </div>
+
+<script>
+document.querySelectorAll('.intro-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+        const introText = button.parentElement.querySelector('.intro-text');
+        const shortText = introText.querySelector('.intro-short');
+        const fullText = introText.querySelector('.intro-full');
+        
+        shortText.classList.toggle('hidden');
+        fullText.classList.toggle('hidden');
+        button.textContent = fullText.classList.contains('hidden') ? 'Read more' : 'Show less';
+    });
+});
+</script>
 
 <%- include("scripts.ejs") %>
 <!-- -->

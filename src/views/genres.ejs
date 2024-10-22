@@ -39,7 +39,11 @@
     </h1>
     
     <div class="mb-8 text-gray-300">
-        <p>Welcome to Infinity Arcade's comprehensive collection of text game <%= title.toLowerCase() %>. Explore our diverse range of interactive fiction categories, from classic adventure to modern experimental narratives. Each <%= title.toLowerCase().slice(0, -1) %> represents a unique storytelling experience in the world of text-based games.</p>
+        <p class="intro-text">
+            <span class="intro-short">Welcome to Infinity Arcade's comprehensive collection of text game <%= title.toLowerCase() %>. Explore our diverse range of interactive fiction categories...</span>
+            <span class="intro-full hidden">Welcome to Infinity Arcade's comprehensive collection of text game <%= title.toLowerCase() %>. Explore our diverse range of interactive fiction categories, from classic adventure to modern experimental narratives. Each <%= title.toLowerCase().slice(0, -1) %> represents a unique storytelling experience in the world of text-based games.</span>
+        </p>
+        <button class="text-purple-400 text-sm mt-2 hover:underline intro-toggle">Read more</button>
     </div>
 
     <div class="gap-6 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
@@ -68,6 +72,22 @@
     </div>
 </div>
 
+<script>
+    // Add this to your existing scripts
+document.querySelectorAll('.intro-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+        const introText = button.parentElement.querySelector('.intro-text');
+        const shortText = introText.querySelector('.intro-short');
+        const fullText = introText.querySelector('.intro-full');
+        
+        shortText.classList.toggle('hidden');
+        fullText.classList.toggle('hidden');
+        button.textContent = fullText.classList.contains('hidden') ? 'Read more' : 'Show less';
+    });
+});
+</script>
+
 <%- include("scripts.ejs") %>
 <!-- -->
 <%- include("footer.ejs") %>
+
