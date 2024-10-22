@@ -1,11 +1,13 @@
 const { Game, Article } = require("../models");
 const { SITE_URL } = process.env;
 const { Op } = require("sequelize");
+const GetGenres = require("../services/GetGenres");
+const { slugify } = require("../utils");
 
 async function sitemap(req, res) {
     try {
         // Fetch public content
-        const [games, articles] = await Promise.all([
+        const [games, articles, genreData] = await Promise.all([
             Game.findAll({ 
                 where: { private: false },
                 attributes: ['slug', 'updatedAt']
@@ -13,7 +15,8 @@ async function sitemap(req, res) {
             Article.findAll({
                 where: { publishedAt: { [Op.not]: null } },
                 attributes: ['slug', 'updatedAt']
-            })
+            }),
+            GetGenres()
         ]);
 
         // Build XML
@@ -35,10 +38,22 @@ async function sitemap(req, res) {
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>${SITE_URL}/subgenres</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>${SITE_URL}/articles</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
+    ${articles.map(article => `
+    <url>
+        <loc>${SITE_URL}/article/${article.slug}</loc>
+        <lastmod>${article.updatedAt.toISOString()}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>`).join('')}
     <url>
         <loc>${SITE_URL}/about</loc>
         <changefreq>monthly</changefreq>
@@ -49,12 +64,11 @@ async function sitemap(req, res) {
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
-    ${articles.map(article => `
+    ${genreData.items.map(genre => `
     <url>
-        <loc>${SITE_URL}/article/${article.slug}</loc>
-        <lastmod>${article.updatedAt.toISOString()}</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <loc>${SITE_URL}/genres/${slugify(genre.item)}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
     </url>`).join('')}
     ${games.map(game => `
     <url>
@@ -63,7 +77,6 @@ async function sitemap(req, res) {
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>`).join('')}
-
 </urlset>`;
 
         res.header('Content-Type', 'application/xml');
