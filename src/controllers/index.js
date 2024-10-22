@@ -1,4 +1,3 @@
-
 module.exports = {
     sessions: require("./sessions"),
     games: require("./games"),
@@ -12,4 +11,5 @@ module.exports = {
     orders: require("./orders"),
     news: require("./news"),
     site: require("./site"),
+    sitemap: require("./sitemap"),
 };

@@ -41,6 +41,9 @@ class Server {
     setupHandlers() {
         this.app.get("/status", controllers.site.status);
 
+        // Add this new route near the top of setupHandlers
+        this.app.get("/sitemap.xml", controllers.sitemap.sitemap);
+
         this.app.get("/api/session/new", controllers.sessions.create);
         this.app.post("/api/game/new", controllers.games.create);
         this.app.post("/api/game/generate", optional_user, controllers.games.generate);
