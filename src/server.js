@@ -67,6 +67,7 @@ class Server {
         this.app.get("/admin/articles/edit/:id", verify_user, verify_admin, controllers.admin.editArticleForm);
         this.app.post("/admin/articles/edit/:id", verify_user, verify_admin, controllers.admin.updateArticle);
         this.app.post("/admin/articles/toggle-publish/:id", verify_user, verify_admin, controllers.admin.togglePublish);
+        this.app.get("/admin/articles/delete/:id", verify_user, verify_admin, controllers.admin.deleteArticle);
 
         this.app.get("/privacy", optional_user, controllers.site.privacy);
         this.app.get("/games", optional_user, controllers.games.games_index);

@@ -133,6 +133,20 @@ async function togglePublish(req, res) {
     }
 };
 
+async function deleteArticle(req, res) {
+    try {
+        const article = await Article.findByPk(req.params.id);
+        if (!article) {
+            return res.status(404).send('Article not found');
+        }
+        await article.destroy();
+        res.redirect('/admin/articles');
+    } catch (error) {
+        console.error('Error deleting article:', error);
+        res.status(500).send('Error deleting article');
+    }
+}
+
 module.exports = {
     index,
     generate_missing_images,
@@ -141,5 +155,6 @@ module.exports = {
     createArticle,
     editArticleForm,
     updateArticle,
-    togglePublish
+    togglePublish,
+    deleteArticle
 };
