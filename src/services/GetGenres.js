@@ -47,16 +47,15 @@ async function GetGenres(query = null) {
         })
     ]);
 
-    const items = [];
-    const added = new Set();
+    // Create a map to store combined counts
+    const itemMap = new Map();
 
     // Process genres
     for (const row of genreResults.rows) {
         const item = row.genre?.toLowerCase();
-        if (!item || added.has(item)) continue;
-        added.add(item);
+        if (!item) continue;
         
-        items.push({
+        itemMap.set(item, {
             item: row.genre,
             id: row.id,
             count: parseInt(row.get('count')),
@@ -64,20 +63,30 @@ async function GetGenres(query = null) {
         });
     }
 
-    // Process subgenres
+    // Process and combine subgenres
     for (const row of subgenreResults.rows) {
         const item = row.subgenre?.toLowerCase();
-        if (!item || added.has(item)) continue;
-        added.add(item);
+        if (!item) continue;
 
-        items.push({
-            item: row.subgenre,
-            id: row.id,
-            count: parseInt(row.get('count')),
-            type: 'subgenre'
-        });
+        if (itemMap.has(item)) {
+            // If item exists, add the counts together
+            const existing = itemMap.get(item);
+            existing.count += parseInt(row.get('count'));
+            // Keep the higher ID
+            existing.id = Math.max(existing.id, row.id);
+            // If it was found in both, mark it as both
+            existing.type = 'both';
+        } else {
+            itemMap.set(item, {
+                item: row.subgenre,
+                id: row.id,
+                count: parseInt(row.get('count')),
+                type: 'subgenre'
+            });
+        }
     }
 
+    const items = Array.from(itemMap.values());
     items.sort((a, b) => b.count - a.count);
 
     return { items, search };

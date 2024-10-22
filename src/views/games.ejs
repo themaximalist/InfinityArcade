@@ -19,9 +19,8 @@
 <% } %>
 
 <div class="text-center mt-3 flex gap-6 justify-center">
-    <a href="/games" class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity">Games</a>
-    <a href="/genres" class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity">Genres</a>
-    <a href="/subgenres" class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity">Subgenres</a>
+    <a href="/games" class="text-white text-sm <%= locals.path === '/games' ? 'opacity-100' : 'opacity-50' %> hover:opacity-100 transition-opacity">Games</a>
+    <a href="/genres" class="text-white text-sm <%= locals.path === '/genres' ? 'opacity-100' : 'opacity-50' %> hover:opacity-100 transition-opacity">Genres</a>
 </div>
 
 <div class="mx-auto text-white my-4 mt-20 px-4">
@@ -110,7 +109,7 @@
     <div class="text-gray-300 space-y-4">
         <p>At Infinity Arcade, we celebrate the art of interactive storytelling through text-based games. Our collection spans various genres and styles, offering immersive experiences that engage your imagination and challenge your mind.</p>
         <p>Can't find the perfect game? Try our unique <a href="/generate" class="text-purple-400 hover:underline">AI-powered game generator</a> to create a custom text adventure tailored to your preferences. The possibilities are endless!</p>
-        <p>Explore our <a href="/genres" class="text-purple-400 hover:underline">genres</a> and <a href="/subgenres" class="text-purple-400 hover:underline">subgenres</a> to discover new favorites, or use our search feature to find specific themes or styles. Join our community of text game enthusiasts and embark on countless text-based adventures!</p>
+        <p>Explore our <a href="/genres" class="text-purple-400 hover:underline">genres</a> to discover new favorites, or use our search feature to find specific themes or styles. Join our community of text game enthusiasts and embark on countless text-based adventures!</p>
     </div>
 </div>
 

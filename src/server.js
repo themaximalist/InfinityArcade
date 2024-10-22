@@ -29,6 +29,10 @@ class Server {
             SITE_URL: process.env.SITE_URL,
             slugify,
         };
+        this.app.use((req, res, next) => {
+            res.locals.path = req.path;
+            next();
+        });
         this.app.set("view engine", "ejs");
         this.app.set("views", "src/views");
         this.setupHandlers();

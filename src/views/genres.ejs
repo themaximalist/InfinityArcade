@@ -20,13 +20,8 @@
 
 <% let title = "Genres" %>
 <div class="text-center mt-3 flex gap-6 justify-center">
-    <a href="/games" class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity">Games</a>
-    <% if (locals.subgenre) { %>
-    <% title = "Subgenres" %>
-    <a href="/genres" class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity">Genres</a>
-    <% } else { %>
-    <a href="/subgenres" class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity">Subgenres</a>
-    <% } %>
+    <a href="/games" class="text-white text-sm <%= locals.path === '/games' ? 'opacity-100' : 'opacity-50' %> hover:opacity-100 transition-opacity">Games</a>
+    <a href="/genres" class="text-white text-sm <%= locals.path === '/genres' ? 'opacity-100' : 'opacity-50' %> hover:opacity-100 transition-opacity">Genres</a>
 </div>
 
 <div class="container mx-auto text-white max-w-8xl my-4 mt-20 px-4">

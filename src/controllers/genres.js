@@ -43,15 +43,11 @@ async function get_genre(req, res) {
 }
 
 async function get_subgenre(req, res) {
-    return await handle_genre(req, res, "subgenre");
+    return res.redirect("/genres/" + req.params.slug);
 }
 
 async function subgenres_index(req, res) {
-    const data = await GetGenres(req.query, "subgenre");
-    data.subgenre = true;
-    data.title = "All Text Game Subgenres";
-    data.description = "Explore our extensive library of interactive text games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.";
-    return res.render("genres", data);
+    return res.redirect("/genres");
 }
 
 module.exports = {
