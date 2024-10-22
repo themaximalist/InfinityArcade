@@ -163,8 +163,10 @@ async function games_index(req, res) {
     const data = await GetGames(req.query, 100);
     if (req.query.search) {
         data.title = `${req.query.search.charAt(0).toUpperCase() + req.query.search.slice(1)} Text Games`;
+        data.description = `Explore our extensive library of ${data.title}, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.`;
     } else {
         data.title = "All Text Games";
+        data.description = "Explore our extensive library of text-based games, browse by genre or subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.";
     }
     return res.render("games", data);
 }

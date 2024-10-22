@@ -42,6 +42,12 @@
             class="text-white hover:text-blue-400 transition-colors"
             >FAQ</a
         >
+
+        <% if (locals.user) { %>
+        <a href="/account" class="text-white hover:text-purple-500 transition-colors">Account</a>
+        <% } else { %>
+        <a href="/pro" class="text-white hover:text-purple-500 transition-colors">GO PRO!</a>
+        <% } %>
         <a
             href="https://themaximalist.com"
             class="opacity-50 hover:opacity-100 transition-opacity lg:hidden"
