@@ -79,21 +79,23 @@
         <% } %> <% } %>
     </div>
     <% let numPages = Math.ceil(totalGames / limit); %>
+
+    <% let endpoint = locals.slug ? slug : "/games" %>
     <!-- -->
     <% if (numPages > 1) { %>
     <div id="pages" class="flex gap-6 my-8 flex-wrap justify-center">
         <% for (let i = 1; i <= numPages; i++) { %>
         <!-- -->
         <% if (i == page) { %>
-        <div class="text-purple-400" href="/games?page=<%= i %>">
+        <div class="text-purple-400" href="<%- endpoint %>?page=<%= i %>">
             <%= i %>
         </div>
         <% } else { %>
         <!-- -->
         <% if (search) { %>
-        <a href="/games?search=<%= search %>&page=<%= i %>" class="text-gray-400 hover:text-white"><%= i %></a>
+        <a href="<%- endpoint %>?search=<%= search %>&page=<%= i %>" class="text-gray-400 hover:text-white"><%= i %></a>
         <% } else { %>
-        <a href="/games?page=<%= i %>" class="text-gray-400 hover:text-white"><%= i %></a>
+        <a href="<%- endpoint %>?page=<%= i %>" class="text-gray-400 hover:text-white"><%= i %></a>
         <% } %>
         <!-- -->
         <% } %>

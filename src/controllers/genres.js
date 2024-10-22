@@ -20,7 +20,7 @@ async function handle_genre(req, res, key) {
     const wildcardSlug = slug.replace(/[-\/]/g, "%");
     const name = unslugify(slug);
 
-    const data = await GetGames({}, NUM_GAMES_TO_SHOW, {
+    const data = await GetGames(req.query, NUM_GAMES_TO_SHOW, {
         [key]: {
             [Op.iLike]: `${wildcardSlug}`
         }
@@ -28,6 +28,7 @@ async function handle_genre(req, res, key) {
 
     data.title = `${name} Text Games`;
     data.description = `Explore our extensive library of ${name} interactive text games, browse by subgenre, or unleash your creativity with our innovative AI game generator to create your own custom text adventures.`;
+    data.slug = req.path;
 
     return res.render("games", data);
 }
